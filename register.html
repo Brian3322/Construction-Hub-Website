@@ -468,7 +468,7 @@
                 <p>Already have an account? <a href="sign_in.html">Sign In</a></p>
             </div>
 
-            <a href="ALL.html" class="home-link">← Back to Homepage</a>
+            <a href="index.html" class="home-link">← Back to Homepage</a>
         </div>
     </div>
 <script src="https://cdn.jsdelivr.net/npm/appwrite@16.0.2"></script>
@@ -550,7 +550,7 @@
                 await account.updatePrefs(prefs);
 
                 showMsg(`Account created for ${name}! Redirecting…`, false);
-                setTimeout(() => { window.location.href = 'ALL.html'; }, 1200);
+                setTimeout(() => { window.location.href = 'index.html'; }, 1200);
 
             } catch (err) {
                 setLoading(role, false);

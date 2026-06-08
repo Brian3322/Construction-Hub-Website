@@ -56,7 +56,7 @@
                     <p>Don't have an account? <a href="register.html">Create Account</a></p>
                 </div>
                 
-                <a href="ALL.html" class="back-home">← Back to Homepage</a>
+                <a href="index.html" class="back-home">← Back to Homepage</a>
             </div>
         </div>
     </div>
@@ -79,7 +79,7 @@
         (async () => {
             try {
                 await account.get();
-                window.location.href = 'ALL.html'; // already logged in
+                window.location.href = 'index.html'; // already logged in
             } catch {
                 // not logged in — stay on this page
             }
@@ -114,7 +114,7 @@
             try {
                 await account.createEmailPasswordSession(email, password);
                 showMsg('Signed in! Redirecting…', false);
-                setTimeout(() => { window.location.href = 'ALL.html'; }, 800);
+                setTimeout(() => { window.location.href = 'index.html'; }, 800);
             } catch (err) {
                 setLoading(false);
 
