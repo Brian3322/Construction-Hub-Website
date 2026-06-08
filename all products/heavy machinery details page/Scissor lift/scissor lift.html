@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JLG 1930ES Scissor Lift | Construction Hub</title>
+    <link rel="stylesheet" href="style scissor lift.css">
+</head>
+<body>
+
+    <header class="navbar">
+        <div class="container">
+            <a href="../../../ALL.html" class="logo">CONSTRUCTION<span>HUB</span></a>
+            <nav>
+                <ul class="nav-links">
+                    <li><a href="../../../ALL.html#home">Home</a></li>
+                    <li><a href="../../../ALL.html#products">Product</a></li>
+                    <li><a href="../../../ALL.html#machinery">Heavy Machinery</a></li>
+                    <li><a href="../../../ALL.html#about">About</a></li>
+                    <li><a href="../../../contact us.html" class="active-link">Contact</a></li>
+                    <li><a href="../../../ALL.html#faq">FAQ</a></li>
+                    <li><a href="../../../sign in.html" class="btn-account">Account</a></li>
+                    <li>
+                        <a href="../../../checkout.html" class="cart-link">
+                            🛒 Cart
+                            <span class="ch-cart-badge">0</span>
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <section class="hero-machinery">
+        <div class="container hero-split">
+            <div class="hero-image-box">
+                <img src="photos/imgi_3_scissor-lift-platform-at-the-railway-station.jpg" alt="Electric Scissor Lift" id="mainMachineryImg">
+                <div class="gallery-mini">
+                    <img src="photos/imgi_3_scissor-lift-platform-at-the-railway-station.jpg" class="thumb active" onclick="swapImg(this.src, this)">
+                    <img src="photos/pexels-jimmy-nilsson-masth-193596566-13532460.jpg" class="thumb" onclick="swapImg(this.src, this)">
+                    <img src="photos/electric-scissor-lift-concept-background-isometric-style-vector.jpg" class="thumb" onclick="swapImg(this.src, this)">
+                </div>
+            </div>
+            <div class="hero-info-box">
+                <span class="category-tag">AERIAL WORK PLATFORM</span>
+                <h1 class="machinery-name">JLG 1930ES Electric Scissor Lift</h1>
+                <div class="status-bar">
+                    <span class="badge available">● AVAILABLE FOR RENTAL</span>
+                    <span class="year-label">2024 Industrial Series</span>
+                </div>
+                <div class="hero-pricing">
+                    <span class="price-title">Daily Rental Rate</span>
+                    <h2 class="price-value">EGP 145.00 <small>/ Day</small></h2>
+                </div>
+                <div class="hero-actions">
+                    <button class="btn-rent-primary">Rent Now</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="section-overview industrial-bg">
+        <div class="container">
+            <h3 class="block-heading">Machinery Overview</h3>
+            <p class="overview-text">
+                The JLG 1930ES is a high-efficiency electric scissor lift designed for indoor and flat-surface 
+                outdoor applications. Featuring quiet, emission-free operation and a compact width, it is 
+                capable of passing through standard single doorways. Ideal for HVAC installation, 
+                warehouse maintenance, electrical fit-outs, and ceiling construction projects.
+            </p>
+        </div>
+    </section>
+
+    <section class="section-specs">
+        <div class="container">
+            <h3 class="block-heading">Technical Specifications</h3>
+            <div class="specs-grid">
+                <div class="spec-item">
+                    <span class="spec-label">Platform Height</span>
+                    <span class="spec-val">5.72 Meters (18.8 ft)</span>
+                </div>
+                <div class="spec-item">
+                    <span class="spec-label">Operating Weight</span>
+                    <span class="spec-val">1,230 kg</span>
+                </div>
+                <div class="spec-item">
+                    <span class="spec-label">Platform Capacity</span>
+                    <span class="spec-val">227 kg (Unrestricted)</span>
+                </div>
+                <div class="spec-item">
+                    <span class="spec-label">Power Source</span>
+                    <span class="spec-val">Electric (4 x 6V, 220 amp-hr)</span>
+                </div>
+                <div class="spec-item">
+                    <span class="spec-label">Travel Speed</span>
+                    <span class="spec-val">4.8 km/h (Lowered)</span>
+                </div>
+                <div class="spec-item">
+                    <span class="spec-label">Turning Radius</span>
+                    <span class="spec-val">Zero (Inside)</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="section-details industrial-bg">
+        <div class="container detail-grid">
+            <div class="rental-info">
+                <h4 class="sub-heading">Rental Terms</h4>
+                <ul class="rental-list">
+                    <li><strong>Daily Rental:</strong> EGP 145.00</li>
+                    <li><strong>Weekly Rate:</strong> EGP 820.00 (Save 19%)</li>
+                    <li><strong>Security Deposit:</strong> EGP 400.00</li>
+                    <li><strong>Delivery:</strong> Tilt-tray transport available</li>
+                </ul>
+            </div>
+            <div class="supplier-info">
+                <h4 class="sub-heading">Supplier Profile</h4>
+                <div class="supplier-card">
+                    <div class="sup-meta">
+                        <strong>Apex Access Solutions</strong>
+                        <div class="rating">⭐⭐⭐⭐☆ (4.9/5)</div>
+                    </div>
+                    <button class="btn-contact-ui">Contact Supplier</button>
+                </div>
+                <p class="terms-note">* Note: Rental includes a fully charged battery set. Long-term rentals require access to a standard 110/220V charging outlet.</p>
+            </div>
+        </div>
+    </section>
+
+    <script>
+        // Gallery logic with active highlight
+        function swapImg(newSrc, clickedElement) {
+            document.getElementById('mainMachineryImg').src = newSrc;
+            const allThumbs = document.querySelectorAll('.thumb');
+            allThumbs.forEach(thumb => thumb.classList.remove('active'));
+            clickedElement.classList.add('active');
+        }
+    </script>
+<script>
+const MACHINE = {
+    id        : 'jlg-1930es-scissor',
+    name      : 'JLG 1930ES Electric Scissor Lift',
+    dailyPrice: 145.0,
+    icon      : '🏗️',
+    image     : 'photos/imgi_3_scissor-lift-platform-at-the-railway-station.jpg',
+};
+</script>
+
+<!-- ── Inlined Cart API ── -->
+<script>
+const CART_KEY = 'ch_cart';
+const Cart = (() => {
+    function load() {
+        try { return JSON.parse(localStorage.getItem(CART_KEY)) || []; }
+        catch { return []; }
+    }
+    function save(items) {
+        localStorage.setItem(CART_KEY, JSON.stringify(items));
+        window.dispatchEvent(new CustomEvent('cartChanged', { detail: { items } }));
+    }
+    function add(item) {
+        const items = load();
+        const idx   = items.findIndex(i => i.id === item.id);
+        if (idx !== -1) {
+            if (item.type === 'purchase') { items[idx].qty += (item.qty || 1); }
+            else { items[idx] = { ...items[idx], ...item }; }
+        } else {
+            items.push({
+                id        : item.id        || String(Date.now()),
+                name      : item.name      || 'Construction Item',
+                type      : item.type      || 'rental',
+                unitPrice : item.unitPrice || 0,
+                unit      : item.unit      || 'day',
+                qty       : item.qty       || 1,
+                icon      : item.icon      || '🏗️',
+                image     : item.image     || '',
+                startDate : item.startDate || '',
+                endDate   : item.endDate   || '',
+                days      : item.days      || 1,
+            });
+        }
+        save(items);
+    }
+    function count()    { return load().length; }
+    function remove(id) { save(load().filter(i => i.id !== id)); }
+    function clear()    { save([]); }
+    return { add, count, remove, clear };
+})();
+</script>
+
+<!-- ── Toast CSS ── -->
+<style>
+.ch-toast {
+    position: fixed; bottom: 30px; right: 30px;
+    background: #1a1a2e; color: #fff;
+    padding: 14px 22px; border-radius: 10px;
+    font-size: 0.9rem; font-weight: 500;
+    box-shadow: 0 8px 25px rgba(0,0,0,0.2);
+    transform: translateY(80px); opacity: 0;
+    transition: all 0.35s ease;
+    z-index: 9999;
+    border-left: 4px solid #f39c12;
+    font-family: 'Segoe UI', Tahoma, sans-serif;
+}
+.ch-toast.show { transform: translateY(0); opacity: 1; }
+</style>
+
+<!-- ── Toast Element ── -->
+<div class="ch-toast" id="chToast"></div>
+
+<!-- ── Add to Cart Logic ── -->
+<script>
+function chShowToast(msg) {
+    const t = document.getElementById('chToast');
+    t.textContent = msg;
+    t.classList.add('show');
+    setTimeout(() => t.classList.remove('show'), 3000);
+}
+
+function addMachineToCart() {
+    Cart.add({
+        id        : MACHINE.id,
+        name      : MACHINE.name,
+        type      : 'rental',
+        unitPrice : MACHINE.dailyPrice,
+        unit      : 'day',
+        qty       : 1,
+        icon      : MACHINE.icon,
+         image     : 'all products/product details page/All-Terrain Forklift/photos/imgi_3_scissor-lift-platform-at-the-railway-station.jpg',
+        days      : 1,
+    });
+    chShowToast('✅ Added to cart! Go to checkout to complete your booking.');
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+    const btn = document.querySelector('.btn-rent-primary');
+    if (btn) btn.onclick = addMachineToCart;
+});
+</script>
+
+</body>
+</html>

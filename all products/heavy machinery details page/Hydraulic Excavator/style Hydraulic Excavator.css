@@ -1,0 +1,153 @@
+/* --- Global & Typography --- */
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { font-family: 'Segoe UI', Arial, sans-serif; color: #2d3436; line-height: 1.6; background: #fdfdfd; padding-top: 80px; }
+.container { max-width: 1200px; margin: 0 auto; padding: 0 20px; }
+
+/* --- Header & Navigation (Original) --- */
+ul {
+    list-style: none;
+}
+
+a {
+    text-decoration: none;
+    transition: 0.3s;
+}
+
+.navbar {
+    background: #1a1a2e;
+    color: #fff;
+    padding: 1rem 0;
+    position: fixed;
+    width: 100%;
+    top: 0;
+    z-index: 1000;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.3);
+}
+
+.navbar .container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.logo {
+    font-size: 1.5rem;
+    font-weight: bold;
+    letter-spacing: 1px;
+    text-decoration: none;
+    display: inline-block; /* Essential for the border to sit right */
+    color: #fff; /* let Your "construction hub at the navbar" White */
+}
+
+.logo span {
+    color: #f39c12; /* Industrial Orange */
+}
+
+.nav-links {
+    display: flex;
+    align-items: center;
+}
+
+
+.nav-links li {
+    margin-left: 20px;
+}
+
+.nav-links a {
+    color: #fff;
+    font-size: 0.9rem;
+    font-weight: 500;
+    text-decoration: none; /* Added to remove underline */
+}
+
+.nav-links a:hover {
+    color: #f39c12;
+}
+
+.btn-account {
+    background: #f39c12;
+    padding: 8px 15px;
+    border-radius: 4px;
+    color: #fff !important;
+}
+
+.btn-account:hover {
+    background: #e67e22;
+}
+
+/* --- Hero Section --- */
+.hero-machinery { padding: 40px 0; background: #fff; }
+.hero-split { display: flex; gap: 40px; align-items: flex-start; }
+.hero-image-box { flex: 1.4; }
+.hero-image-box img#mainMachineryImg { width: 100%; height: 450px; object-fit: cover; border-radius: 4px; border-bottom: 5px solid #1a1a2e; }
+.gallery-mini { display: flex; gap: 10px; margin-top: 15px; }
+.gallery-mini img { width: 100px; height: 70px; object-fit: cover; cursor: pointer; border: 2px solid #eee; border-radius: 4px; }
+
+.hero-info-box { flex: 1; padding: 20px; }
+.category-tag { color: #f39c12; font-weight: 800; font-size: 0.8rem; letter-spacing: 2px; }
+.machinery-name { font-size: 2.4rem; color: #1a1a2e; line-height: 1.1; margin: 10px 0; font-weight: 900; }
+.status-bar { margin: 15px 0; display: flex; align-items: center; gap: 15px; }
+.badge.available { color: #27ae60; font-weight: bold; font-size: 0.85rem; }
+.year-label { color: #7f8c8d; font-size: 0.85rem; border-left: 1px solid #ccc; padding-left: 15px; }
+
+.hero-pricing { background: #f8f9fa; padding: 20px; border-left: 5px solid #f39c12; margin: 25px 0; }
+.price-title { font-size: 0.8rem; color: #7f8c8d; text-transform: uppercase; }
+.price-value { font-size: 2.2rem; color: #1a1a2e; }
+.price-value small { font-size: 1rem; color: #7f8c8d; }
+
+.hero-actions { display: flex; flex-direction: column; gap: 12px; }
+.btn-rent-primary { background: #f39c12; color: #fff; border: none; padding: 18px; font-weight: bold; font-size: 1.1rem; border-radius: 4px; cursor: pointer; transition: 0.3s; }
+.btn-rent-primary:hover { background: #e67e22; transform: scale(1.02); }
+.btn-compare-secondary { background: #1a1a2e; color: #fff; border: none; padding: 12px; font-weight: bold; border-radius: 4px; cursor: pointer; }
+
+/* --- Section Styling --- */
+.dark-bg { background: #f1f2f6; border-top: 1px solid #dfe4ea; border-bottom: 1px solid #dfe4ea; }
+.section-heading { font-size: 1.2rem; text-transform: uppercase; letter-spacing: 1px; color: #1a1a2e; margin-bottom: 20px; border-bottom: 3px solid #f39c12; display: inline-block; padding-bottom: 5px; }
+.section-overview, .section-specs, .section-details { padding: 60px 0; }
+
+.overview-text { font-size: 1.1rem; color: #2f3542; max-width: 800px; margin-bottom: 20px; }
+.project-tags span { background: #1a1a2e; color: #fff; padding: 5px 12px; border-radius: 20px; font-size: 0.75rem; margin-right: 8px; }
+
+/* --- Specs Grid --- */
+.specs-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 20px; }
+.spec-card { background: #fff; padding: 20px; border: 1px solid #eee; border-top: 4px solid #1a1a2e; }
+.spec-label { display: block; font-size: 0.75rem; color: #7f8c8d; text-transform: uppercase; margin-bottom: 5px; }
+.spec-value { font-size: 1.1rem; font-weight: bold; color: #2d3436; }
+
+
+/*image style*/
+/* The highlight class that JavaScript will apply */
+.thumb {
+    width: 100px;
+    height: 70px;
+    object-fit: cover;
+    cursor: pointer;
+    border: 2px solid #eee; /* Light gray default border */
+    border-radius: 4px;
+    transition: all 0.3s ease; /* Smooth transition when clicking */
+}
+
+.thumb.active {
+    border: 2px solid #f39c12; /* Brand Orange */
+    box-shadow: 0 0 10px rgba(243, 156, 18, 0.4); /* Subtle orange glow */
+    transform: translateY(-2px); /* Slight lift effect */
+}
+/*-------------------------------------------------*/
+/* --- Info Blocks --- */
+.details-split { display: grid; grid-template-columns: 1fr 1fr; gap: 60px; }
+.block-title { margin-bottom: 20px; color: #1a1a2e; font-size: 1.3rem; }
+.detail-list { list-style: none; }
+.detail-list li { padding: 10px 0; border-bottom: 1px solid #ddd; display: flex; justify-content: space-between; font-size: 0.95rem; }
+
+.supplier-card { background: #fff; padding: 20px; border-radius: 8px; box-shadow: 0 4px 6px rgba(0,0,0,0.05); display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px; }
+.supplier-name { font-weight: bold; display: block; font-size: 1.1rem; }
+.rating { color: #f39c12; font-size: 0.9rem; }
+.btn-contact-ui { background: transparent; border: 2px solid #1a1a2e; padding: 8px 15px; font-weight: bold; border-radius: 4px; cursor: pointer; transition: 0.3s;  }
+.btn-contact-ui:hover { background: #1a1a2e; color: #fff; }
+.terms-summary { font-size: 0.8rem; color: #7f8c8d; font-style: italic; }
+
+/* --- Responsive --- */
+@media (max-width: 900px) {
+    .hero-split, .details-split { grid-template-columns: 1fr; flex-direction: column; }
+    .hero-image-box img#mainMachineryImg { height: 300px; }
+}

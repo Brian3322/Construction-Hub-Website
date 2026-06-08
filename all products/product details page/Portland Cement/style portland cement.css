@@ -1,0 +1,333 @@
+/* --- Global Styles --- */
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body {
+    background-color: #ffffff;
+    font-family: 'Segoe UI', Arial, sans-serif;
+    color: #333;
+    padding-top: 80px;
+    line-height: 1.6;
+}
+.container { max-width: 1200px; margin: 0 auto; padding: 0 20px; }
+
+.tab-content-wrapper {
+    /* Adjust 300px to match the height of your tallest tab (Specifications) */
+    min-height: 300px; 
+    margin-top: -1px; /* Aligns with the tab border */
+}
+
+/* --- Header & Navigation (Original) --- */
+ul {
+    list-style: none;
+}
+
+a {
+    text-decoration: none;
+    transition: 0.3s;
+}
+
+.navbar {
+    background: #1a1a2e;
+    color: #fff;
+    padding: 1rem 0;
+    position: fixed;
+    width: 100%;
+    top: 0;
+    z-index: 1000;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.3);
+}
+
+.navbar .container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.logo {
+    font-size: 1.5rem;
+    font-weight: bold;
+    letter-spacing: 1px;
+    text-decoration: none;
+    display: inline-block; /* Essential for the border to sit right */
+    color: #fff; /* let Your "construction hub at the navbar" White */
+}
+
+.logo span {
+    color: #f39c12; /* Industrial Orange */
+}
+
+.nav-links {
+    display: flex;
+    align-items: center;
+}
+
+
+.nav-links li {
+    margin-left: 20px;
+}
+
+.nav-links a {
+    color: #fff;
+    font-size: 0.9rem;
+    font-weight: 500;
+    text-decoration: none; /* Added to remove underline */
+}
+
+.nav-links a:hover {
+    color: #f39c12;
+}
+
+.btn-account {
+    background: #f39c12;
+    padding: 8px 15px;
+    border-radius: 4px;
+    color: #fff !important;
+}
+
+.btn-account:hover {
+    background: #e67e22;
+}
+
+/* --- Product Layout --- */
+.product-page {
+    display: flex;
+    gap: 60px;
+    padding: 40px 20px;
+}
+
+/* --- Left Side: Gallery --- */
+.product-gallery { flex: 1.2; }
+.main-image-container {
+    background: #f9f9f9;
+    border: 1px solid #eee;
+    border-radius: 8px;
+    height: 500px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    overflow: hidden;
+    margin-bottom: 20px;
+}
+.main-image-container img { 
+    width: 100%; 
+    height: 100%; 
+    object-fit: cover; /* Ensures the image fills the area without stretching */
+    transition: none;  /* Static: removed the 0.5s transition */
+}
+
+.zoom-hint { 
+    display: none; /* Hidden since the image is now static and fills the box */
+}
+
+.thumbnails { display: flex; gap: 10px; }
+.thumb {
+    width: 80px; height: 80px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    cursor: pointer;
+    overflow: hidden;
+}
+.thumb.active { border: 2px solid #f39c12; }
+.thumb img { width: 100%; height: 100%; object-fit: cover; }
+.thumb-add {
+    width: 80px; height: 80px;
+    border: 1px dashed #ccc;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 0.7rem; color: #888; cursor: pointer;
+}
+
+/* --- Right Side: Info --- */
+.product-info { flex: 1; }
+.breadcrumb { font-size: 0.8rem; color: #888; margin-bottom: 10px; }
+.product-title { font-size: 2.5rem; color: #1a1a2e; margin-bottom: 15px; }
+
+.info-badges { display: flex; gap: 10px; margin-bottom: 20px; }
+.badge { padding: 4px 12px; border-radius: 4px; font-size: 0.75rem; font-weight: bold; }
+.badge.verified { background: #e8f5e9; color: #2e7d32; }
+.badge.stock { background: #fff3e0; color: #ef6c00; }
+
+.description { color: #666; font-size: 1rem; margin-bottom: 25px; border-left: 4px solid #f39c12; padding-left: 15px;}
+
+.pricing-section { margin-bottom: 30px; }
+.price-label { font-size: 0.9rem; color: #888; }
+.main-price { font-size: 2.2rem; color: #f39c12; font-weight: 800; }
+.main-price small { font-size: 1rem; color: #888; font-weight: 400; }
+
+/* --- Size Options Grid --- */
+.selection-group h3 { font-size: 1rem; margin-bottom: 15px; }
+.options-grid { display: grid; grid-template-columns: 1fr; gap: 10px; margin-bottom: 30px; }
+.option-card {
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    padding: 15px;
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    transition: 0.3s;
+}
+.option-card:hover { border-color: #f39c12; background: #fffdf9; }
+.option-card input { margin-right: 15px; accent-color: #f39c12; }
+.option-content { display: flex; justify-content: space-between; width: 100%; }
+.size-name { font-weight: 600; font-size: 0.9rem; }
+.size-price { color: #f39c12; font-weight: bold; }
+
+/* --- Meta Info --- */
+.meta-info { background: #f8f9fa; padding: 20px; border-radius: 8px; margin-bottom: 30px; font-size: 0.9rem; }
+.meta-item { margin-bottom: 8px; display: flex; justify-content: space-between; }
+.meta-item strong { color: #555; }
+
+/* --- Actions --- */
+.actions { display: flex; gap: 15px; }
+.qty-selector { display: flex; border: 1px solid #ddd; border-radius: 4px; overflow: hidden; }
+.qty-selector button { width: 40px; border: none; background: #eee; cursor: pointer; font-size: 1.2rem; }
+.qty-selector input { width: 50px; border: none; text-align: center; font-weight: bold;}
+.btn-add-to-cart {
+    flex: 1;
+    background: #f39c12;
+    color: #fff;
+    border: 12px solid #f39c12;
+    border-radius: 4px;
+    font-weight: bold;
+    font-size: 1.1rem;
+    cursor: pointer;
+    transition: 0.3s;
+}
+.btn-add-to-cart:hover { background: #e67e22; border-color: #e67e22; transform: translateY(-2px); box-shadow: 0 5px 15px rgba(243, 156, 18, 0.3); }
+
+
+
+
+
+/* --- Breadcrumb Styling --- */
+.breadcrumb {
+    font-size: 0.85rem;
+    color: #888;
+    margin-bottom: 15px;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+/* Style for clickable links */
+.breadcrumb a {
+    color: #888;
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+/* Hover effect: change to brand orange in breadcrumb links */
+.breadcrumb a:hover {
+    color: #f39c12;
+    text-decoration: underline;
+}
+
+/* Style for the current (non-clickable) page */
+.breadcrumb .current-page {
+    color: #333;
+    font-weight: 500;
+}
+
+/* Style for the '>' symbols */
+.breadcrumb .separator {
+    color: #ccc;
+    user-select: none;
+}
+
+/*-----------------------------------------------------*/
+/* --- Footer Specs --- */
+/* --- Tab Functionality Logic --- */
+
+.specs-section {
+    margin-top: 40px;
+    padding-bottom: 80px;
+}
+
+/* 1. Hide all panels by default */
+.tab-panel {
+    display: none;
+    padding-top: 20px;
+}
+
+/* 2. Show the active panel (Triggered by JS) */
+.tab-panel.active {
+    display: block; /* Show only the active one */
+}
+
+
+
+/* 3. Style the Tab Labels */
+.tabs {
+    display: flex;
+    gap: 30px;
+    border-bottom: 1px solid #eee;
+    margin-bottom: 10px;
+}
+
+
+
+.tab-btn {
+    background: none;
+    border: none;
+    padding: 10px 0;
+    font-weight: bold;
+    color: #888;
+    cursor: pointer;
+    border-bottom: 3px solid transparent;
+    transition: 0.3s;
+    font-size: 1rem;
+}
+
+
+
+.tab-label:hover {
+    color: #f39c12;
+}
+
+/* 4. Active Button Styling (The Orange Line) */
+.tab-btn.active {
+    color: #1a1a2e;
+    border-bottom: 3px solid #f39c12; /* Steady Orange Line */
+}
+
+
+/* --- Table & Reviews Styling --- */
+.specs-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+
+
+.specs-table td {
+    padding: 15px;
+    border-bottom: 1px solid #eee;
+    text-align: left; /* Ensure text isn't centering and disappearing */
+}
+
+.specs-table td:first-child {
+    font-weight: bold;
+    color: #777;
+    width: 30%;
+}
+
+.review-item {
+    padding: 20px 0;
+    border-bottom: 1px solid #eee;
+}
+
+
+/* --- Review Panel Styling --- */
+
+
+.stars {
+    color: #f39c12;
+    margin-bottom: 5px;
+    font-size: 1.1rem;
+}
+
+
+/* --- Responsive --- */
+@media (max-width: 992px) {
+    .product-page { flex-direction: column; }
+    .main-image-container { height: 400px; }
+}

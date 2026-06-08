@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CAT 320 Hydraulic Excavator | Construction Hub</title>
+    <link rel="stylesheet" href="style Hydraulic Excavator.css">
+</head>
+<body>
+
+    <header class="navbar">
+        <div class="container">
+            <a href="../../../ALL.html" class="logo">CONSTRUCTION<span>HUB</span></a>
+            <nav>
+                <ul class="nav-links">
+                    <li><a href="../../../ALL.html#home">Home</a></li>
+                    <li><a href="../../../ALL.html#products">Product</a></li>
+                    <li><a href="../../../ALL.html#machinery">Heavy Machinery</a></li>
+                    <li><a href="../../../ALL.html#about">About</a></li>
+                    <li><a href="../../../contact us.html" class="active-link">Contact</a></li>
+                    <li><a href="../../../ALL.html#faq">FAQ</a></li>
+                    <li><a href="../../../sign in.html" class="btn-account">Account</a></li>
+                    <li>
+                        <a href="../../../checkout.html" class="cart-link">
+                            🛒 Cart
+                            <span class="ch-cart-badge">0</span>
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <section class="hero-machinery">
+        <div class="container hero-split">
+            <div class="hero-image-box">
+                <img src="photos/img1.png" alt="Hydraulic Excavator" id="mainMachineryImg">
+                    <div class="gallery-mini">
+                        <img src="photos/img1.png" class="thumb active" onclick="swapImg(this.src, this)">
+                        <img src="photos/img2.jpg" class="thumb" onclick="swapImg(this.src, this)">
+                        <img src="photos/CM20190621-ac965-b7e2f.jpg" class="thumb" onclick="swapImg(this.src, this)">
+                        <img src="photos/imgi_5_image.png" class="thumb" onclick="swapImg(this.src, this)">
+                    </div>
+            </div>
+            <div class="hero-info-box">
+                <span class="category-tag">HEAVY EXCAVATOR</span>
+                <h1 class="machinery-name">CAT 320 Next Gen Hydraulic Excavator</h1>
+                <div class="status-bar">
+                    <span class="badge reserved">● RESERVED</span>
+                    <span class="year-label">2024 Model</span>
+                </div>
+                <div class="hero-pricing">
+                    <span class="price-title">Daily Rental Rate</span>
+                    <h2 class="price-value">EGP 450.00 <small>/ Day</small></h2>
+                </div>
+                <div class="hero-actions">
+                    <button class="btn-rent-primary btn-reserved" disabled>Currently Reserved</button>
+                    <p class="reserved-notice">⚠️ This machine is currently reserved and unavailable for new bookings. Please check back later or browse other available equipment.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="section-overview dark-bg">
+        <div class="container">
+            <h3 class="section-heading">Machinery Overview</h3>
+            <p class="overview-text">
+                The CAT 320 Next Gen Excavator raises the bar for efficiency and fuel economy in the 20-ton size class. 
+                Equipped with integrated CAT Connect Technology, this machine increases operator efficiency by up to 45%. 
+                It is engineered for heavy-duty digging, trenching, and lifting in complex infrastructure and commercial 
+                development projects.
+            </p>
+            <div class="project-tags">
+                <span>Infrastructure</span>
+                <span>Urban Development</span>
+                <span>Deep Trenching</span>
+                <span>Mass Excavation</span>
+            </div>
+        </div>
+    </section>
+
+    <section class="section-specs">
+        <div class="container">
+            <h3 class="section-heading">Technical Specifications</h3>
+            <div class="specs-grid">
+                <div class="spec-card">
+                    <span class="spec-label">Engine Power</span>
+                    <span class="spec-value">129 kW (173 HP)</span>
+                </div>
+                <div class="spec-card">
+                    <span class="spec-label">Operating Weight</span>
+                    <span class="spec-value">22,500 kg</span>
+                </div>
+                <div class="spec-card">
+                    <span class="spec-label">Max Digging Depth</span>
+                    <span class="spec-value">6,720 mm</span>
+                </div>
+                <div class="spec-card">
+                    <span class="spec-label">Fuel Type</span>
+                    <span class="spec-value">Diesel (Euro 4)</span>
+                </div>
+                <div class="spec-card">
+                    <span class="spec-label">Transmission</span>
+                    <span class="spec-value">Hydrostatic High/Low</span>
+                </div>
+                <div class="spec-card">
+                    <span class="spec-label">Bucket Capacity</span>
+                    <span class="spec-value">1.19 m³</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="section-details dark-bg">
+        <div class="container details-split">
+            <div class="info-block">
+                <h4 class="block-title">Rental Information</h4>
+                <ul class="detail-list">
+                    <li><strong>Daily Rate:</strong> EGP 450.00</li>
+                    <li><strong>Weekly Rate:</strong> EGP 2,800.00 (Save 12%)</li>
+                    <li><strong>Security Deposit:</strong> EGP 1,500.00</li>
+                    <li><strong>Delivery:</strong> Low-loader required (EGP 150 flat fee)</li>
+                </ul>
+            </div>
+            <div class="info-block">
+                <h4 class="block-title">Supplier Information</h4>
+                <div class="supplier-card">
+                    <div class="supplier-meta">
+                        <span class="supplier-name">Nile Equipment Rentals</span>
+                        <div class="rating">⭐⭐⭐⭐☆ (4.8/5)</div>
+                    </div>
+                    <button class="btn-contact-ui">Contact Supplier</button>
+                </div>
+                <p class="terms-summary">Rental includes standard maintenance. Operator available upon request for an additional fee.</p>
+            </div>
+        </div>
+    </section>
+
+    <script>
+        function swapImg(newSrc, clickedElement) {
+    // 1. Change the main machinery image
+    document.getElementById('mainMachineryImg').src = newSrc;
+
+    // 2. Remove the 'active' class from ALL thumbnails
+    const allThumbs = document.querySelectorAll('.thumb');
+    allThumbs.forEach(thumb => {
+        thumb.classList.remove('active');
+    });
+
+    // 3. Add the 'active' class ONLY to the clicked thumbnail
+    clickedElement.classList.add('active');
+}
+
+
+//or do it like this:
+/* function swapImg(newSrc, clickedElement) {
+    // 1. Update the big photo
+    document.getElementById('mainMachineryImg').src = newSrc;
+
+    // 2. Clear all borders
+    document.querySelectorAll('.thumb').forEach(t => t.classList.remove('active'));
+
+    // 3. Highlight the clicked one
+    clickedElement.classList.add('active');
+} */
+    </script>
+<script>
+const MACHINE = {
+    id        : 'cat-320-excavator',
+    name      : 'CAT 320 Next Gen Hydraulic Excavator',
+    dailyPrice: 450.0,
+    icon      : '⛏️',
+    image     : 'photos/img1.png',
+};
+</script>
+
+<!-- ── Inlined Cart API ── -->
+<script>
+const CART_KEY = 'ch_cart';
+const Cart = (() => {
+    function load() {
+        try { return JSON.parse(localStorage.getItem(CART_KEY)) || []; }
+        catch { return []; }
+    }
+    function save(items) {
+        localStorage.setItem(CART_KEY, JSON.stringify(items));
+        window.dispatchEvent(new CustomEvent('cartChanged', { detail: { items } }));
+    }
+    function add(item) {
+        const items = load();
+        const idx   = items.findIndex(i => i.id === item.id);
+        if (idx !== -1) {
+            if (item.type === 'purchase') { items[idx].qty += (item.qty || 1); }
+            else { items[idx] = { ...items[idx], ...item }; }
+        } else {
+            items.push({
+                id        : item.id        || String(Date.now()),
+                name      : item.name      || 'Construction Item',
+                type      : item.type      || 'rental',
+                unitPrice : item.unitPrice || 0,
+                unit      : item.unit      || 'day',
+                qty       : item.qty       || 1,
+                icon      : item.icon      || '🏗️',
+                image     : item.image     || '',
+                startDate : item.startDate || '',
+                endDate   : item.endDate   || '',
+                days      : item.days      || 1,
+            });
+        }
+        save(items);
+    }
+    function count()    { return load().length; }
+    function remove(id) { save(load().filter(i => i.id !== id)); }
+    function clear()    { save([]); }
+    return { add, count, remove, clear };
+})();
+</script>
+
+<!-- ── Toast CSS ── -->
+<style>
+.ch-toast {
+    position: fixed; bottom: 30px; right: 30px;
+    background: #1a1a2e; color: #fff;
+    padding: 14px 22px; border-radius: 10px;
+    font-size: 0.9rem; font-weight: 500;
+    box-shadow: 0 8px 25px rgba(0,0,0,0.2);
+    transform: translateY(80px); opacity: 0;
+    transition: all 0.35s ease;
+    z-index: 9999;
+    border-left: 4px solid #f39c12;
+    font-family: 'Segoe UI', Tahoma, sans-serif;
+}
+.ch-toast.show { transform: translateY(0); opacity: 1; }
+
+.btn-reserved {
+    background: #95a5a6 !important;
+    color: #fff !important;
+    cursor: not-allowed !important;
+    opacity: 0.75;
+    box-shadow: none !important;
+    transform: none !important;
+}
+.reserved-notice {
+    margin-top: 14px;
+    background: #fdecea;
+    border-left: 4px solid #e74c3c;
+    color: #c0392b;
+    padding: 12px 16px;
+    border-radius: 6px;
+    font-size: 0.88rem;
+    line-height: 1.5;
+}
+</style>
+
+<!-- ── Toast Element ── -->
+<div class="ch-toast" id="chToast"></div>
+
+<!-- ── Add to Cart Logic ── -->
+<script>
+function chShowToast(msg) {
+    const t = document.getElementById('chToast');
+    t.textContent = msg;
+    t.classList.add('show');
+    setTimeout(() => t.classList.remove('show'), 3000);
+}
+
+function addMachineToCart() {
+    // Machine is RESERVED — block all cart additions
+    chShowToast('⛔ This machine is currently reserved and cannot be booked.');
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+    const btn = document.querySelector('.btn-rent-primary');
+    if (btn) {
+        btn.disabled = true;
+        btn.onclick = (e) => { e.preventDefault(); addMachineToCart(); };
+    }
+});
+</script>
+
+</body>
+</html>

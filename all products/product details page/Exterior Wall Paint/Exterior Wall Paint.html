@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Exterior Wall Paint | Construction Hub</title>
+    <link rel="stylesheet" href="style paint.css">
+</head>
+<body>
+
+    <header class="navbar">
+        <div class="container">
+            <a href="../../../ALL.html" class="logo">CONSTRUCTION<span>HUB</span></a>
+            <nav>
+                <ul class="nav-links">
+                    <li><a href="../../../ALL.html#home">Home</a></li>
+                    <li><a href="../../../ALL.html#products">Product</a></li>
+                    <li><a href="../../../ALL.html#machinery">Heavy Machinery</a></li>
+                    <li><a href="../../../ALL.html#about">About</a></li>
+                    <li><a href="../../../contact us.html" class="active-link">Contact</a></li>
+                    <li><a href="../../../ALL.html#faq">FAQ</a></li>
+                    <li><a href="../../../sign in.html" class="btn-account">Account</a></li>
+                    <li>
+  <a href="../../../checkout.html" class="cart-link">
+    🛒 Cart
+    <span class="ch-cart-badge">0</span>
+  </a>
+</li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main class="container product-page">
+        <section class="product-gallery">
+            <div class="main-image-container">
+                <img id="mainProductImg" src="photos/exterior wall paint.png" alt="Exterior Paint Main">
+            </div>
+            
+            <div class="thumbnails">
+                <div class="thumb active" onclick="changeImage('photos/exterior wall paint.png', this)">
+                    <img src="photos/exterior wall paint.png" alt="Product Bucket">
+                </div>
+                <div class="thumb" onclick="changeImage('photos/Plascon_Micatex_1924x550.png', this)">
+                    <img src="photos/Plascon_Micatex_1924x550.png" alt="Color Swatch">
+                </div>
+                <div class="thumb" onclick="changeImage('photos/imgi_1_Plascon_Masterprep_1924x550-min.png', this)">
+                    <img src="photos/imgi_1_Plascon_Masterprep_1924x550-min.png" alt="Wall Application">
+                </div>
+                <div class="thumb" onclick="changeImage('photos/Plascon_Website-Banner-Desktop_V2-scaled.png', this)">
+                    <img src="photos/Plascon_Website-Banner-Desktop_V2-scaled.png" alt="Wall Application">
+                </div>
+                <div class="thumb-add">+ Add</div>
+            </div>
+        </section>
+
+        <section class="product-info">
+            <nav class="breadcrumb">
+                <a href="../../../ALL.html">HomePage</a> 
+                <span class="separator">></span>
+                <a href="../../all products.html">materials</a> 
+                <span class="separator">></span>
+                <span class="current-page">Exterior Wall Paint</span>
+            </nav>
+            <h1 class="product-title">Weather-Shield Exterior Acrylic Paint</h1>
+            
+            <div class="info-badges">
+                <span class="badge verified">✓ UV Protected</span>
+                <span class="badge stock">In Stock</span>
+            </div>
+
+            <p class="description">
+                Premium grade exterior acrylic emulsion formulated for maximum protection against harsh weather. 
+                Features advanced anti-fungal properties and high-elasticity to prevent cracking. 
+                Provides a smooth, matte finish with excellent color retention for concrete, brick, and plastered surfaces.
+            </p>
+
+            <div class="pricing-section">
+                <span class="price-label">Price per selection:</span>
+                <h2 class="main-price">EGP<span id="dynamic-price">45.00</span> <small>/ bucket</small></h2>
+            </div>
+
+            <div class="selection-group">
+                <h3>Select Volume (Liters)</h3>
+                <div class="options-grid">
+                    <label class="option-card">
+                        <input type="radio" name="size" value="small" data-price="45.00" checked>
+                        <div class="option-content">
+                            <span class="size-name">Small Bucket (5 Liters)</span>
+                            <span class="size-price">EGP 45.00/ea</span>
+                        </div>
+                    </label>
+                    <label class="option-card">
+                        <input type="radio" name="size" value="medium" data-price="82.50">
+                        <div class="option-content">
+                            <span class="size-name">Standard Drum (10 Liters)</span>
+                            <span class="size-price">EGP 82.50/ea</span>
+                        </div>
+                    </label>
+                    <label class="option-card">
+                        <input type="radio" name="size" value="large" data-price="155.00">
+                        <div class="option-content">
+                            <span class="size-name">Industrial Pail (20 Liters)</span>
+                            <span class="size-price">EGP 155.00/ea</span>
+                        </div>
+                    </label>
+                </div>
+            </div>
+
+            <div class="meta-info">
+                <div class="meta-item"><strong>Supplier:</strong> <span>Elite Coating Systems</span></div>
+                <div class="meta-item"><strong>Coverage:</strong> <span>Approx. 10-12 m²/Liter</span></div>
+                <div class="meta-item"><strong>Finish:</strong> <span>Matt / Silk Available</span></div>
+            </div>
+
+            <div class="actions">
+                <div class="qty-selector">
+                    <button type="button" onclick="updateQty(-1)">-</button>
+                    <input type="number" id="quantity" value="1" min="1">
+                    <button type="button" onclick="updateQty(1)">+</button>
+                </div>
+                <button class="btn-add-to-cart" onclick="addToCart()">Add to Cart</button>
+            </div>
+        </section>
+    </main>
+
+    <section class="container specs-section">
+        <div class="tabs">
+            <button class="tab-btn active" data-target="specs">Specifications</button>
+            <button class="tab-btn" data-target="reviews">Reviews</button>
+            <button class="tab-btn" data-target="shipping">Shipping Policy</button>
+        </div>
+
+        <div class="tab-content-wrapper">
+            <div id="specs" class="tab-panel active">
+                <table class="specs-table">
+                    <tr><td>Resin Type</td><td>100% Pure Acrylic</td></tr>
+                    <tr><td>Drying Time</td><td>2 Hours (Touch), 4 Hours (Recoat)</td></tr>
+                    <tr><td>VOC Content</td><td>Low VOC (< 50g/L)</td></tr>
+                    <tr><td>Warranty</td><td>7 Year Weather Protection</td></tr>
+                </table>
+            </div>
+
+            <div id="reviews" class="tab-panel">
+                <div class="review-item">
+                    <div class="stars">★★★★★</div>
+                    <strong>DecorPro Renovations</strong>
+                    <p>Great opacity. Only needed two coats to cover a dark grey wall. The finish is very consistent.</p>
+                </div>
+            </div>
+
+            <div id="shipping" class="tab-panel">
+                <p>Delivered in spill-proof sealed containers. Bulk orders of 10+ pails are delivered on pallets. Please store in a cool, dry place away from direct sunlight.</p>
+            </div>
+        </div>
+    </section>
+<!-- Inline cart.js so this page works regardless of folder depth -->
+    <script>
+    const CART_KEY = 'ch_cart';
+    const Cart = (() => {
+        function load() {
+            try { return JSON.parse(localStorage.getItem(CART_KEY)) || []; }
+            catch { return []; }
+        }
+        function save(items) {
+            localStorage.setItem(CART_KEY, JSON.stringify(items));
+            window.dispatchEvent(new CustomEvent('cartChanged', { detail: { items } }));
+        }
+        function add(item) {
+            const items = load();
+            const idx   = items.findIndex(i => i.id === item.id);
+            if (idx !== -1) {
+                if (item.type === 'purchase') { items[idx].qty += (item.qty || 1); }
+                else { items[idx] = { ...items[idx], ...item }; }
+            } else {
+                items.push({
+                    id        : item.id        || String(Date.now()),
+                    name      : item.name      || 'Construction Item',
+                    type      : item.type      || 'purchase',
+                    unitPrice : item.unitPrice || 0,
+                    unit      : item.unit      || 'Unit',
+                    qty       : item.qty       || 1,
+                    icon      : item.icon      || '🏗️',
+                    image     : item.image     || '',
+                    startDate : item.startDate || '',
+                    endDate   : item.endDate   || '',
+                    days      : item.days      || 1,
+                });
+            }
+            save(items);
+        }
+        function getAll()       { return load(); }
+        function count()        { return load().length; }
+        function remove(id)     { save(load().filter(i => i.id !== id)); }
+        function clear()        { save([]); }
+        function goToCheckout() { window.location.href = '../../../checkout.html'; }
+        return { add, getAll, count, remove, clear, goToCheckout };
+    })();
+
+    /* Keep cart badge up to date */
+    function _updateBadge() {
+        document.querySelectorAll('.ch-cart-badge').forEach(badge => {
+            const n = Cart.count();
+            badge.textContent = n;
+            badge.style.display = n > 0 ? 'inline-flex' : 'none';
+        });
+    }
+    window.addEventListener('cartChanged', _updateBadge);
+    document.addEventListener('DOMContentLoaded', _updateBadge);
+
+    /* Toast notification */
+    function showCartToast(msg) {
+        let t = document.getElementById('_cartToast');
+        if (!t) {
+            t = document.createElement('div');
+            t.id = '_cartToast';
+            t.style.cssText = `
+                position:fixed;bottom:30px;right:30px;z-index:99999;
+                background:#1a1a2e;color:#fff;padding:14px 22px;
+                border-radius:10px;font-family:'Segoe UI',sans-serif;
+                font-size:.9rem;font-weight:500;
+                box-shadow:0 8px 25px rgba(0,0,0,.2);
+                border-left:4px solid #f39c12;
+                transform:translateY(80px);opacity:0;
+                transition:all .35s ease;pointer-events:none;`;
+            document.body.appendChild(t);
+        }
+        t.textContent = msg;
+        t.style.transform = 'translateY(0)';
+        t.style.opacity   = '1';
+        clearTimeout(t._timer);
+        t._timer = setTimeout(() => {
+            t.style.transform = 'translateY(80px)';
+            t.style.opacity   = '0';
+        }, 3000);
+    }
+    </script>
+
+    <script>
+        /* ── Image gallery ── */
+        function changeImage(path, el) {
+            document.getElementById('mainProductImg').src = path;
+            document.querySelectorAll('.thumb').forEach(t => t.classList.remove('active'));
+            el.classList.add('active');
+        }
+
+        /* ── Price display updates when a size option is selected ── */
+        const priceDisplay = document.getElementById('dynamic-price');
+        document.querySelectorAll('input[name="size"]').forEach(radio => {
+            radio.addEventListener('change', function() {
+                priceDisplay.innerText = this.dataset.price;
+            });
+        });
+
+        /* ── Tabs ── */
+        const tabs = document.querySelectorAll('.tab-btn');
+        const panels = document.querySelectorAll('.tab-panel');
+        tabs.forEach(tab => {
+            tab.addEventListener('click', () => {
+                tabs.forEach(t => t.classList.remove('active'));
+                panels.forEach(p => p.classList.remove('active'));
+                tab.classList.add('active');
+                document.getElementById(tab.dataset.target).classList.add('active');
+            });
+        });
+
+        /* ── Quantity stepper ── */
+        function updateQty(change) {
+            const qtyInput = document.getElementById('quantity');
+            let val = parseInt(qtyInput.value) + change;
+            if (val < 1) val = 1;
+            qtyInput.value = val;
+        }
+
+        /* ── Add to Cart ── */
+        function addToCart() {
+            const selected  = document.querySelector('input[name="size"]:checked');
+            const unitPrice = parseFloat(selected.dataset.price);
+            const sizeLabel = selected.parentElement.querySelector('.size-name').textContent;
+            const qty       = Math.max(1, parseInt(document.getElementById('quantity').value) || 1);
+
+            Cart.add({
+                id        : 'exterior-paint-' + selected.value,
+                name      : 'Exterior Wall Paint – ' + sizeLabel,
+                type      : 'purchase',
+                unitPrice : unitPrice,
+                unit      : 'bucket',
+                qty       : qty,
+                icon      : '🎨',
+                image     : 'all products/product details page/Binding wire/photos/exterior wall paint.png',
+            });
+
+            showCartToast(`✅ Added EGP{qty} × Exterior Wall Paint (EGP{sizeLabel}) to cart!`);
+        }
+
+        /* ── Buy Now ── */
+        function buyNow() {
+            addToCart();
+            Cart.goToCheckout();
+        }
+    </script>
+</body>
+</html>

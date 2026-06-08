@@ -1,0 +1,578 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Create Account | Construction Hub</title>
+    <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@700;800&family=Barlow:wght@400;500;600&display=swap" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        :root {
+            --navy:   #1a1a2e;
+            --orange: #f39c12;
+            --orange-dark: #e67e22;
+            --white:  #ffffff;
+            --light:  #f8f9fa;
+            --muted:  #666666;
+            --border: #dddddd;
+            --red:    #c0392b;
+        }
+
+        body {
+            font-family: 'Barlow', sans-serif;
+            background: var(--white);
+            height: 100vh;
+            display: flex;
+            overflow: hidden;
+        }
+
+        /* ── Brand Side ── */
+        .brand-side {
+            flex: 1;
+            position: relative;
+            background: url('CSS/Photos/4- sign up form/wmremove-transformed2.jpeg') no-repeat center center / cover;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+        }
+
+        .brand-side .overlay {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(135deg, rgba(26,26,46,0.88) 0%, rgba(243,156,18,0.45) 100%);
+        }
+
+        .brand-content {
+            position: relative;
+            z-index: 2;
+            text-align: center;
+            color: #fff;
+            padding: 30px;
+        }
+
+        .logo {
+            font-family: 'Barlow Condensed', sans-serif;
+            font-size: 3rem;
+            font-weight: 800;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+        }
+
+        .logo span { color: var(--orange); }
+
+        .tagline {
+            font-size: 1rem;
+            color: rgba(255,255,255,0.8);
+            margin-top: 10px;
+            font-weight: 400;
+        }
+
+        .accent-bar {
+            width: 70px;
+            height: 4px;
+            background: var(--orange);
+            margin: 22px auto 0;
+            border-radius: 2px;
+        }
+
+        /* ── Form Side ── */
+        .form-side {
+            flex: 1.2;
+            background: var(--white);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 40px 50px;
+            overflow-y: auto;
+        }
+
+        .form-wrapper {
+            width: 100%;
+            max-width: 480px;
+        }
+
+        .form-header {
+            margin-bottom: 28px;
+        }
+
+        .form-header h2 {
+            font-family: 'Barlow Condensed', sans-serif;
+            font-size: 2.4rem;
+            font-weight: 800;
+            color: var(--navy);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .form-header p {
+            color: var(--muted);
+            font-size: 0.95rem;
+            margin-top: 5px;
+        }
+
+        /* ── Role Toggle ── */
+        .role-toggle-wrap {
+            margin-bottom: 28px;
+        }
+
+        .role-toggle-label {
+            display: block;
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: var(--navy);
+            font-weight: 600;
+            margin-bottom: 10px;
+        }
+
+        .role-toggle {
+            display: flex;
+            background: #f0f0f0;
+            border-radius: 50px;
+            padding: 5px;
+            position: relative;
+        }
+
+        .role-toggle button {
+            flex: 1;
+            padding: 11px 0;
+            border: none;
+            background: transparent;
+            font-family: 'Barlow', sans-serif;
+            font-size: 0.95rem;
+            font-weight: 600;
+            cursor: pointer;
+            border-radius: 50px;
+            color: #888;
+            transition: all 0.3s ease;
+            position: relative;
+            z-index: 1;
+        }
+
+        .role-toggle button.active {
+            background: var(--navy);
+            color: #fff;
+            box-shadow: 0 4px 14px rgba(26,26,46,0.3);
+        }
+
+        /* ── Status Message ── */
+        #status-msg {
+            display: none;
+            padding: 12px 16px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            font-size: 0.9rem;
+            font-weight: 600;
+        }
+
+        /* ── Form Panels ── */
+        .form-panel {
+            display: none;
+        }
+
+        .form-panel.active {
+            display: block;
+        }
+
+        /* ── Input Groups ── */
+        .input-group {
+            margin-bottom: 16px;
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 14px;
+        }
+
+        .input-group label {
+            display: block;
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: #444;
+            font-weight: 600;
+            margin-bottom: 7px;
+        }
+
+        .input-group input,
+        .input-group select {
+            width: 100%;
+            padding: 13px 15px;
+            background: #f9f9f9;
+            border: 1.5px solid var(--border);
+            border-radius: 8px;
+            color: #333;
+            font-family: 'Barlow', sans-serif;
+            font-size: 0.95rem;
+            transition: 0.25s ease;
+            outline: none;
+        }
+
+        .input-group input:focus,
+        .input-group select:focus {
+            border-color: var(--orange);
+            background: #fff;
+            box-shadow: 0 0 0 3px rgba(243,156,18,0.12);
+        }
+
+        .input-group select {
+            cursor: pointer;
+            appearance: none;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' fill='%23f39c12' viewBox='0 0 16 16'%3E%3Cpath d='M7.247 11.14 2.451 5.658C1.885 5.013 2.345 4 3.204 4h9.592a1 1 0 0 1 .753 1.659l-4.796 5.48a1 1 0 0 1-1.506 0z'/%3E%3C/svg%3E");
+            background-repeat: no-repeat;
+            background-position: right 14px center;
+        }
+
+        /* ── Checkbox ── */
+        .checkbox-label {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 0.9rem;
+            color: #555;
+            cursor: pointer;
+            margin: 18px 0;
+        }
+
+        .checkbox-label input[type="checkbox"] {
+            width: 16px;
+            height: 16px;
+            accent-color: var(--orange);
+            cursor: pointer;
+        }
+
+        .checkbox-label a {
+            color: var(--orange);
+            font-weight: 600;
+            text-decoration: none;
+        }
+
+        .checkbox-label a:hover { text-decoration: underline; }
+
+        /* ── Submit Button ── */
+        .register-btn {
+            width: 100%;
+            padding: 15px;
+            background: var(--orange);
+            color: #fff;
+            border: none;
+            border-radius: 8px;
+            font-family: 'Barlow Condensed', sans-serif;
+            font-size: 1.1rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            cursor: pointer;
+            transition: 0.3s ease;
+            box-shadow: 0 4px 12px rgba(243,156,18,0.25);
+        }
+
+        .register-btn:hover:not(:disabled) {
+            background: var(--orange-dark);
+            transform: translateY(-2px);
+            box-shadow: 0 7px 18px rgba(243,156,18,0.35);
+        }
+
+        .register-btn:disabled {
+            opacity: 0.65;
+            cursor: not-allowed;
+        }
+
+        /* ── Footer ── */
+        .form-footer {
+            text-align: center;
+            margin-top: 18px;
+            color: var(--muted);
+            font-size: 0.9rem;
+        }
+
+        .form-footer a {
+            color: var(--orange);
+            font-weight: 600;
+            text-decoration: none;
+        }
+
+        .form-footer a:hover { text-decoration: underline; }
+
+        .home-link {
+            display: block;
+            text-align: center;
+            margin-top: 20px;
+            color: #aaa;
+            text-decoration: none;
+            font-size: 0.85rem;
+            transition: 0.3s;
+        }
+
+        .home-link:hover { color: var(--orange); }
+
+        /* ── Seller badge accent ── */
+        .seller-badge-row {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            background: #fff8ee;
+            border: 1px solid #f9d68a;
+            border-radius: 8px;
+            padding: 10px 14px;
+            margin-bottom: 18px;
+            font-size: 0.85rem;
+            color: #7a5000;
+        }
+
+        .seller-badge-row .icon { font-size: 1.2rem; }
+
+        /* ── Responsive ── */
+        @media (max-width: 900px) {
+            .brand-side { display: none; }
+            .form-side { flex: 1; padding: 30px 24px; }
+        }
+
+        @media (max-width: 480px) {
+            .form-row { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- ── Brand Side ── -->
+    <div class="brand-side">
+        <div class="overlay"></div>
+        <div class="brand-content">
+            <h1 class="logo">CONSTRUCTION<span>HUB</span></h1>
+            <p class="tagline">Your Gateway to Industrial Excellence</p>
+            <div class="accent-bar"></div>
+        </div>
+    </div>
+
+    <!-- ── Form Side ── -->
+    <div class="form-side">
+        <div class="form-wrapper">
+
+            <div class="form-header">
+                <h2>Join the Hub</h2>
+                <p>Create your account to buy materials or list your products.</p>
+            </div>
+
+            <!-- Role Toggle -->
+            <div class="role-toggle-wrap">
+                <span class="role-toggle-label">I want to register as</span>
+                <div class="role-toggle">
+                    <button id="btn-buyer" class="active" onclick="switchRole('buyer')">🛒 Buyer / User</button>
+                    <button id="btn-seller" onclick="switchRole('seller')">🏗️ Seller / Supplier</button>
+                </div>
+            </div>
+
+            <!-- Status Message -->
+            <div id="status-msg"></div>
+
+            <!-- ══ BUYER FORM ══ -->
+            <form id="buyerForm" class="form-panel active" onsubmit="handleSubmit(event, 'buyer')">
+
+                <div class="input-group">
+                    <label for="b-name">Full Name</label>
+                    <input type="text" id="b-name" placeholder="John Doe" required>
+                </div>
+
+                <div class="input-group">
+                    <label for="b-email">Email Address</label>
+                    <input type="email" id="b-email" placeholder="email@example.com" required>
+                </div>
+
+                <div class="input-group">
+                    <label for="b-phone">Phone Number</label>
+                    <input type="tel" id="b-phone" placeholder="+20 100 000 0000" required>
+                </div>
+
+                <div class="form-row">
+                    <div class="input-group">
+                        <label for="b-password">Password</label>
+                        <input type="password" id="b-password" placeholder="••••••••" required minlength="8">
+                    </div>
+                    <div class="input-group">
+                        <label for="b-confirm">Confirm</label>
+                        <input type="password" id="b-confirm" placeholder="••••••••" required minlength="8">
+                    </div>
+                </div>
+
+                <label class="checkbox-label">
+                    <input type="checkbox" required>
+                    I agree to the <a href="terms_and_conditions.html">Terms &amp; Conditions</a>
+                </label>
+
+                <button type="submit" class="register-btn" id="buyerBtn">Create Account</button>
+            </form>
+
+            <!-- ══ SELLER FORM ══ -->
+            <form id="sellerForm" class="form-panel" onsubmit="handleSubmit(event, 'seller')">
+
+                <div class="seller-badge-row">
+                    <span class="icon">⚠️</span>
+                    <span>Seller accounts are reviewed before listing products. Expect verification within 24 hours.</span>
+                </div>
+
+                <div class="input-group">
+                    <label for="s-name">Full Name</label>
+                    <input type="text" id="s-name" placeholder="John Doe" required>
+                </div>
+
+                <div class="input-group">
+                    <label for="s-company">Company / Business Name</label>
+                    <input type="text" id="s-company" placeholder="e.g. Cairo Building Supplies Co." required>
+                </div>
+
+                <div class="input-group">
+                    <label for="s-email">Email Address</label>
+                    <input type="email" id="s-email" placeholder="email@company.com" required>
+                </div>
+
+                <div class="input-group">
+                    <label for="s-phone">Business Phone</label>
+                    <input type="tel" id="s-phone" placeholder="+20 100 000 0000" required>
+                </div>
+
+                <div class="input-group">
+                    <label for="s-type">Seller Type</label>
+                    <select id="s-type" required>
+                        <option value="" disabled selected>Select seller category</option>
+                        <option value="supplier">Material Supplier</option>
+                        <option value="company">Construction Company</option>
+                        <option value="rental">Machinery Rental Provider</option>
+                        <option value="individual">Individual / Freelance Contractor</option>
+                    </select>
+                </div>
+
+                <div class="form-row">
+                    <div class="input-group">
+                        <label for="s-password">Password</label>
+                        <input type="password" id="s-password" placeholder="••••••••" required minlength="8">
+                    </div>
+                    <div class="input-group">
+                        <label for="s-confirm">Confirm</label>
+                        <input type="password" id="s-confirm" placeholder="••••••••" required minlength="8">
+                    </div>
+                </div>
+
+                <label class="checkbox-label">
+                    <input type="checkbox" required>
+                    I agree to the <a href="terms_and_conditions.html">Terms &amp; Conditions</a>
+                </label>
+
+                <button type="submit" class="register-btn" id="sellerBtn">Create Seller Account</button>
+            </form>
+
+            <div class="form-footer">
+                <p>Already have an account? <a href="sign_in.html">Sign In</a></p>
+            </div>
+
+            <a href="ALL.html" class="home-link">← Back to Homepage</a>
+        </div>
+    </div>
+<script src="https://cdn.jsdelivr.net/npm/appwrite@16.0.2"></script>
+<script>
+    window.addEventListener('load', function() {
+
+        const { Client, Account, ID } = Appwrite;
+
+        const client = new Client()
+            .setEndpoint('https://nyc.cloud.appwrite.io/v1')
+            .setProject('69e66361000f9e7af684');
+
+        const account = new Account(client);
+
+        let currentRole = 'buyer';
+
+        function switchRole(role) {
+            currentRole = role;
+            document.getElementById('buyerForm').classList.toggle('active', role === 'buyer');
+            document.getElementById('sellerForm').classList.toggle('active', role === 'seller');
+            document.getElementById('btn-buyer').classList.toggle('active', role === 'buyer');
+            document.getElementById('btn-seller').classList.toggle('active', role === 'seller');
+            hideMsg();
+        }
+
+        function showMsg(text, isError = false) {
+            const box = document.getElementById('status-msg');
+            box.textContent = text;
+            box.style.display = 'block';
+            box.style.background = isError ? '#fdecea' : '#e8f5e9';
+            box.style.color     = isError ? '#c0392b' : '#2e7d32';
+            box.style.border    = `1px solid ${isError ? '#e74c3c' : '#2ecc71'}`;
+            box.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+        }
+
+        function hideMsg() {
+            document.getElementById('status-msg').style.display = 'none';
+        }
+
+        function setLoading(role, loading) {
+            const btn = document.getElementById(role + 'Btn');
+            btn.textContent = loading
+                ? 'Creating account…'
+                : (role === 'buyer' ? 'Create Account' : 'Create Seller Account');
+            btn.disabled = loading;
+        }
+
+        async function handleSubmit(e, role) {
+            e.preventDefault();
+
+            const prefix = role === 'buyer' ? 'b' : 's';
+            const password = document.getElementById(`${prefix}-password`).value;
+            const confirm  = document.getElementById(`${prefix}-confirm`).value;
+
+            if (password !== confirm) {
+                showMsg('Passwords do not match. Please try again.', true);
+                return;
+            }
+            if (password.length < 8) {
+                showMsg('Password must be at least 8 characters.', true);
+                return;
+            }
+
+            setLoading(role, true);
+
+            try {
+                const email = document.getElementById(`${prefix}-email`).value.trim();
+                const name  = document.getElementById(`${prefix}-name`).value.trim();
+                const phone = document.getElementById(`${prefix}-phone`).value.trim();
+
+                await account.create(ID.unique(), email, password, name);
+                await account.createEmailPasswordSession(email, password);
+
+                const prefs = { role, phone };
+                if (role === 'seller') {
+                    prefs.company    = document.getElementById('s-company').value.trim();
+                    prefs.sellerType = document.getElementById('s-type').value;
+                }
+                await account.updatePrefs(prefs);
+
+                showMsg(`Account created for ${name}! Redirecting…`, false);
+                setTimeout(() => { window.location.href = 'ALL.html'; }, 1200);
+
+            } catch (err) {
+                setLoading(role, false);
+                const msg = err.message || '';
+                if (msg.includes('already exists')) {
+                    showMsg('An account with this email already exists. Try signing in.', true);
+                } else if (msg.includes('Invalid email')) {
+                    showMsg('Please enter a valid email address.', true);
+                } else if (msg.includes('password')) {
+                    showMsg('Password is too weak. Use at least 8 characters.', true);
+                } else {
+                    showMsg('Registration failed: ' + (msg || 'Unknown error.'), true);
+                }
+            }
+        }
+
+        // Expose functions used in HTML onclick attributes
+        window.switchRole = switchRole;
+        window.handleSubmit = handleSubmit;
+
+    });
+</script>
+
+</body>
+</html>

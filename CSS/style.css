@@ -1,0 +1,381 @@
+/* --- Global Styles --- */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    line-height: 1.6;
+    color: #333;
+    background-color: #f4f4f4;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+ul {
+    list-style: none;
+}
+
+a {
+    text-decoration: none;
+    transition: 0.3s;
+}
+
+/* --- Header & Navigation --- */
+.navbar {
+    background: #1a1a2e;
+    color: #fff;
+    padding: 1rem 0;
+    position: fixed;
+    width: 100%;
+    top: 0;
+    z-index: 1000;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.3);
+}
+
+.navbar .container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.logo {
+    font-size: 1.5rem;
+    font-weight: bold;
+    letter-spacing: 1px;
+    color: #fff;
+}
+
+.logo span {
+    color: #f39c12; /* Industrial Orange */
+}
+
+.nav-links {
+    display: flex;
+    align-items: center;
+}
+
+.nav-links li {
+    margin-left: 20px;
+}
+
+.nav-links a {
+    color: #fff;
+    font-size: 0.9rem;
+    font-weight: 500;
+}
+
+.nav-links a:hover {
+    color: #f39c12;
+}
+
+.btn-account {
+    background: #f39c12;
+    padding: 8px 15px;
+    border-radius: 4px;
+    color: #fff !important;
+}
+
+.btn-account:hover {
+    background: #e67e22;
+}
+
+/* --- Hero Section --- */
+.hero {
+    height: 100vh;
+    background-image: url('Photos/1- Hero section/hero.jpg'); 
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+    margin-top: 60px;
+    display: flex;
+    align-items: center;
+    color: #fff;
+}
+
+.hero-overlay {
+    background: rgba(0, 0, 0, 0.6);
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+}
+
+.hero h2 {
+    font-size: 1.5rem;
+    color: #f39c12;
+}
+
+.hero h1 {
+    font-size: 3.5rem;
+    margin: 10px 0;
+    line-height: 1.2;
+}
+
+.hero p {
+    font-size: 1.2rem;
+    margin-bottom: 30px;
+    max-width: 600px;
+}
+
+.cta-btn {
+    background: #f39c12;
+    color: #fff;
+    padding: 12px 30px;
+    font-size: 1rem;
+    font-weight: bold;
+    border-radius: 5px;
+}
+
+/* --- Section Formatting --- */
+section {
+    padding: 80px 0;
+}
+
+.section-title {
+    text-align: center;
+    margin-bottom: 50px;
+}
+
+.section-title h2 {
+    font-size: 2rem;
+    text-transform: uppercase;
+}
+
+.underline {
+    width: 70px;
+    height: 4px;
+    background: #f39c12;
+    margin: 10px auto;
+}
+
+/* --- About Section --- */
+.about {
+    background-image: url('Photos/5- about us/imge.jpg'); 
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+    padding: 120px 0 250px 0;
+}
+
+.about-content {
+    max-width: 800px;
+    margin: 0 auto;
+    text-align: center;
+    
+    
+}
+
+.about-content p {
+    margin-bottom: 20px;
+    font-size: 1.1rem;
+}
+
+/* --- Grid & Cards --- */
+.grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 30px;
+}
+
+.card {
+    background: #fff;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+    transition: transform 0.3s;
+}
+
+.card:hover {
+    transform: translateY(-10px);
+}
+
+.card-img-placeholder {
+    height: 200px;
+    background: #ddd;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    color: #888;
+}
+
+.card-body {
+    padding: 20px;
+}
+
+.card-body h3 {
+    margin-bottom: 10px;
+}
+
+.card-body p {
+    font-size: 0.9rem;
+    color: #666;
+    margin-bottom: 15px;
+}
+
+.price {
+    display: block;
+    font-size: 1.2rem;
+    font-weight: bold;
+    color: #1a1a2e;
+    margin-bottom: 15px;
+}
+
+.btn-rent, .btn-view {
+    display: block;
+    width: 100%;
+    text-align: center;
+    padding: 10px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: 0.3s;
+}
+
+.btn-rent { background: #1a1a2e; color: #fff; }
+.btn-rent:hover { background: #f39c12; }
+
+.btn-view { background: #eee; color: #333; }
+.btn-view:hover { background: #ddd; }
+
+
+
+/* --- View More Button Container --- */
+.view-more-container {
+    text-align: center;
+    margin-top: 40px; /* Space between the grid and the button */
+}
+
+.btn-view-more {
+    display: inline-block;
+    padding: 12px 35px;
+    background-color: #f39c12; /* Matches your accent yellow/orange */
+    color: #1a1a2e; /* Dark blue text for high contrast */
+    text-decoration: none;
+    font-weight: bold;
+    border-radius: 4px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    transition: all 0.3s ease;
+    border: 2px solid #f39c12;
+}
+
+.btn-view-more:hover {
+    background-color: #ffffff; /* White background on hover */
+    color: #000000;
+    transform: translateY(-3px);
+    box-shadow: 0 5px 15px rgba(243, 156, 18, 0.3);
+}
+
+/* --- products section --- */
+.products {
+    background-image: url('Photos/6- featured products section/vertical interior brick background.jpg'); 
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: contain;
+    padding: 120px 0 250px 0;
+
+}
+
+/*--- heavy machinery section ---*/
+.machinery {
+    background-image: url('Photos/7- heavy machinery section/wmremove-transformed.jpeg'); 
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+    padding: 120px 0 250px 0;
+}
+
+
+/* --- FAQ Section --- */
+.faq {
+    background: #ececec;
+    background-image: url('Photos/8- FAQ/imgi_12_question-mark-white-wall-background-faq-concept-image_157125-10036.jpg');
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+.faq-container {
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.faq-item {
+    background: #fff;
+    margin-bottom: 15px;
+    padding: 20px;
+    border-left: 5px solid #f39c12;
+}
+
+.faq-item h3 {
+    margin-bottom: 10px;
+    font-size: 1.1rem;
+}
+
+/* --- Footer --- */
+footer {
+    background: #111;
+    color: #ccc;
+    padding: 60px 0 20px;
+}
+
+.footer-grid {
+    display: grid;
+    grid-template-columns: 2fr 1fr 1.5fr;
+    gap: 50px;
+    margin-bottom: 40px;
+}
+
+.footer-about h2 {
+    margin-bottom: 20px;
+}
+
+.footer-links h3, .footer-contact h3 {
+    color: #fff;
+    margin-bottom: 20px;
+}
+
+.footer-links ul li {
+    margin-bottom: 10px;
+}
+
+.footer-links a {
+    color: #ccc;
+}
+
+.footer-links a:hover {
+    color: #f39c12;
+    padding-left: 5px;
+}
+
+.footer-bottom {
+    text-align: center;
+    border-top: 1px solid #333;
+    padding-top: 20px;
+    font-size: 0.8rem;
+}
+
+/* --- Responsive Adjustments --- */
+@media (max-width: 768px) {
+    .nav-links {
+        display: none; /* In a real app, you'd add a hamburger menu with JS */
+    }
+    
+    .hero h1 {
+        font-size: 2.5rem;
+    }
+    
+    .footer-grid {
+        grid-template-columns: 1fr;
+    }
+}

@@ -1,0 +1,193 @@
+/* --- Global Styles --- */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', Arial, sans-serif;
+}
+
+body {
+    background-color: #ffffff; /* Pure white background */
+    color: #333333; /* Darker text for readability */
+    line-height: 1.8;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+
+/* --- Header & Navigation (Original) --- */
+ul {
+    list-style: none;
+}
+
+a {
+    text-decoration: none;
+    transition: 0.3s;
+}
+
+.navbar {
+    background: #1a1a2e;
+    color: #fff;
+    padding: 1rem 0;
+    position: fixed;
+    width: 100%;
+    top: 0;
+    z-index: 1000;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.3);
+}
+
+.navbar .container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.logo {
+    font-size: 1.5rem;
+    font-weight: bold;
+    letter-spacing: 1px;
+    text-decoration: none;
+    display: inline-block; /* Essential for the border to sit right */
+    color: #fff; /* let Your "construction hub at the navbar" White */
+}
+
+.logo span {
+    color: #f39c12; /* Industrial Orange */
+}
+
+.nav-links {
+    display: flex;
+    align-items: center;
+}
+
+
+.nav-links li {
+    margin-left: 20px;
+}
+
+.nav-links a {
+    color: #fff;
+    font-size: 0.9rem;
+    font-weight: 500;
+    text-decoration: none; /* Added to remove underline */
+}
+
+.nav-links a:hover {
+    color: #f39c12;
+}
+
+.btn-account {
+    background: #f39c12;
+    padding: 8px 15px;
+    border-radius: 4px;
+    color: #fff !important;
+}
+
+.btn-account:hover {
+    background: #e67e22;
+}
+
+
+
+
+
+
+/* --- Terms Hero Section --- */
+.terms-hero {
+    position: relative;
+    padding: 150px 0 80px;
+    background: url('https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?q=80&w=2070') no-repeat center center/cover;
+    text-align: center;
+}
+
+.hero-overlay {
+    position: absolute;
+    top: 0; left: 0; width: 100%; height: 100%;
+    background: rgba(26, 26, 46, 0.7);
+}
+
+.terms-hero .container {
+    position: relative;
+    z-index: 2;
+}
+
+.terms-hero h1 {
+    font-size: 3rem;
+    color: #fff;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+}
+
+.terms-hero p {
+    color: #f39c12;
+    font-size: 1.1rem;
+    margin-top: 10px;
+}
+
+.accent-line {
+    width: 80px;
+    height: 4px;
+    background: #f39c12;
+    margin: 20px auto 0;
+}
+
+/* --- Terms Content Area --- */
+.terms-content {
+    background-color: #f8f9fa; /* Light gray section background */
+    padding: 80px 0;
+}
+
+.content-wrapper {
+    max-width: 850px; /* Comfortable reading width */
+    background: #ffffff; /* White card for the text */
+    padding: 60px;
+    border-radius: 12px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.05); /* Softer shadow */
+    border: 1px solid #eeeeee;
+}
+
+.terms-section {
+    margin-bottom: 40px;
+    border-bottom: 1px solid #9b9b9b; /* Lighter borders */
+    padding-bottom: 30px;
+}
+
+.terms-section:last-of-type {
+    border-bottom: none;
+}
+
+.terms-section h2 {
+    color: #1a1a2e; /* Navy blue for sub-headings */
+    font-size: 1.4rem;
+    margin-bottom: 15px;
+    text-transform: uppercase;
+    border-left: 4px solid #f39c12; /* Adding a side accent */
+    padding-left: 15px;
+}
+
+.terms-section p {
+    color: #555555; /* Dark gray for the body text */
+    font-size: 1.05rem;
+}
+
+/* --- Footer Note --- */
+.footer-note {
+    text-align: center;
+    margin-top: 40px;
+    padding-top: 30px;
+    border-top: 2px dashed #474747;
+}
+
+.footer-note p {
+    font-weight: bold;
+    color: #1a1a2e; /* Navy blue */
+}
+/* --- Responsive --- */
+@media (max-width: 768px) {
+    .content-wrapper { padding: 30px; }
+    .terms-hero h1 { font-size: 2rem; }
+}

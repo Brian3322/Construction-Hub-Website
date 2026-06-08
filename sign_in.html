@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign In | Construction Hub</title>
+    <link rel="stylesheet" href="style_sign_in.css">
+    <script src="https://cdn.jsdelivr.net/npm/appwrite@16.0.2"></script>
+</head>
+<body>
+
+    <div class="signin-container">
+        <div class="brand-side">
+            <div class="overlay"></div>
+            <div class="brand-content">
+                <h1 class="logo">CONSTRUCTION<span>HUB</span></h1>
+                <p class="tagline">Your Gateway to Industrial Excellence</p>
+                <div class="yellow-bar"></div>
+            </div>
+        </div>
+
+        <div class="form-side">
+            <div class="form-wrapper">
+                <div class="form-header">
+                    <h2>Welcome Back</h2>
+                    <p>Sign in to manage your materials and rentals</p>
+                </div>
+
+                <!-- Status message box -->
+                <div id="status-msg" style="display:none; padding: 12px 16px; border-radius: 8px; margin-bottom: 20px; font-size: 0.9rem; font-weight: 600;"></div>
+
+                <form class="signin-form" id="signinForm">
+                    <div class="input-group">
+                        <label for="email">Email Address</label>
+                        <input type="email" id="email" placeholder="name@company.com" required>
+                    </div>
+
+                    <div class="input-group">
+                        <label for="password">Password</label>
+                        <input type="password" id="password" placeholder="••••••••" required>
+                    </div>
+
+                    <div class="form-options">
+                        <label class="checkbox-container">
+                            <input type="checkbox" id="rememberMe">
+                            <span class="checkmark"></span>
+                            Remember Me
+                        </label>
+                        <a href="#" class="forgot-link">Forgot Password?</a>
+                    </div>
+
+                    <button type="submit" class="signin-btn" id="signinBtn">Sign In</button>
+                </form>
+
+                <div class="form-footer">
+                    <p>Don't have an account? <a href="register.html">Create Account</a></p>
+                </div>
+                
+                <a href="ALL.html" class="back-home">← Back to Homepage</a>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // ── Appwrite Configuration ──────────────────────────────────────────
+        // Replace these two values with your own from the Appwrite console
+        const APPWRITE_ENDPOINT = 'https://nyc.cloud.appwrite.io/v1';
+        const APPWRITE_PROJECT_ID = '69e66361000f9e7af684'; // ← change this
+
+        const { Client, Account } = Appwrite;
+
+        const client = new Client()
+            .setEndpoint('https://nyc.cloud.appwrite.io/v1')
+            .setProject('69e66361000f9e7af684');
+
+        const account = new Account(client);
+
+        // ── Redirect if already logged in ──────────────────────────────────
+        (async () => {
+            try {
+                await account.get();
+                window.location.href = 'ALL.html'; // already logged in
+            } catch {
+                // not logged in — stay on this page
+            }
+        })();
+
+        // ── UI helpers ─────────────────────────────────────────────────────
+        function showMsg(text, isError = false) {
+            const box = document.getElementById('status-msg');
+            box.textContent = text;
+            box.style.display = 'block';
+            box.style.background = isError ? '#fdecea' : '#e8f5e9';
+            box.style.color     = isError ? '#c0392b' : '#2e7d32';
+            box.style.border    = `1px solid ${isError ? '#e74c3c' : '#2ecc71'}`;
+        }
+
+        function setLoading(loading) {
+            const btn = document.getElementById('signinBtn');
+            btn.textContent = loading ? 'Signing in…' : 'Sign In';
+            btn.disabled = loading;
+            btn.style.opacity = loading ? '0.7' : '1';
+        }
+
+        // ── Sign-in handler ────────────────────────────────────────────────
+        document.getElementById('signinForm').addEventListener('submit', async (e) => {
+            e.preventDefault();
+
+            const email    = document.getElementById('email').value.trim();
+            const password = document.getElementById('password').value;
+
+            setLoading(true);
+
+            try {
+                await account.createEmailPasswordSession(email, password);
+                showMsg('Signed in! Redirecting…', false);
+                setTimeout(() => { window.location.href = 'ALL.html'; }, 800);
+            } catch (err) {
+                setLoading(false);
+
+                // Friendly error messages
+                const msg = err.message || '';
+                if (msg.includes('Invalid credentials') || msg.includes('user_invalid_credentials')) {
+                    showMsg('Incorrect email or password. Please try again.', true);
+                } else if (msg.includes('network') || msg.includes('fetch')) {
+                    showMsg('Network error — please check your connection.', true);
+                } else {
+                    showMsg('Sign in failed: ' + msg, true);
+                }
+            }
+        });
+    </script>
+
+</body>
+</html>

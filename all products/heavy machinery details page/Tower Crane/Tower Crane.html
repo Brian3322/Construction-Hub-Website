@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Liebherr 280 EC-H 12 | Construction Hub</title>
+    <link rel="stylesheet" href="style Tower Crane.css">
+</head>
+<body>
+
+    <header class="navbar">
+        <div class="container">
+            <a href="../../../ALL.html" class="logo">CONSTRUCTION<span>HUB</span></a>
+            <nav>
+                <ul class="nav-links">
+                    <li><a href="../../../ALL.html#home">Home</a></li>
+                    <li><a href="../../../ALL.html#products">Product</a></li>
+                    <li><a href="../../../ALL.html#machinery">Heavy Machinery</a></li>
+                    <li><a href="../../../ALL.html#about">About</a></li>
+                    <li><a href="../../../contact us.html" class="active-link">Contact</a></li>
+                    <li><a href="../../../ALL.html#faq">FAQ</a></li>
+                    <li><a href="../../../sign in.html" class="btn-account">Account</a></li>
+                    <li>
+                        <a href="../../../checkout.html" class="cart-link">
+                            🛒 Cart
+                            <span class="ch-cart-badge">0</span>
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <section class="hero-machinery">
+        <div class="container hero-split">
+            <div class="hero-image-box">
+                <img src="photos/img1.jpeg" alt="Tower Crane" id="mainMachineryImg">
+                <div class="gallery-mini">
+                    <img src="photos/img1.jpeg" class="thumb active" onclick="swapImg(this.src, this)">
+                    <img src="photos/img2.jpeg" class="thumb" onclick="swapImg(this.src, this)">
+                    <img src="photos/img4.jpeg" class="thumb" onclick="swapImg(this.src, this)">
+                </div>
+            </div>
+            <div class="hero-info-box">
+                <span class="category-tag">LIFTING SOLUTIONS</span>
+                <h1 class="machinery-name">Liebherr 280 EC-H 12 Litronic</h1>
+                <div class="status-bar">
+                    <span class="badge reserved">● RESERVED</span>
+                    <span class="year-label">2023 Series</span>
+                </div>
+                <div class="hero-pricing">
+                    <span class="price-title">Daily Rental Price</span>
+                    <h2 class="price-value">EGP1,250.00 <small>/ Day</small></h2>
+                </div>
+                <div class="hero-actions">
+                    <button class="btn-rent-primary btn-reserved" disabled>Currently Reserved</button>
+                    <p class="reserved-notice">⚠️ This machine is currently reserved and unavailable for new bookings. Please check back later or browse other available equipment.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="section-overview industrial-bg">
+        <div class="container">
+            <h3 class="block-heading">Machinery Overview</h3>
+            <p class="overview-text">
+                The Liebherr 280 EC-H 12 is a high-top tower crane designed for major civil engineering and industrial 
+                infrastructure projects. It offers precision load handling via Litronic control systems and 
+                modular mast configurations. Ideal for high-rise construction, bridge building, and large-scale 
+                commercial developments requiring high lifting capacities at significant heights.
+            </p>
+        </div>
+    </section>
+
+    <section class="section-specs">
+        <div class="container">
+            <h3 class="block-heading">Technical Specifications</h3>
+            <div class="specs-grid">
+                <div class="spec-item">
+                    <span class="spec-label">Max Lifting Capacity</span>
+                    <span class="spec-val">12,000 kg</span>
+                </div>
+                <div class="spec-item">
+                    <span class="spec-label">Max Jib Length</span>
+                    <span class="spec-val">70.0 m</span>
+                </div>
+                <div class="spec-item">
+                    <span class="spec-label">Capacity at Max Radius</span>
+                    <span class="spec-val">2,800 kg</span>
+                </div>
+                <div class="spec-item">
+                    <span class="spec-label">Power Source</span>
+                    <span class="spec-val">400V Electric / 3-Phase</span>
+                </div>
+                <div class="spec-item">
+                    <span class="spec-label">Hoist Gear</span>
+                    <span class="spec-val">45 kW Frequency Converter</span>
+                </div>
+                <div class="spec-item">
+                    <span class="spec-label">Standard Mast Height</span>
+                    <span class="spec-val">68.1 m (Freestanding)</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="section-details industrial-bg">
+        <div class="container detail-grid">
+            <div class="rental-info">
+                <h4 class="sub-heading">Rental Terms</h4>
+                <ul class="rental-list">
+                    <li><strong>Daily Rate:</strong> EGP 1,250.00</li>
+                    <li><strong>Weekly Rate:</strong> EGP7,500.00 (Incl. 1 Day Discount)</li>
+                    <li><strong>Security Deposit:</strong> EGP5,000.00 (Refundable)</li>
+                    <li><strong>Assembly Fee:</strong> Quote Required based on height</li>
+                </ul>
+            </div>
+            <div class="supplier-info">
+                <h4 class="sub-heading">Supplier Profile</h4>
+                <div class="supplier-card">
+                    <div class="sup-meta">
+                        <strong>Skyline Lifting Co.</strong>
+                        <div class="rating">⭐⭐⭐⭐☆ (4.9/5)</div>
+                    </div>
+                    <button class="btn-contact-ui">Contact Supplier</button>
+                </div>
+                <p class="terms-note">* Insurance coverage for crane operation is mandatory and must be verified before delivery.</p>
+            </div>
+        </div>
+    </section>
+
+    <script>
+        // Gallery Switcher with Highlight Border Fix
+        function swapImg(newSrc, clickedElement) {
+            document.getElementById('mainMachineryImg').src = newSrc;
+            const allThumbs = document.querySelectorAll('.thumb');
+            allThumbs.forEach(thumb => thumb.classList.remove('active'));
+            clickedElement.classList.add('active');
+        }
+    </script>
+<script>
+const MACHINE = {
+    id        : 'liebherr-280-ec-h',
+    name      : 'Liebherr 280 EC-H 12 Litronic',
+    dailyPrice: 1250.0,
+    icon      : '🏗️',
+    image     : 'photos/img1.jpeg',
+};
+</script>
+
+<!-- ── Inlined Cart API ── -->
+<script>
+const CART_KEY = 'ch_cart';
+const Cart = (() => {
+    function load() {
+        try { return JSON.parse(localStorage.getItem(CART_KEY)) || []; }
+        catch { return []; }
+    }
+    function save(items) {
+        localStorage.setItem(CART_KEY, JSON.stringify(items));
+        window.dispatchEvent(new CustomEvent('cartChanged', { detail: { items } }));
+    }
+    function add(item) {
+        const items = load();
+        const idx   = items.findIndex(i => i.id === item.id);
+        if (idx !== -1) {
+            if (item.type === 'purchase') { items[idx].qty += (item.qty || 1); }
+            else { items[idx] = { ...items[idx], ...item }; }
+        } else {
+            items.push({
+                id        : item.id        || String(Date.now()),
+                name      : item.name      || 'Construction Item',
+                type      : item.type      || 'rental',
+                unitPrice : item.unitPrice || 0,
+                unit      : item.unit      || 'day',
+                qty       : item.qty       || 1,
+                icon      : item.icon      || '🏗️',
+                image     : item.image     || '',
+                startDate : item.startDate || '',
+                endDate   : item.endDate   || '',
+                days      : item.days      || 1,
+            });
+        }
+        save(items);
+    }
+    function count()    { return load().length; }
+    function remove(id) { save(load().filter(i => i.id !== id)); }
+    function clear()    { save([]); }
+    return { add, count, remove, clear };
+})();
+</script>
+
+<!-- ── Toast CSS ── -->
+<style>
+.ch-toast {
+    position: fixed; bottom: 30px; right: 30px;
+    background: #1a1a2e; color: #fff;
+    padding: 14px 22px; border-radius: 10px;
+    font-size: 0.9rem; font-weight: 500;
+    box-shadow: 0 8px 25px rgba(0,0,0,0.2);
+    transform: translateY(80px); opacity: 0;
+    transition: all 0.35s ease;
+    z-index: 9999;
+    border-left: 4px solid #f39c12;
+    font-family: 'Segoe UI', Tahoma, sans-serif;
+}
+.ch-toast.show { transform: translateY(0); opacity: 1; }
+
+.btn-reserved {
+    background: #95a5a6 !important;
+    color: #fff !important;
+    cursor: not-allowed !important;
+    opacity: 0.75;
+    box-shadow: none !important;
+    transform: none !important;
+}
+.reserved-notice {
+    margin-top: 14px;
+    background: #fdecea;
+    border-left: 4px solid #e74c3c;
+    color: #c0392b;
+    padding: 12px 16px;
+    border-radius: 6px;
+    font-size: 0.88rem;
+    line-height: 1.5;
+}
+</style>
+
+<!-- ── Toast Element ── -->
+<div class="ch-toast" id="chToast"></div>
+
+<!-- ── Add to Cart Logic ── -->
+<script>
+function chShowToast(msg) {
+    const t = document.getElementById('chToast');
+    t.textContent = msg;
+    t.classList.add('show');
+    setTimeout(() => t.classList.remove('show'), 3000);
+}
+
+function addMachineToCart() {
+    // Machine is RESERVED — block all cart additions
+    chShowToast('⛔ This machine is currently reserved and cannot be booked.');
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+    const btn = document.querySelector('.btn-rent-primary');
+    if (btn) {
+        btn.disabled = true;
+        btn.onclick = (e) => { e.preventDefault(); addMachineToCart(); };
+    }
+});
+</script>
+
+</body>
+</html>

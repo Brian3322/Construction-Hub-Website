@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Structural Timber (C24) | Construction Hub</title>
+    <link rel="stylesheet" href="style Structural Timber.css">
+</head>
+<body>
+
+    <header class="navbar">
+        <div class="container">
+            <a href="../../../ALL.html" class="logo">CONSTRUCTION<span>HUB</span></a>
+            <nav>
+                <ul class="nav-links">
+                    <li><a href="../../../ALL.html#home">Home</a></li>
+                    <li><a href="../../../ALL.html#products">Product</a></li>
+                    <li><a href="../../../ALL.html#machinery">Heavy Machinery</a></li>
+                    <li><a href="../../../ALL.html#about">About</a></li>
+                    <li><a href="../../../contact us.html" class="active-link">Contact</a></li>
+                    <li><a href="../../../ALL.html#faq">FAQ</a></li>
+                    <li><a href="../../../sign in.html" class="btn-account">Account</a></li>
+                    <li>
+  <a href="../../../checkout.html" class="cart-link">
+    🛒 Cart
+    <span class="ch-cart-badge">0</span>
+  </a>
+</li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main class="container product-page">
+        <section class="product-gallery">
+            <div class="main-image-container">
+                <img id="mainProductImg" src="photos/wmremove-transformed (2).jpeg" alt="Structural Timber Main">
+            </div>
+            
+            <div class="thumbnails">
+                <div class="thumb active" onclick="changeImage('photos/wmremove-transformed (2).jpeg', this)">
+                    <img src="photos/wmremove-transformed (2).jpeg" alt="Timber Bundle">
+                </div>
+                <div class="thumb" onclick="changeImage('photos/wmremove-transformed (1).jpeg', this)">
+                    <img src="photos/wmremove-transformed (1).jpeg" alt="Grain Detail">
+                </div>
+                <div class="thumb" onclick="changeImage('photos/wmremove-transformed.jpeg', this)">
+                    <img src="photos/wmremove-transformed.jpeg" alt="Roof Framing View">
+                </div>
+                <div class="thumb-add">+ Add</div>
+            </div>
+        </section>
+
+        <section class="product-info">
+            <nav class="breadcrumb">
+                <a href="../../../ALL.html">HomePage</a> 
+                <span class="separator">></span>
+                <a href="../../all products.html">Materials</a> 
+                <span class="separator">></span>
+                <span class="current-page">Structural Timber</span>
+            </nav>
+            <h1 class="product-title">C24 Graded Structural Timber</h1>
+            
+            <div class="info-badges">
+                <span class="badge verified">✓ FSC Certified</span>
+                <span class="badge stock">In Stock</span>
+            </div>
+
+            <p class="description">
+                Premium kiln-dried C24 grade softwood timber, ideal for high-load applications such as floor joists, 
+                roof rafters, and timber frame wall construction. Planed all round (PAR) with eased edges for 
+                easier handling and increased fire resistance.
+            </p>
+
+            <div class="pricing-section">
+                <span class="price-label">Price per selection:</span>
+                <h2 class="main-price">EGP<span id="dynamic-price">12.50</span> <small>/ length</small></h2>
+            </div>
+
+            <div class="selection-group">
+                <h3>Select Timber Dimensions</h3>
+                <div class="options-grid">
+                    <label class="option-card">
+                        <input type="radio" name="size" value="standard" data-price="12.50" checked>
+                        <div class="option-content">
+                            <span class="size-name">47mm x 100mm (4.8m Length)</span>
+                            <span class="size-price">EGP 12.50/ea</span>
+                        </div>
+                    </label>
+                    <label class="option-card">
+                        <input type="radio" name="size" value="large" data-price="22.75">
+                        <div class="option-content">
+                            <span class="size-name">47mm x 200mm (4.8m Length)</span>
+                            <span class="size-price">EGP 22.75/ea</span>
+                        </div>
+                    </label>
+                    <label class="option-card">
+                        <input type="radio" name="size" value="bulk" data-price="550.00">
+                        <div class="option-content">
+                            <span class="size-name">Full Pack (50 Lengths - 47x100)</span>
+                            <span class="size-price">EGP 550.00/pack</span>
+                        </div>
+                    </label>
+                </div>
+            </div>
+
+            <div class="meta-info">
+                <div class="meta-item"><strong>Supplier:</strong> <span>Northwood Timber Mills</span></div>
+                <div class="meta-item"><strong>Treatment:</strong> <span>Kiln Dried / Regularised</span></div>
+                <div class="meta-item"><strong>Delivery:</strong> <span>Flatbed hiab delivery available</span></div>
+            </div>
+
+            <div class="actions">
+                <div class="qty-selector">
+                    <button type="button" onclick="updateQty(-1)">-</button>
+                    <input type="number" id="quantity" value="1" min="1">
+                    <button type="button" onclick="updateQty(1)">+</button>
+                </div>
+                <button class="btn-add-to-cart" onclick="addToCart()">Add to Cart</button>
+            </div>
+        </section>
+    </main>
+
+    <section class="container specs-section">
+        <div class="tabs">
+            <button class="tab-btn active" data-target="specs">Specifications</button>
+            <button class="tab-btn" data-target="reviews">Reviews</button>
+            <button class="tab-btn" data-target="shipping">Shipping Policy</button>
+        </div>
+
+        <div class="tab-content-wrapper">
+            <div id="specs" class="tab-panel active">
+                <table class="specs-table">
+                    <tr><td>Strength Grade</td><td>C24 (Industrial Standard)</td></tr>
+                    <tr><td>Finish</td><td>Planed All Round (PAR)</td></tr>
+                    <tr><td>Moisture Content</td><td>Kiln Dried to < 20%</td></tr>
+                    <tr><td>Sourcing</td><td>FSC / PEFC Certified Sustainable</td></tr>
+                </table>
+            </div>
+
+            <div id="reviews" class="tab-panel">
+                <div class="review-item">
+                    <div class="stars">★★★★★</div>
+                    <strong>Greenwood Homes</strong>
+                    <p>Very straight lengths with minimal knotting. Perfect for our latest roof conversion.</p>
+                </div>
+            </div>
+
+            <div id="shipping" class="tab-panel">
+                <p>Delivered via specialized hiab crane trucks. Please ensure 3.5m width clearance for site access. Timber should be stored in a dry area upon delivery.</p>
+            </div>
+        </div>
+    </section>
+<!-- Inline cart.js so this page works regardless of folder depth -->
+    <script>
+    const CART_KEY = 'ch_cart';
+    const Cart = (() => {
+        function load() {
+            try { return JSON.parse(localStorage.getItem(CART_KEY)) || []; }
+            catch { return []; }
+        }
+        function save(items) {
+            localStorage.setItem(CART_KEY, JSON.stringify(items));
+            window.dispatchEvent(new CustomEvent('cartChanged', { detail: { items } }));
+        }
+        function add(item) {
+            const items = load();
+            const idx   = items.findIndex(i => i.id === item.id);
+            if (idx !== -1) {
+                if (item.type === 'purchase') { items[idx].qty += (item.qty || 1); }
+                else { items[idx] = { ...items[idx], ...item }; }
+            } else {
+                items.push({
+                    id        : item.id        || String(Date.now()),
+                    name      : item.name      || 'Construction Item',
+                    type      : item.type      || 'purchase',
+                    unitPrice : item.unitPrice || 0,
+                    unit      : item.unit      || 'Unit',
+                    qty       : item.qty       || 1,
+                    icon      : item.icon      || '🏗️',
+                    image     : item.image     || '',
+                    startDate : item.startDate || '',
+                    endDate   : item.endDate   || '',
+                    days      : item.days      || 1,
+                });
+            }
+            save(items);
+        }
+        function getAll()       { return load(); }
+        function count()        { return load().length; }
+        function remove(id)     { save(load().filter(i => i.id !== id)); }
+        function clear()        { save([]); }
+        function goToCheckout() { window.location.href = '../../../checkout.html'; }
+        return { add, getAll, count, remove, clear, goToCheckout };
+    })();
+
+    function _updateBadge() {
+        document.querySelectorAll('.ch-cart-badge').forEach(badge => {
+            const n = Cart.count();
+            badge.textContent = n;
+            badge.style.display = n > 0 ? 'inline-flex' : 'none';
+        });
+    }
+    window.addEventListener('cartChanged', _updateBadge);
+    document.addEventListener('DOMContentLoaded', _updateBadge);
+
+    function showCartToast(msg) {
+        let t = document.getElementById('_cartToast');
+        if (!t) {
+            t = document.createElement('div');
+            t.id = '_cartToast';
+            t.style.cssText = `
+                position:fixed;bottom:30px;right:30px;z-index:99999;
+                background:#1a1a2e;color:#fff;padding:14px 22px;
+                border-radius:10px;font-family:'Segoe UI',sans-serif;
+                font-size:.9rem;font-weight:500;
+                box-shadow:0 8px 25px rgba(0,0,0,.2);
+                border-left:4px solid #f39c12;
+                transform:translateY(80px);opacity:0;
+                transition:all .35s ease;pointer-events:none;`;
+            document.body.appendChild(t);
+        }
+        t.textContent = msg;
+        t.style.transform = 'translateY(0)';
+        t.style.opacity   = '1';
+        clearTimeout(t._timer);
+        t._timer = setTimeout(() => {
+            t.style.transform = 'translateY(80px)';
+            t.style.opacity   = '0';
+        }, 3000);
+    }
+    </script>
+    <script>
+        function changeImage(path, el) {
+            document.getElementById('mainProductImg').src = path;
+            document.querySelectorAll('.thumb').forEach(t => t.classList.remove('active'));
+            el.classList.add('active');
+        }
+
+        const priceDisplay = document.getElementById('dynamic-price');
+        document.querySelectorAll('input[name="size"]').forEach(radio => {
+            radio.addEventListener('change', function() {
+                priceDisplay.innerText = this.dataset.price;
+            });
+        });
+
+        const tabs = document.querySelectorAll('.tab-btn');
+        const panels = document.querySelectorAll('.tab-panel');
+        tabs.forEach(tab => {
+            tab.addEventListener('click', () => {
+                tabs.forEach(t => t.classList.remove('active'));
+                panels.forEach(p => p.classList.remove('active'));
+                tab.classList.add('active');
+                document.getElementById(tab.dataset.target).classList.add('active');
+            });
+        });
+
+        function updateQty(change) {
+            const qtyInput = document.getElementById('quantity');
+            let val = parseInt(qtyInput.value) + change;
+            if (val < 1) val = 1;
+            qtyInput.value = val;
+        }
+
+        function addToCart() {
+            const selected  = document.querySelector('input[name="size"]:checked');
+            const unitPrice = parseFloat(selected.dataset.price);
+            const sizeLabel = selected.parentElement.querySelector('.size-name').textContent;
+            const qty       = Math.max(1, parseInt(document.getElementById('quantity').value) || 1);
+
+            Cart.add({
+                id        : 'structural-timber-' + selected.value,
+                name      : 'Structural Timber (C24) - ' + sizeLabel,
+                type      : 'purchase',
+                unitPrice : unitPrice,
+                unit      : 'length',
+                qty       : qty,
+                icon      : '🪵',
+                image     : 'all products/product details page/Binding wire/photos/Timber.jpeg',
+            });
+
+            showCartToast('Added ' + qty + ' x Structural Timber (C24) (' + sizeLabel + ') to cart!');
+        }
+
+        function buyNow() {
+            addToCart();
+            Cart.goToCheckout();
+        }
+    </script>
+</body>
+</html>
