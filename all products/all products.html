@@ -5,21 +5,42 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>All Construction Materials | Construction Hub</title>
     <link rel="stylesheet" href="style products.css">
+<style>
+        .btn-logout-icon {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 38px;
+            height: 38px;
+            border-radius: 50%;
+            font-size: 1.1rem;
+            text-decoration: none;
+            background: rgba(255,255,255,0.08);
+            transition: background 0.2s ease;
+        }
+        .btn-logout-icon:hover {
+            background: rgba(255,255,255,0.2);
+            cursor: pointer;
+        }
+    </style>
+    <script src="https://cdn.jsdelivr.net/npm/appwrite@16.0.2"></script>
 </head>
 <body>
 
      <header class="navbar">
         <div class="container">
-            <a href="../ALL.html" class="logo">CONSTRUCTION<span>HUB</span></a>
+            <a href="../index.html" class="logo">CONSTRUCTION<span>HUB</span></a>
             <nav>
                 <ul class="nav-links">
-                    <li><a href="../ALL.html#home">Home</a></li>
-                    <li><a href="../ALL.html#products">Product</a></li>
-                    <li><a href="../ALL.html#machinery">Heavy Machinery</a></li>
-                    <li><a href="../ALL.html#about">About</a></li>
+                    <li><a href="../index.html#home">Home</a></li>
+                    <li><a href="../index.html#products">Product</a></li>
+                    <li><a href="../index.html#machinery">Heavy Machinery</a></li>
+                    <li><a href="../index.html#about">About</a></li>
                     <li><a href="../contact us.html" class="active-link">Contact</a></li>
-                    <li><a href="../ALL.html#faq">FAQ</a></li>
-                    <li><a href="../sign in.html" class="btn-account">Account</a></li>
+                    <li><a href="../index.html#faq">FAQ</a></li>
+                    <li id="profile-link-item" style="display:none;"><a href="../profile.html" class="btn-account">👤 My Profile</a></li>
+                <li id="logout-link-item" style="display:none;"><a href="#" id="logout-icon-btn" class="btn-logout-icon" title="Sign out">👤</a></li>
+                <li><a href="../sign_in.html" id="account-link" class="btn-account">Account</a></li>
                     <li>
                         <a href="../../../checkout.html" class="cart-link">
                             🛒 Cart
@@ -104,7 +125,7 @@
                         <span class="supp-label">Verified Supplier</span>
                         <h3>Red Clay Bricks</h3>
                         <p>High-density structural bricks.</p>
-                        <span class="p-price">EGP 0.50 / Unit</span>
+                        <span class="p-price">EGP 45 / Unit</span>
                         <button class="btn-view-p">View Details</button>
                     </div>
                 </div>
@@ -120,7 +141,7 @@
                         <span class="supp-label">Verified Supplier</span>
                         <h3>Reinforcement Steel</h3>
                         <p>12mm TMT deformed bars.</p>
-                        <span class="p-price">EGP 1.10 / Kg</span>
+                        <span class="p-price">EGP 250 / Kg</span>
                         <button class="btn-view-p">View Details</button>
                     </div>
                 </div>
@@ -136,7 +157,7 @@
                         <span class="supp-label company">Company</span>
                         <h3>Portland Cement</h3>
                         <p>Grade 42.5 high strength.</p>
-                        <span class="p-price">EGP 8.50 / Bag</span>
+                        <span class="p-price">EGP 250 / Bag</span>
                         <button class="btn-view-p">View Details</button>
                     </div>
                 </div>
@@ -151,7 +172,7 @@
                         <span class="supp-label">Verified Supplier</span>
                         <h3>Coarse Sand</h3>
                         <p>Washer river sand for concrete.</p>
-                        <span class="p-price">EGP 25 / Ton</span>
+                        <span class="p-price">EGP 110 / Ton</span>
                         <button class="btn-view-p">View Details</button>
                     </div>
                 </div>
@@ -166,7 +187,7 @@
                         <span class="supp-label company">Company</span>
                         <h3>Crushed Gravel (20mm)</h3>
                         <p>Premium base material for driveways and drainage.</p>
-                        <span class="p-price">EGP 9 / 23kg</span>
+                        <span class="p-price">EGP 515 / 23kg</span>
                         <button class="btn-view-p">View Details</button>
                     </div>
                 </div>
@@ -181,7 +202,7 @@
                         <span class="supp-label">Verified Supplier</span>
                         <h3>Hollow Concrete Blocks</h3>
                         <p>Standard 8-inch high-strength building blocks.</p>
-                        <span class="p-price">EGP 11.20 / Unit</span>
+                        <span class="p-price">EGP 15 / Unit</span>
                         <button class="btn-view-p">View Details</button>
                     </div>
                 </div>
@@ -196,7 +217,7 @@
                         <span class="supp-label company">Company</span>
                         <h3>Structural Timber</h3>
                         <p>Pressure-treated wood for framing and roofing.</p>
-                        <span class="p-price">EGP 15.50 / Piece</span>
+                        <span class="p-price">EGP 270 / Piece</span>
                         <button class="btn-view-p">View Details</button>
                     </div>
                 </div>
@@ -211,7 +232,7 @@
                         <span class="supp-label">Verified Supplier</span>
                         <h3>Exterior Wall Paint</h3>
                         <p>Weather-resistant matte finish (20 Liters).</p>
-                        <span class="p-price">EGP 65.00 / Gallon</span>
+                        <span class="p-price">EGP 1000 /5 Liters</span>
                         <button class="btn-view-p">View Details</button>
                     </div>
                 </div>
@@ -226,7 +247,7 @@
                         <span class="supp-label">Verified Supplier</span>
                         <h3>Binding wire</h3>
                         <p>Binding wire with high strength easily bent and tied in a knot.</p>
-                        <span class="p-price">EGP 11 / 50 meter</span>
+                        <span class="p-price">EGP 620 / 50 meter</span>
                         <button class="btn-view-p">View Details</button>
                     </div>
                 </div>
@@ -256,8 +277,8 @@
             <div class="f-links">
                 <h3>Quick Links</h3>
                 <ul>
-                    <li><a href="../ALL.html#home">Home</a></li>
-                    <li><a href="../ALL.html#products">Products</a></li>
+                    <li><a href="../index.html#home">Home</a></li>
+                    <li><a href="../index.html#products">Products</a></li>
                     <li><a href="../contact us.html">Contact</a></li>
                 </ul>
             </div>
@@ -269,5 +290,41 @@
         </div>
     </footer>
 
+<script>
+    // Reflects the current sign-in state in the navbar: if a session
+    // already exists, swap the "Account" link for "My Profile" + a
+    // sign-out icon instead of sending the user to sign_in.html
+    // (which would just bounce them straight back out).
+    (function () {
+        const { Client, Account } = Appwrite;
+        const client = new Client()
+            .setEndpoint('https://nyc.cloud.appwrite.io/v1')
+            .setProject('69e66361000f9e7af684');
+        const account = new Account(client);
+
+        (async () => {
+            try {
+                const user = await account.get();
+
+                document.getElementById('account-link').parentElement.style.display = 'none';
+                document.getElementById('profile-link-item').style.display = 'block';
+
+                const logoutItem = document.getElementById('logout-link-item');
+                const logoutBtn  = document.getElementById('logout-icon-btn');
+                logoutItem.style.display = 'block';
+                logoutBtn.title = 'Sign out (' + user.name.split(' ')[0] + ')';
+                logoutBtn.addEventListener('click', async (e) => {
+                    e.preventDefault();
+                    if (confirm('Sign out of Construction Hub?')) {
+                        await account.deleteSession('current');
+                        window.location.href = '../sign_in.html';
+                    }
+                });
+            } catch {
+                // Not logged in — keep the default "Account" link to sign_in.html
+            }
+        })();
+    })();
+</script>
 </body>
 </html>

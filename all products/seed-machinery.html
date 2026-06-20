@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Seed Machinery Data</title>
+</head>
+<body>
+<h1>Seeding machinery_website collection…</h1>
+<pre id="log"></pre>
+
+<script type="module">
+import { initializeApp, getApps, getApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+import { getFirestore, doc, setDoc } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+
+const firebaseConfig = {
+  apiKey: "AIzaSyAJ4E6DyZlImLmJomyy45XruCObfVemtq8",
+  authDomain: "construtionhubv2-8a393.firebaseapp.com",
+  projectId: "construtionhubv2-8a393",
+  storageBucket: "construtionhubv2-8a393.firebasestorage.app",
+  messagingSenderId: "857747425961",
+  appId: "1:857747425961:web:386bac01ff77dec28db7b8"
+};
+
+const app = getApps().length ? getApp() : initializeApp(firebaseConfig);
+const db = getFirestore(app);
+const log = (msg) => document.getElementById('log').textContent += msg + "\n";
+
+const machines = {
+  "jcb-940-rtfl": {
+    name: "JCB 940 RTFL All-Terrain Forklift",
+    title: "JCB 940 RTFL | Construction Hub Machinery",
+    categoryTag: "ROUGH TERRAIN LIFTING",
+    status: "available",
+    statusLabel: "AVAILABLE NOW",
+    yearLabel: "2024 Industrial Series",
+    dailyPrice: 285.0,
+    icon: "🚜",
+    mainImage: "photos/imgi_2_Img_1424x891.jpeg",
+    gallery: [
+      "photos/imgi_2_Img_1424x891.jpeg",
+      "photos/imgi_5_Img_1600x686.jpeg",
+      "photos/imgi_6_Img_1600x686.jpeg"
+    ],
+    overview: "The JCB 940 RTFL is a high-capacity all-terrain forklift engineered for the most demanding construction sites. Featuring a high-torque Dieselmax engine and a 4-wheel drive system, it excels in moving heavy palletized loads across mud, gravel, and uneven surfaces. Ideal for large-scale logistics, brick-laying support, and remote site infrastructure projects.",
+    specs: [
+      { label: "Engine Power", value: "55 kW (74 HP)" },
+      { label: "Max Lift Capacity", value: "4,000 kg" },
+      { label: "Max Lift Height", value: "6.7 Meters" },
+      { label: "Fuel Type", value: "Diesel (Stage V)" },
+      { label: "Transmission Type", value: "4-Speed Synchro Shuttle" },
+      { label: "Operating Weight", value: "7,500 kg" }
+    ],
+    rentalTerms: [
+      { label: "Daily Rental", value: "EGP 285.00" },
+      { label: "Weekly Rate", value: "EGP 1,650.00 (Save 15%)" },
+      { label: "Security Deposit", value: "EGP 800.00" },
+      { label: "Delivery", value: "Available (Flatbed Transit)" }
+    ],
+    supplier: {
+      name: "Rugged Rentals Ltd.",
+      rating: "⭐⭐⭐⭐☆ (4.7/5)"
+    },
+    termsNote: "* Note: All operators must hold a valid CPCS/NPORS certification for rough terrain telescopic/masted handlers.",
+    cartImage: "all products/heavy machinery details page/All-Terrain Forklift/photos/imgi_2_Img_1424x891.jpeg"
+  },
+
+  "cat-320-excavator": {
+    name: "CAT 320 Next Gen Hydraulic Excavator",
+    title: "CAT 320 Hydraulic Excavator | Construction Hub",
+    categoryTag: "HEAVY EXCAVATOR",
+    status: "reserved",
+    statusLabel: "RESERVED",
+    yearLabel: "2024 Model",
+    dailyPrice: 450.0,
+    icon: "⛏️",
+    mainImage: "photos/img1.png",
+    gallery: [
+      "photos/img1.png",
+      "photos/img2.jpg",
+      "photos/CM20190621-ac965-b7e2f.jpg",
+      "photos/imgi_5_image.png"
+    ],
+    overview: "The CAT 320 Next Gen Excavator raises the bar for efficiency and fuel economy in the 20-ton size class. Equipped with integrated CAT Connect Technology, this machine increases operator efficiency by up to 45%. It is engineered for heavy-duty digging, trenching, and lifting in complex infrastructure and commercial development projects.",
+    projectTags: ["Infrastructure", "Urban Development", "Deep Trenching", "Mass Excavation"],
+    specs: [
+      { label: "Engine Power", value: "129 kW (173 HP)" },
+      { label: "Operating Weight", value: "22,500 kg" },
+      { label: "Max Digging Depth", value: "6,720 mm" },
+      { label: "Fuel Type", value: "Diesel (Euro 4)" },
+      { label: "Transmission", value: "Hydrostatic High/Low" },
+      { label: "Bucket Capacity", value: "1.19 m³" }
+    ],
+    rentalTerms: [
+      { label: "Daily Rate", value: "EGP 450.00" },
+      { label: "Weekly Rate", value: "EGP 2,800.00 (Save 12%)" },
+      { label: "Security Deposit", value: "EGP 1,500.00" },
+      { label: "Delivery", value: "Low-loader required (EGP 150 flat fee)" }
+    ],
+    supplier: {
+      name: "Nile Equipment Rentals",
+      rating: "⭐⭐⭐⭐☆ (4.8/5)"
+    },
+    termsNote: "Rental includes standard maintenance. Operator available upon request for an additional fee.",
+    reservedNotice: "⚠️ This machine is currently reserved and unavailable for new bookings. Please check back later or browse other available equipment.",
+    cartImage: "all products/heavy machinery details page/Hydraulic Excavator/photos/img1.png"
+  },
+
+  "cat-950gc-loader": {
+    name: "CAT 950GC Medium Wheel Loader",
+    title: "CAT 950GC Wheel Loader | Construction Hub",
+    categoryTag: "EARTHMOVING & LOADING",
+    status: "available",
+    statusLabel: "AVAILABLE FOR HIRE",
+    yearLabel: "2024 Series",
+    dailyPrice: 525.0,
+    icon: "🚛",
+    mainImage: "photos/13_1512630041.jpg",
+    gallery: [
+      "photos/13_1512630041.jpg",
+      "photos/CM20210523-40ebc-b1808.jpg",
+      "photos/C844107.jpg"
+    ],
+    overview: "The CAT 950GC is designed specifically to handle all your jobs on the worksite from material handling and truck loading to general construction and stockpiling. This machine is purpose-built to be just the right machine to get your everyday jobs done. Easy to operate, maintain, and incredibly reliable.",
+    idealFor: "Stockpiling, Truck Loading, Hopping, and Infrastructure Maintenance.",
+    specs: [
+      { label: "Engine Power", value: "171 kW (232 HP)" },
+      { label: "Operating Weight", value: "18,800 kg" },
+      { label: "Bucket Capacity", value: "3.1 m³ - 3.5 m³" },
+      { label: "Fuel Type", value: "Diesel (Stage IV)" },
+      { label: "Transmission", value: "Power Shift / Countershaft" },
+      { label: "Max Dump Height", value: "3,000 mm" }
+    ],
+    rentalTerms: [
+      { label: "Daily Rate", value: "EGP 525.00" },
+      { label: "Weekly Rate", value: "EGP 3,100.00 (Incl. 15% Discount)" },
+      { label: "Security Deposit", value: "EGP 2,000.00 (Refundable)" },
+      { label: "Delivery", value: "Low-bed trailer required (EGP 180 flat fee)" }
+    ],
+    supplier: {
+      name: "Nile Heavy Equipment",
+      rating: "⭐⭐⭐⭐☆ (4.7/5)"
+    },
+    termsNote: "* Note: Machine is delivered with a full tank of diesel and must be returned full.",
+    cartImage: "all products/heavy machinery details page/Loaders/photos/C844107.jpg"
+  },
+
+  "jlg-1930es-scissor": {
+    name: "JLG 1930ES Electric Scissor Lift",
+    title: "JLG 1930ES Scissor Lift | Construction Hub",
+    categoryTag: "AERIAL WORK PLATFORM",
+    status: "available",
+    statusLabel: "AVAILABLE FOR RENTAL",
+    yearLabel: "2024 Industrial Series",
+    dailyPrice: 145.0,
+    icon: "🏗️",
+    mainImage: "photos/imgi_3_scissor-lift-platform-at-the-railway-station.jpg",
+    gallery: [
+      "photos/imgi_3_scissor-lift-platform-at-the-railway-station.jpg",
+      "photos/pexels-jimmy-nilsson-masth-193596566-13532460.jpg",
+      "photos/electric-scissor-lift-concept-background-isometric-style-vector.jpg"
+    ],
+    overview: "The JLG 1930ES is a high-efficiency electric scissor lift designed for indoor and flat-surface outdoor applications. Featuring quiet, emission-free operation and a compact width, it is capable of passing through standard single doorways. Ideal for HVAC installation, warehouse maintenance, electrical fit-outs, and ceiling construction projects.",
+    specs: [
+      { label: "Platform Height", value: "5.72 Meters (18.8 ft)" },
+      { label: "Operating Weight", value: "1,230 kg" },
+      { label: "Platform Capacity", value: "227 kg (Unrestricted)" },
+      { label: "Power Source", value: "Electric (4 x 6V, 220 amp-hr)" },
+      { label: "Travel Speed", value: "4.8 km/h (Lowered)" },
+      { label: "Turning Radius", value: "Zero (Inside)" }
+    ],
+    rentalTerms: [
+      { label: "Daily Rental", value: "EGP 145.00" },
+      { label: "Weekly Rate", value: "EGP 820.00 (Save 19%)" },
+      { label: "Security Deposit", value: "EGP 400.00" },
+      { label: "Delivery", value: "Tilt-tray transport available" }
+    ],
+    supplier: {
+      name: "Apex Access Solutions",
+      rating: "⭐⭐⭐⭐☆ (4.9/5)"
+    },
+    termsNote: "* Note: Rental includes a fully charged battery set. Long-term rentals require access to a standard 110/220V charging outlet.",
+    cartImage: "all products/heavy machinery details page/Scissor lift/photos/imgi_3_scissor-lift-platform-at-the-railway-station.jpg"
+  },
+
+  "liebherr-280-ec-h": {
+    name: "Liebherr 280 EC-H 12 Litronic",
+    title: "Liebherr 280 EC-H 12 | Construction Hub",
+    categoryTag: "LIFTING SOLUTIONS",
+    status: "reserved",
+    statusLabel: "RESERVED",
+    yearLabel: "2023 Series",
+    dailyPrice: 1250.0,
+    icon: "🏗️",
+    mainImage: "photos/img1.jpeg",
+    gallery: [
+      "photos/img1.jpeg",
+      "photos/img2.jpeg",
+      "photos/img4.jpeg"
+    ],
+    overview: "The Liebherr 280 EC-H 12 is a high-top tower crane designed for major civil engineering and industrial infrastructure projects. It offers precision load handling via Litronic control systems and modular mast configurations. Ideal for high-rise construction, bridge building, and large-scale commercial developments requiring high lifting capacities at significant heights.",
+    specs: [
+      { label: "Max Lifting Capacity", value: "12,000 kg" },
+      { label: "Max Jib Length", value: "70.0 m" },
+      { label: "Capacity at Max Radius", value: "2,800 kg" },
+      { label: "Power Source", value: "400V Electric / 3-Phase" },
+      { label: "Hoist Gear", value: "45 kW Frequency Converter" },
+      { label: "Standard Mast Height", value: "68.1 m (Freestanding)" }
+    ],
+    rentalTerms: [
+      { label: "Daily Rate", value: "EGP 1,250.00" },
+      { label: "Weekly Rate", value: "EGP7,500.00 (Incl. 1 Day Discount)" },
+      { label: "Security Deposit", value: "EGP5,000.00 (Refundable)" },
+      { label: "Assembly Fee", value: "Quote Required based on height" }
+    ],
+    supplier: {
+      name: "Skyline Lifting Co.",
+      rating: "⭐⭐⭐⭐☆ (4.9/5)"
+    },
+    termsNote: "* Insurance coverage for crane operation is mandatory and must be verified before delivery.",
+    reservedNotice: "⚠️ This machine is currently reserved and unavailable for new bookings. Please check back later or browse other available equipment.",
+    cartImage: "all products/heavy machinery details page/Tower Crane/photos/img1.jpeg"
+  }
+};
+
+(async () => {
+  for (const [id, data] of Object.entries(machines)) {
+    try {
+      await setDoc(doc(db, "machinery_website", id), data);
+      log(`✅ Uploaded: ${id}`);
+    } catch (err) {
+      log(`❌ Failed: ${id} — ${err.message}`);
+    }
+  }
+  log("\nSeeding complete.");
+})();
+</script>
+</body>
+</html>

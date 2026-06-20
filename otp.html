@@ -1,0 +1,526 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Verify Your Account | Construction Hub</title>
+    <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@700;800&family=Barlow:wght@400;500;600&display=swap" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        :root {
+            --navy:   #1a1a2e;
+            --orange: #f39c12;
+            --orange-dark: #e67e22;
+            --white:  #ffffff;
+            --light:  #f8f9fa;
+            --muted:  #666666;
+            --border: #dddddd;
+            --red:    #c0392b;
+            --green:  #2e7d32;
+        }
+
+        body {
+            font-family: 'Barlow', sans-serif;
+            background: var(--white);
+            height: 100vh;
+            display: flex;
+            overflow: hidden;
+        }
+
+        /* ── Brand Side ── */
+        .brand-side {
+            flex: 1;
+            position: relative;
+            background: url('CSS/Photos/4- sign up form/wmremove-transformed2.jpeg') no-repeat center center / cover;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+        }
+
+        .brand-side .overlay {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(135deg, rgba(26,26,46,0.88) 0%, rgba(243,156,18,0.45) 100%);
+        }
+
+        .brand-content {
+            position: relative;
+            z-index: 2;
+            text-align: center;
+            color: #fff;
+            padding: 30px;
+        }
+
+        .logo {
+            font-family: 'Barlow Condensed', sans-serif;
+            font-size: 3rem;
+            font-weight: 800;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+        }
+
+        .logo span { color: var(--orange); }
+
+        .tagline {
+            font-size: 1rem;
+            color: rgba(255,255,255,0.8);
+            margin-top: 10px;
+            font-weight: 400;
+        }
+
+        .accent-bar {
+            width: 70px;
+            height: 4px;
+            background: var(--orange);
+            margin: 22px auto 0;
+            border-radius: 2px;
+        }
+
+        /* ── Form Side ── */
+        .form-side {
+            flex: 1.2;
+            background: var(--white);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 40px 50px;
+            overflow-y: auto;
+        }
+
+        .form-wrapper {
+            width: 100%;
+            max-width: 440px;
+            text-align: center;
+        }
+
+        .otp-icon {
+            width: 70px;
+            height: 70px;
+            border-radius: 50%;
+            background: #fff8ee;
+            border: 1px solid #f9d68a;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            margin: 0 auto 20px;
+        }
+
+        .form-header h2 {
+            font-family: 'Barlow Condensed', sans-serif;
+            font-size: 2.2rem;
+            font-weight: 800;
+            color: var(--navy);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .form-header p {
+            color: var(--muted);
+            font-size: 0.95rem;
+            margin-top: 10px;
+            line-height: 1.6;
+        }
+
+        .form-header p strong { color: var(--navy); }
+
+        /* ── Status Message ── */
+        #status-msg {
+            display: none;
+            padding: 12px 16px;
+            border-radius: 8px;
+            margin: 22px 0 0;
+            font-size: 0.9rem;
+            font-weight: 600;
+            text-align: center;
+        }
+
+        /* ── OTP Input Boxes ── */
+        .otp-inputs {
+            display: flex;
+            justify-content: center;
+            gap: 12px;
+            margin: 32px 0 8px;
+        }
+
+        .otp-inputs input {
+            width: 52px;
+            height: 60px;
+            text-align: center;
+            font-size: 1.6rem;
+            font-weight: 700;
+            font-family: 'Barlow', sans-serif;
+            color: var(--navy);
+            background: #f9f9f9;
+            border: 1.5px solid var(--border);
+            border-radius: 10px;
+            outline: none;
+            transition: 0.25s ease;
+        }
+
+        .otp-inputs input:focus {
+            border-color: var(--orange);
+            background: #fff;
+            box-shadow: 0 0 0 3px rgba(243,156,18,0.12);
+        }
+
+        .otp-inputs input.filled {
+            border-color: var(--navy);
+        }
+
+        @media (max-width: 480px) {
+            .otp-inputs { gap: 8px; }
+            .otp-inputs input { width: 42px; height: 52px; font-size: 1.3rem; }
+        }
+
+        /* ── Timer / Resend ── */
+        .resend-row {
+            margin: 18px 0 28px;
+            font-size: 0.9rem;
+            color: var(--muted);
+        }
+
+        .resend-row button {
+            background: none;
+            border: none;
+            color: var(--orange);
+            font-weight: 700;
+            cursor: pointer;
+            font-size: 0.9rem;
+            font-family: 'Barlow', sans-serif;
+            padding: 0;
+        }
+
+        .resend-row button:disabled {
+            color: #bbb;
+            cursor: not-allowed;
+        }
+
+        .resend-row button:hover:not(:disabled) {
+            text-decoration: underline;
+        }
+
+        /* ── Submit Button ── */
+        .verify-btn {
+            width: 100%;
+            padding: 15px;
+            background: var(--orange);
+            color: #fff;
+            border: none;
+            border-radius: 8px;
+            font-family: 'Barlow Condensed', sans-serif;
+            font-size: 1.1rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            cursor: pointer;
+            transition: 0.3s ease;
+            box-shadow: 0 4px 12px rgba(243,156,18,0.25);
+        }
+
+        .verify-btn:hover:not(:disabled) {
+            background: var(--orange-dark);
+            transform: translateY(-2px);
+            box-shadow: 0 7px 18px rgba(243,156,18,0.35);
+        }
+
+        .verify-btn:disabled {
+            opacity: 0.65;
+            cursor: not-allowed;
+        }
+
+        /* ── Footer ── */
+        .form-footer {
+            text-align: center;
+            margin-top: 20px;
+            color: var(--muted);
+            font-size: 0.9rem;
+        }
+
+        .form-footer a {
+            color: var(--orange);
+            font-weight: 600;
+            text-decoration: none;
+        }
+
+        .form-footer a:hover { text-decoration: underline; }
+
+        .home-link {
+            display: block;
+            text-align: center;
+            margin-top: 26px;
+            color: #aaa;
+            text-decoration: none;
+            font-size: 0.85rem;
+            transition: 0.3s;
+        }
+
+        .home-link:hover { color: var(--orange); }
+
+        /* ── Responsive ── */
+        @media (max-width: 900px) {
+            .brand-side { display: none; }
+            .form-side { flex: 1; padding: 30px 24px; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- ── Brand Side ── -->
+    <div class="brand-side">
+        <div class="overlay"></div>
+        <div class="brand-content">
+            <h1 class="logo">CONSTRUCTION<span>HUB</span></h1>
+            <p class="tagline">Your Gateway to Industrial Excellence</p>
+            <div class="accent-bar"></div>
+        </div>
+    </div>
+
+    <!-- ── Form Side ── -->
+    <div class="form-side">
+        <div class="form-wrapper">
+
+            <div class="otp-icon">📩</div>
+
+            <div class="form-header">
+                <h2>Verify Your Account</h2>
+                <p>We've sent a 6-digit code to <strong id="otp-email">your email</strong>.<br>
+                Enter it below to confirm your registration.</p>
+            </div>
+
+            <!-- Status Message -->
+            <div id="status-msg"></div>
+
+            <form id="otpForm" onsubmit="handleVerify(event)">
+                <div class="otp-inputs" id="otpInputs">
+                    <input type="text" inputmode="numeric" maxlength="1" autocomplete="one-time-code" data-index="0">
+                    <input type="text" inputmode="numeric" maxlength="1" data-index="1">
+                    <input type="text" inputmode="numeric" maxlength="1" data-index="2">
+                    <input type="text" inputmode="numeric" maxlength="1" data-index="3">
+                    <input type="text" inputmode="numeric" maxlength="1" data-index="4">
+                    <input type="text" inputmode="numeric" maxlength="1" data-index="5">
+                </div>
+
+                <div class="resend-row">
+                    Didn't get the code?
+                    <button type="button" id="resendBtn" onclick="resendCode()" disabled>Resend code (<span id="timer">60</span>s)</button>
+                </div>
+
+                <button type="submit" class="verify-btn" id="verifyBtn">Confirm Registration</button>
+            </form>
+
+            <div class="form-footer">
+                <p>Wrong email? <a href="register.html">Go back to registration</a></p>
+            </div>
+
+            <a href="index.html" class="home-link">← Back to Homepage</a>
+        </div>
+    </div>
+
+<script src="https://cdn.jsdelivr.net/npm/appwrite@16.0.2"></script>
+
+<!-- Firestore: expose saveUser() for the verification script below -->
+<script type="module">
+    import { saveUser } from './machinery-firestore.js';
+    window._saveUserToFirestore = saveUser;
+</script>
+
+<script>
+    window.addEventListener('load', function () {
+
+        const { Client, Account } = Appwrite;
+
+        const client = new Client()
+            .setEndpoint('https://nyc.cloud.appwrite.io/v1')
+            .setProject('69e66361000f9e7af684');
+
+        const account = new Account(client);
+
+        // ── Retrieve registration context ──────────────────────────────
+        const userId = sessionStorage.getItem('ch_otp_userId');
+        const email  = sessionStorage.getItem('ch_otp_email');
+        const name   = sessionStorage.getItem('ch_otp_name');
+        const prefs  = JSON.parse(sessionStorage.getItem('ch_otp_prefs') || '{}');
+
+        if (!userId || !email) {
+            // No pending verification — send them back to register
+            window.location.href = 'register.html';
+            return;
+        }
+
+        // Mask email for display, e.g. jo***@gmail.com
+        function maskEmail(addr) {
+            const [user, domain] = addr.split('@');
+            if (!domain) return addr;
+            const visible = user.slice(0, Math.min(2, user.length));
+            return `${visible}${'*'.repeat(Math.max(user.length - visible.length, 3))}@${domain}`;
+        }
+        document.getElementById('otp-email').textContent = maskEmail(email);
+
+        // ── UI helpers ──────────────────────────────────────────────────
+        const statusBox = document.getElementById('status-msg');
+
+        function showMsg(text, isError = false) {
+            statusBox.textContent = text;
+            statusBox.style.display = 'block';
+            statusBox.style.background = isError ? '#fdecea' : '#e8f5e9';
+            statusBox.style.color     = isError ? '#c0392b' : '#2e7d32';
+            statusBox.style.border    = `1px solid ${isError ? '#e74c3c' : '#2ecc71'}`;
+        }
+
+        function hideMsg() {
+            statusBox.style.display = 'none';
+        }
+
+        function setVerifying(loading) {
+            const btn = document.getElementById('verifyBtn');
+            btn.textContent = loading ? 'Verifying…' : 'Confirm Registration';
+            btn.disabled = loading;
+        }
+
+        // ── OTP input box behaviour ────────────────────────────────────
+        const inputs = Array.from(document.querySelectorAll('#otpInputs input'));
+
+        inputs.forEach((input, idx) => {
+            input.addEventListener('input', () => {
+                input.value = input.value.replace(/[^0-9]/g, '');
+                input.classList.toggle('filled', input.value.length === 1);
+                if (input.value && idx < inputs.length - 1) {
+                    inputs[idx + 1].focus();
+                }
+            });
+
+            input.addEventListener('keydown', (e) => {
+                if (e.key === 'Backspace' && !input.value && idx > 0) {
+                    inputs[idx - 1].focus();
+                }
+            });
+
+            input.addEventListener('paste', (e) => {
+                e.preventDefault();
+                const pasted = (e.clipboardData || window.clipboardData).getData('text').replace(/[^0-9]/g, '');
+                if (!pasted) return;
+                pasted.split('').slice(0, inputs.length).forEach((char, i) => {
+                    inputs[i].value = char;
+                    inputs[i].classList.add('filled');
+                });
+                const next = Math.min(pasted.length, inputs.length - 1);
+                inputs[next].focus();
+            });
+        });
+
+        inputs[0].focus();
+
+        function getCode() {
+            return inputs.map(i => i.value).join('');
+        }
+
+        // ── Verify the OTP ──────────────────────────────────────────────
+        async function handleVerify(e) {
+            e.preventDefault();
+            hideMsg();
+
+            const code = getCode();
+            if (code.length !== 6) {
+                showMsg('Please enter the full 6-digit code.', true);
+                return;
+            }
+
+            setVerifying(true);
+
+            try {
+                // Make sure no stale session is blocking createSession()
+                try {
+                    await account.deleteSession('current');
+                } catch {
+                    // No active session — nothing to clear
+                }
+
+                await account.createSession(userId, code);
+
+                // Record the verified user's details in Firestore (user_website)
+                try {
+                    await window._saveUserToFirestore(userId, {
+                        name,
+                        email,
+                        phone      : prefs.phone      || '',
+                        role       : prefs.role       || 'buyer',
+                        company    : prefs.company    || '',
+                        sellerType : prefs.sellerType || '',
+                        verified   : true,
+                    });
+                } catch (fireErr) {
+                    // Don't block the user's login flow if this write fails —
+                    // just log it so it can be investigated.
+                    console.error('Could not save user to Firestore:', fireErr);
+                }
+
+                showMsg(`Account verified! Welcome${name ? ', ' + name : ''} 🎉 Redirecting…`, false);
+
+                sessionStorage.removeItem('ch_otp_userId');
+                sessionStorage.removeItem('ch_otp_email');
+                sessionStorage.removeItem('ch_otp_name');
+                sessionStorage.removeItem('ch_otp_prefs');
+
+                setTimeout(() => { window.location.href = 'index.html'; }, 1200);
+
+            } catch (err) {
+                setVerifying(false);
+                const msg = err.message || '';
+                if (msg.includes('Invalid token') || msg.includes('invalid') || msg.includes('expired')) {
+                    showMsg('Incorrect or expired code. Please try again or resend a new code.', true);
+                } else {
+                    showMsg('Verification failed: ' + (msg || 'Unknown error.'), true);
+                }
+                inputs.forEach(i => { i.value = ''; i.classList.remove('filled'); });
+                inputs[0].focus();
+            }
+        }
+
+        // ── Resend code with cooldown ──────────────────────────────────
+        const resendBtn = document.getElementById('resendBtn');
+        const timerSpan = document.getElementById('timer');
+        let countdown = 60;
+        let timerInterval = null;
+
+        function startCooldown() {
+            countdown = 60;
+            resendBtn.disabled = true;
+            timerSpan.textContent = countdown;
+            timerInterval = setInterval(() => {
+                countdown--;
+                timerSpan.textContent = countdown;
+                if (countdown <= 0) {
+                    clearInterval(timerInterval);
+                    resendBtn.disabled = false;
+                    resendBtn.textContent = 'Resend code';
+                }
+            }, 1000);
+        }
+
+        async function resendCode() {
+            hideMsg();
+            try {
+                await account.createEmailToken(userId, email);
+                showMsg('A new code has been sent to your email.', false);
+                inputs.forEach(i => { i.value = ''; i.classList.remove('filled'); });
+                inputs[0].focus();
+                resendBtn.textContent = `Resend code (${countdown}s)`;
+                startCooldown();
+            } catch (err) {
+                showMsg('Could not resend code: ' + (err.message || 'Unknown error.'), true);
+            }
+        }
+
+        startCooldown();
+
+        // Expose for inline handlers
+        window.handleVerify = handleVerify;
+        window.resendCode = resendCode;
+    });
+</script>
+
+</body>
+</html>

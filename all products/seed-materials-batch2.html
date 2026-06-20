@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Seed Materials Data (Batch 2)</title>
+</head>
+<body>
+<h1>Seeding Materials_Website collection (batch 2)…</h1>
+<pre id="log"></pre>
+
+<script type="module">
+import { initializeApp, getApps, getApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+import { getFirestore, doc, setDoc } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+
+const firebaseConfig = {
+  apiKey: "AIzaSyAJ4E6DyZlImLmJomyy45XruCObfVemtq8",
+  authDomain: "construtionhubv2-8a393.firebaseapp.com",
+  projectId: "construtionhubv2-8a393",
+  storageBucket: "construtionhubv2-8a393.firebasestorage.app",
+  messagingSenderId: "857747425961",
+  appId: "1:857747425961:web:386bac01ff77dec28db7b8"
+};
+
+const app = getApps().length ? getApp() : initializeApp(firebaseConfig);
+const db = getFirestore(app);
+const log = (msg) => document.getElementById('log').textContent += msg + "\n";
+
+const materials = {
+  "exterior-wall-paint": {
+    name: "Weather-Shield Exterior Acrylic Paint",
+    title: "Exterior Wall Paint | Construction Hub",
+    categoryTag: "PAINTS & FINISHES",
+    status: "available",
+    badges: ["✓ UV Protected", "In Stock"],
+    icon: "🎨",
+    mainImage: "photos/exterior wall paint.png",
+    gallery: [
+      "photos/exterior wall paint.png",
+      "photos/Plascon_Micatex_1924x550.png",
+      "photos/imgi_1_Plascon_Masterprep_1924x550-min.png",
+      "photos/Plascon_Website-Banner-Desktop_V2-scaled.png"
+    ],
+    description: "Premium grade exterior acrylic emulsion formulated for maximum protection against harsh weather. Features advanced anti-fungal properties and high-elasticity to prevent cracking. Provides a smooth, matte finish with excellent color retention for concrete, brick, and plastered surfaces.",
+    currency: "EGP",
+    basePrice: 45.00,
+    priceUnit: "bucket",
+    sizeOptions: [
+      { value: "small", label: "Small Bucket (5 Liters)", price: 45.00, unit: "ea" },
+      { value: "medium", label: "Standard Drum (10 Liters)", price: 82.50, unit: "ea" },
+      { value: "large", label: "Industrial Pail (20 Liters)", price: 155.00, unit: "ea" }
+    ],
+    specs: [
+      { label: "Resin Type", value: "100% Pure Acrylic" },
+      { label: "Drying Time", value: "2 Hours (Touch), 4 Hours (Recoat)" },
+      { label: "VOC Content", value: "Low VOC (< 50g/L)" },
+      { label: "Warranty", value: "7 Year Weather Protection" }
+    ],
+    supplier: { name: "Elite Coating Systems" },
+    meta: {
+      coverage: "Approx. 10-12 m²/Liter",
+      finish: "Matt / Silk Available"
+    },
+    reviews: [
+      { author: "DecorPro Renovations", rating: 5, text: "Great opacity. Only needed two coats to cover a dark grey wall. The finish is very consistent." }
+    ],
+    shippingPolicy: "Delivered in spill-proof sealed containers. Bulk orders of 10+ pails are delivered on pallets. Please store in a cool, dry place away from direct sunlight.",
+    cartImage: "all products/product details page/Binding wire/photos/exterior wall paint.png"
+  },
+
+  "crushed-gravel": {
+    name: "Crushed Gravel (20mm)",
+    title: "Crushed Gravel (20mm) | Construction Hub",
+    categoryTag: "AGGREGATES",
+    status: "available",
+    badges: ["✓ Verified Supplier", "In Stock"],
+    icon: "🪨",
+    mainImage: "photos/oxfoGrav25-650x455.jpg",
+    gallery: [
+      "photos/oxfoGrav25-650x455.jpg",
+      "photos/oxfg-650x455.jpg",
+      "photos/BulkSmallWillitwork-650x455.jpg"
+    ],
+    description: "High-quality 20mm angular crushed stone, ideal for sub-bases, drainage systems, and heavy-duty driveway surfacing. This material offers excellent interlocking properties and structural durability for both residential and large-scale civil engineering projects.",
+    currency: "EGP",
+    basePrice: 4.50,
+    priceUnit: "bag",
+    sizeOptions: [
+      { value: "25kg", label: "Small Bag (25kg)", price: 4.50, unit: "bag" },
+      { value: "1 Ton", label: "Jumbo Bag (1 Ton)", price: 35.00, unit: "bag" },
+      { value: "10 Tons", label: "Bulk Load bag (10 Tons)", price: 320.00, unit: "bag" }
+    ],
+    specs: [
+      { label: "Material Type", value: "Basalt / Limestone mix" },
+      { label: "Grain Size", value: "20mm Nominal" },
+      { label: "Color", value: "Natural Gray" },
+      { label: "Compressive Strength", value: "High" }
+    ],
+    supplier: { name: "Cairo Industrial Materials Co." },
+    meta: {
+      delivery: "Ships within 24-48 hours (Cairo & Giza)",
+      minOrder: "1 Unit"
+    },
+    reviews: [
+      { author: "Ahmed M.", rating: 5, text: "Excellent quality gravel. Used it for my driveway and it looks great." },
+      { author: "Sarah K.", rating: 4, text: "Delivery was on time. The material is very clean." }
+    ],
+    shippingPolicy: "We deliver across Cairo and Giza within 48 hours. Bulk orders may require specialized unloading equipment.",
+    cartImage: "all products/product details page/Binding wire/photos/gravel.jpg"
+  },
+
+  "coarse-sand": {
+    name: "Premium Coarse Sand (Screened)",
+    title: "Coarse Sand | Construction Hub",
+    categoryTag: "AGGREGATES",
+    status: "available",
+    badges: ["✓ Quality Tested", "In Stock"],
+    icon: "🪨",
+    mainImage: "photos/sand.jpg",
+    gallery: [
+      "photos/sand.jpg",
+      "photos/sand-isolated.png",
+      "photos/brown-sand-falling-black-wall.jpg"
+    ],
+    description: "Triple-screened washed coarse sand, specifically graded for concrete mixing and bedding layers. With a sharp, angular grain, it provides superior structural integrity for paving, under-slab preparation, and heavy-duty mortar applications. Free from silt and organic matter.",
+    currency: "USD",
+    basePrice: 25.00,
+    priceUnit: "unit",
+    sizeOptions: [
+      { value: "bag", label: "Jumbo Bulk Bag (Approx. 1 Ton)", price: 25.00, unit: "ea" },
+      { value: "small", label: "Small Handy Bag (25kg)", price: 4.50, unit: "ea" },
+      { value: "truck", label: "Full Truck Load (10 Tons)", price: 220.00, unit: "load" }
+    ],
+    specs: [
+      { label: "Grain Size", value: "2.0mm - 4.75mm" },
+      { label: "Shape", value: "Angular / Sharp" },
+      { label: "Silt Content", value: "Less than 3%" },
+      { label: "Color", value: "Natural Yellow / Tan" }
+    ],
+    supplier: { name: "Desert Quarry Materials" },
+    meta: {
+      purity: "98% Silica Content",
+      delivery: "Available for Tipper Truck delivery"
+    },
+    reviews: [
+      { author: "Tarek Foundations", rating: 5, text: "Very clean sand. We used it for a large concrete pour last week, zero issues with consistency." }
+    ],
+    shippingPolicy: "Bulk loads are delivered via 10-ton tipper trucks. Please ensure there are no overhead cables at the drop-off point.",
+    cartImage: "all products/product details page/Binding wire/photos/sand.jpg"
+  },
+
+  "binding-wire": {
+    name: "Black Annealed Binding Wire",
+    title: "Annealed Binding Wire | Construction Hub",
+    categoryTag: "WIRE & FASTENERS",
+    status: "available",
+    badges: ["✓ High Flexibility", "In Stock"],
+    icon: "🧵",
+    mainImage: "photos/Binding-Wire.png",
+    gallery: [
+      "photos/Binding-Wire.png",
+      "photos/wmremove-transformed.jpeg",
+      "photos/wmremove-transformed (1).jpeg"
+    ],
+    description: "Premium soft-annealed black iron wire specifically designed for securing reinforcement steel. Offers high tensile strength combined with maximum flexibility for easy hand-tying. Uniform diameter and oil-coated finish ensure smooth handling and excellent corrosion resistance during construction.",
+    currency: "EGP",
+    basePrice: 2.50,
+    priceUnit: "kg",
+    sizeOptions: [
+      { value: "kg", label: "Handy Coil (1 kg - 18 Gauge)", price: 2.50, unit: "kg" },
+      { value: "standard", label: "Standard Coil (10 kg - 18 Gauge)", price: 22.00, unit: "coil" },
+      { value: "bundle", label: "Bulk Bundle (25 kg - 16 Gauge)", price: 48.00, unit: "bundle" }
+    ],
+    specs: [
+      { label: "Material Grade", value: "Low Carbon Steel Q195" },
+      { label: "Wire Gauge", value: "SWG 16 - 18 (1.2mm - 1.6mm)" },
+      { label: "Tensile Strength", value: "300 - 450 N/mm²" },
+      { label: "Treatment", value: "Fully Soft Annealed" }
+    ],
+    supplier: { name: "Ironclad Wire Mills" },
+    meta: {
+      coating: "Light Oil Finished",
+      delivery: "Ships in protective moisture-proof wrap"
+    },
+    reviews: [
+      { author: "SteelWorks Contractors", rating: 5, text: "Very easy to twist without breaking. Perfect for heavy mesh reinforcement tying." }
+    ],
+    shippingPolicy: "Delivery is available in moisture-resistant Hessian or plastic bags to prevent rust. For bulk orders over 500kg, palletized shipping is standard.",
+    cartImage: "all products/product details page/Binding wire/photos/Binding-Wire.png"
+  }
+};
+
+(async () => {
+  for (const [id, data] of Object.entries(materials)) {
+    try {
+      await setDoc(doc(db, "Materials_Website", id), data);
+      log(`✅ Uploaded: ${id}`);
+    } catch (err) {
+      log(`❌ Failed: ${id} — ${err.message}`);
+    }
+  }
+  log("\nSeeding complete.");
+})();
+</script>
+</body>
+</html>

@@ -400,7 +400,7 @@
 
                 <label class="checkbox-label">
                     <input type="checkbox" required>
-                    I agree to the <a href="terms_and_conditions.html">Terms &amp; Conditions</a>
+                    I agree to the <a href="terms and conditions.html">Terms &amp; Conditions</a>
                 </label>
 
                 <button type="submit" class="register-btn" id="buyerBtn">Create Account</button>
@@ -458,7 +458,7 @@
 
                 <label class="checkbox-label">
                     <input type="checkbox" required>
-                    I agree to the <a href="terms_and_conditions.html">Terms &amp; Conditions</a>
+                    I agree to the <a href="terms and conditions.html">Terms &amp; Conditions</a>
                 </label>
 
                 <button type="submit" class="register-btn" id="sellerBtn">Create Seller Account</button>
@@ -482,6 +482,16 @@
             .setProject('69e66361000f9e7af684');
 
         const account = new Account(client);
+
+        // Removes any pre-existing session so a new one can be created
+        // (Appwrite throws "session is active" if one already exists)
+        async function clearActiveSession() {
+            try {
+                await account.deleteSession('current');
+            } catch {
+                // No active session — nothing to do
+            }
+        }
 
         let currentRole = 'buyer';
 
@@ -539,7 +549,9 @@
                 const name  = document.getElementById(`${prefix}-name`).value.trim();
                 const phone = document.getElementById(`${prefix}-phone`).value.trim();
 
-                await account.create(ID.unique(), email, password, name);
+                const newAccount = await account.create(ID.unique(), email, password, name);
+
+                await clearActiveSession();
                 await account.createEmailPasswordSession(email, password);
 
                 const prefs = { role, phone };
@@ -549,8 +561,20 @@
                 }
                 await account.updatePrefs(prefs);
 
-                showMsg(`Account created for ${name}! Redirecting…`, false);
-                setTimeout(() => { window.location.href = 'index.html'; }, 1200);
+                // Send a 6-digit OTP code to the user's email to confirm registration
+                await account.createEmailToken(newAccount.$id, email);
+
+                // Stash info needed by the OTP page
+                sessionStorage.setItem('ch_otp_userId', newAccount.$id);
+                sessionStorage.setItem('ch_otp_email', email);
+                sessionStorage.setItem('ch_otp_name', name);
+                sessionStorage.setItem('ch_otp_prefs', JSON.stringify(prefs));
+
+                // Drop this session so the OTP page can create its own via createSession()
+                await clearActiveSession();
+
+                showMsg(`Account created for ${name}! Sending verification code…`, false);
+                setTimeout(() => { window.location.href = 'otp.html'; }, 1000);
 
             } catch (err) {
                 setLoading(role, false);

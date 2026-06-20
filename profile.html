@@ -1,0 +1,494 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Profile | Construction Hub</title>
+    <script src="https://cdn.jsdelivr.net/npm/appwrite@16.0.2"></script>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', Tahoma, sans-serif; }
+
+        :root {
+            --navy: #1a1a2e;
+            --orange: #f39c12;
+            --orange-dark: #e67e22;
+            --bg: #f4f4f4;
+            --white: #ffffff;
+            --text: #333333;
+            --muted: #666666;
+            --border: #dddddd;
+            --green: #2e7d32;
+            --red: #c0392b;
+        }
+
+        body { background: var(--bg); color: var(--text); min-height: 100vh; }
+
+        /* ── Navbar ── */
+        .navbar {
+            background: var(--navy);
+            padding: 1rem 0;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.3);
+        }
+        .navbar .container {
+            max-width: 1200px; margin: 0 auto; padding: 0 20px;
+            display: flex; justify-content: space-between; align-items: center;
+        }
+        .logo { font-size: 1.5rem; font-weight: bold; color: #fff; text-decoration: none; letter-spacing: 1px; }
+        .logo span { color: var(--orange); }
+        .nav-links { display: flex; align-items: center; list-style: none; gap: 20px; }
+        .nav-links a { color: #fff; font-size: 0.9rem; font-weight: 500; text-decoration: none; transition: 0.3s; }
+        .nav-links a:hover { color: var(--orange); }
+        .btn-account { background: var(--orange); padding: 8px 15px; border-radius: 4px; color: #fff !important; }
+        .btn-account:hover { background: var(--orange-dark) !important; }
+
+        /* ── Hero ── */
+        .profile-hero {
+            margin-top: 60px;
+            background: linear-gradient(rgba(0,0,0,0.75), rgba(0,0,0,0.75)),
+                        url('https://images.unsplash.com/photo-1504307651254-35680f356dfd?q=80&w=2070') no-repeat center/cover;
+            padding: 60px 0 50px;
+            text-align: center;
+            color: #fff;
+        }
+        .profile-hero h1 { font-size: 2.4rem; text-transform: uppercase; letter-spacing: 3px; }
+        .profile-hero p { color: var(--orange); margin-top: 10px; font-size: 1rem; }
+        .accent-line { width: 70px; height: 4px; background: var(--orange); margin: 16px auto 0; }
+
+        /* ── Breadcrumb ── */
+        .breadcrumb { background: #16213e; padding: 12px 0; }
+        .breadcrumb .container {
+            max-width: 1200px; margin: 0 auto; padding: 0 20px;
+            display: flex; gap: 8px; align-items: center;
+            font-size: 0.85rem; color: #aaa;
+        }
+        .breadcrumb a { color: var(--orange); text-decoration: none; }
+        .breadcrumb span { color: #fff; }
+
+        .container { max-width: 1200px; margin: 0 auto; padding: 0 20px; }
+
+        /* ── Body Layout ── */
+        .profile-body { padding: 50px 0 80px; }
+        .profile-grid {
+            display: grid;
+            grid-template-columns: 320px 1fr;
+            gap: 30px;
+            align-items: start;
+        }
+
+        /* ── Identity Card ── */
+        .id-card {
+            background: var(--white);
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.07);
+            overflow: hidden;
+            text-align: center;
+        }
+        .id-card-header {
+            background: var(--navy);
+            padding: 36px 20px 28px;
+            color: #fff;
+        }
+        .avatar-circle {
+            width: 80px; height: 80px;
+            border-radius: 50%;
+            background: var(--orange);
+            color: var(--navy);
+            font-size: 2rem;
+            font-weight: 800;
+            display: flex; align-items: center; justify-content: center;
+            margin: 0 auto 14px;
+        }
+        .id-card-header h3 { font-size: 1.15rem; }
+        .id-card-header p { font-size: 0.82rem; color: #c8c8d8; margin-top: 4px; word-break: break-all; }
+        .id-card-body { padding: 22px 24px; text-align: left; }
+        .id-row {
+            display: flex; justify-content: space-between; align-items: center;
+            padding: 11px 0; border-bottom: 1px solid #f0f0f0; font-size: 0.85rem;
+        }
+        .id-row:last-child { border-bottom: none; }
+        .id-row .label { color: var(--muted); }
+        .id-row .value { font-weight: 600; color: var(--navy); text-transform: capitalize; }
+        .verified-pill {
+            display: inline-flex; align-items: center; gap: 4px;
+            background: #e8f5e9; color: var(--green);
+            font-size: 0.72rem; font-weight: 700;
+            padding: 3px 10px; border-radius: 20px;
+        }
+        .signout-btn {
+            width: 100%; margin-top: 16px;
+            padding: 11px; background: transparent;
+            border: 1.5px solid var(--border); border-radius: 8px;
+            color: var(--muted); font-weight: 600; font-size: 0.85rem;
+            cursor: pointer; transition: 0.2s;
+        }
+        .signout-btn:hover { border-color: var(--red); color: var(--red); }
+
+        /* ── Form Card ── */
+        .card {
+            background: var(--white);
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.07);
+            overflow: hidden;
+            margin-bottom: 25px;
+        }
+        .card-header {
+            background: var(--navy);
+            padding: 18px 28px;
+            display: flex; align-items: center; gap: 12px;
+        }
+        .card-header .step-icon {
+            background: var(--orange); color: var(--navy);
+            width: 30px; height: 30px; border-radius: 50%;
+            display: flex; align-items: center; justify-content: center;
+            font-size: 0.95rem; flex-shrink: 0;
+        }
+        .card-header h3 { color: #fff; font-size: 1rem; text-transform: uppercase; letter-spacing: 1px; }
+        .card-body { padding: 28px; }
+        .card-body .sub-note { color: var(--muted); font-size: 0.85rem; margin-bottom: 22px; }
+
+        .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 16px; }
+        .form-row.full { grid-template-columns: 1fr; }
+        .form-group { margin-bottom: 16px; }
+        .form-group label {
+            display: block; font-size: 0.8rem; text-transform: uppercase;
+            letter-spacing: 1px; color: var(--navy); margin-bottom: 7px; font-weight: 600;
+        }
+        .form-group input, .form-group select, .form-group textarea {
+            width: 100%; padding: 12px 15px;
+            border: 1px solid var(--border); border-radius: 8px;
+            font-size: 0.95rem; color: var(--text);
+            background: #fafafa; transition: 0.2s;
+            font-family: inherit;
+        }
+        .form-group input:focus, .form-group select:focus, .form-group textarea:focus {
+            outline: none; border-color: var(--orange); background: #fff;
+            box-shadow: 0 0 0 3px rgba(243,156,18,0.1);
+        }
+        .field-hint { font-size: 0.75rem; color: #999; margin-top: 5px; }
+
+        .save-btn {
+            padding: 14px 32px;
+            background: var(--orange); color: var(--navy);
+            border: none; border-radius: 10px;
+            font-size: 0.95rem; font-weight: 800;
+            text-transform: uppercase; letter-spacing: 1px;
+            cursor: pointer; transition: 0.3s;
+            display: inline-flex; align-items: center; gap: 8px;
+        }
+        .save-btn:hover:not(:disabled) {
+            background: var(--orange-dark); color: #fff;
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(243,156,18,0.3);
+        }
+        .save-btn:disabled { opacity: 0.6; cursor: not-allowed; transform: none; }
+
+        #status-msg {
+            display: none; padding: 12px 16px; border-radius: 8px;
+            margin-bottom: 20px; font-size: 0.9rem; font-weight: 600;
+        }
+
+        .loading-state {
+            text-align: center; padding: 60px 20px; color: var(--muted);
+        }
+
+        /* ── Toast ── */
+        .toast {
+            position: fixed; bottom: 30px; right: 30px;
+            background: var(--navy); color: #fff;
+            padding: 14px 22px; border-radius: 10px;
+            font-size: 0.9rem; font-weight: 500;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.2);
+            transform: translateY(80px); opacity: 0;
+            transition: all 0.35s ease;
+            z-index: 9999;
+            border-left: 4px solid var(--orange);
+        }
+        .toast.show { transform: translateY(0); opacity: 1; }
+        .toast.error { border-left-color: var(--red); }
+
+        @media (max-width: 900px) {
+            .profile-grid { grid-template-columns: 1fr; }
+        }
+        @media (max-width: 600px) {
+            .form-row { grid-template-columns: 1fr; }
+            .profile-hero h1 { font-size: 1.8rem; }
+        }
+    </style>
+</head>
+<body>
+
+<!-- Navbar -->
+<header class="navbar">
+    <div class="container">
+        <a href="index.html" class="logo">CONSTRUCTION<span>HUB</span></a>
+        <nav>
+            <ul class="nav-links">
+                <li><a href="index.html#home">Home</a></li>
+                <li><a href="index.html#products">Product</a></li>
+                <li><a href="index.html#machinery">Heavy Machinery</a></li>
+                <li><a href="index.html#about">About</a></li>
+                <li><a href="contact us.html">Contact</a></li>
+                <li>
+                    <a href="checkout.html" class="cart-link">
+                        🛒 Cart
+                        <span class="ch-cart-badge">0</span>
+                    </a>
+                </li>
+                <li><a href="sign_in.html" id="account-link" class="btn-account">Account</a></li>
+            </ul>
+        </nav>
+    </div>
+</header>
+
+<!-- Hero -->
+<section class="profile-hero">
+    <div class="container">
+        <h1>My Profile</h1>
+        <p>Manage your personal details for faster checkout and delivery.</p>
+        <div class="accent-line"></div>
+    </div>
+</section>
+
+<!-- Breadcrumb -->
+<div class="breadcrumb">
+    <div class="container">
+        <a href="index.html">Home</a> › <span>My Profile</span>
+    </div>
+</div>
+
+<div class="profile-body">
+    <div class="container" id="profileContainer">
+        <div class="loading-state" id="loadingState">Loading your profile…</div>
+    </div>
+</div>
+
+<!-- Toast -->
+<div class="toast" id="toast"></div>
+
+<script>
+const { Client, Account } = Appwrite;
+
+const client = new Client()
+    .setEndpoint('https://nyc.cloud.appwrite.io/v1')
+    .setProject('69e66361000f9e7af684');
+
+const account = new Account(client);
+
+function showToast(msg, isError = false) {
+    const t = document.getElementById('toast');
+    t.textContent = msg;
+    t.classList.toggle('error', isError);
+    t.classList.add('show');
+    setTimeout(() => t.classList.remove('show'), 3000);
+}
+
+function getInitials(name) {
+    if (!name) return '👤';
+    const parts = name.trim().split(/\s+/);
+    return parts.length > 1
+        ? (parts[0][0] + parts[1][0]).toUpperCase()
+        : parts[0].slice(0, 2).toUpperCase();
+}
+
+(async () => {
+    let user;
+    try {
+        user = await account.get();
+    } catch {
+        // Not signed in — send to sign in, then back here afterwards
+        window.location.href = 'sign_in.html?redirect=profile.html';
+        return;
+    }
+
+    // Update navbar account link
+    const accLink = document.getElementById('account-link');
+    accLink.textContent = '👤 ' + user.name.split(' ')[0];
+    accLink.href = '#';
+    accLink.title = 'Click to sign out';
+    accLink.addEventListener('click', async (e) => {
+        e.preventDefault();
+        if (confirm('Sign out of Construction Hub?')) {
+            await account.deleteSession('current');
+            window.location.href = 'sign_in.html';
+        }
+    });
+
+    // Load saved Firestore profile fields (DOB, address, etc.)
+    const { loadUser, saveUser } = await import('./machinery-firestore.js');
+    const saved = await loadUser(user.$id);
+
+    const prefs = user.prefs || {};
+    const role       = saved?.role       || prefs.role       || 'buyer';
+    const company    = saved?.company    || prefs.company    || '';
+    const sellerType = saved?.sellerType || prefs.sellerType || '';
+    const phone      = saved?.phone      || prefs.phone      || '';
+    const verified   = saved?.verified === true || user.emailVerification === true;
+
+    document.getElementById('loadingState').remove();
+
+    const container = document.getElementById('profileContainer');
+    container.innerHTML = `
+        <div class="profile-grid">
+
+            <!-- Identity Card -->
+            <div class="id-card">
+                <div class="id-card-header">
+                    <div class="avatar-circle">${getInitials(user.name)}</div>
+                    <h3>${user.name || 'Construction Hub User'}</h3>
+                    <p>${user.email}</p>
+                </div>
+                <div class="id-card-body">
+                    <div class="id-row">
+                        <span class="label">Account Type</span>
+                        <span class="value">${role === 'seller' ? '🏗️ Seller' : '🛒 Buyer'}</span>
+                    </div>
+                    ${company ? `
+                    <div class="id-row">
+                        <span class="label">Company</span>
+                        <span class="value">${company}</span>
+                    </div>` : ''}
+                    ${sellerType ? `
+                    <div class="id-row">
+                        <span class="label">Seller Type</span>
+                        <span class="value">${sellerType}</span>
+                    </div>` : ''}
+                    <div class="id-row">
+                        <span class="label">Verification</span>
+                        <span class="value">
+                            ${verified
+                                ? `<span class="verified-pill">✓ Verified</span>`
+                                : `<span style="color:#c0392b;font-weight:600;">Unverified</span>`}
+                        </span>
+                    </div>
+                    <button class="signout-btn" id="signoutBtn">Sign Out</button>
+                </div>
+            </div>
+
+            <!-- Editable Details -->
+            <div>
+                <div id="status-msg"></div>
+
+                <div class="card">
+                    <div class="card-header">
+                        <div class="step-icon">👤</div>
+                        <h3>Personal Details</h3>
+                    </div>
+                    <div class="card-body">
+                        <p class="sub-note">This information helps us speed up delivery and verify your identity for rentals.</p>
+
+                        <form id="profileForm">
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label>Full Name</label>
+                                    <input type="text" id="p-name" value="${user.name || ''}" placeholder="Your name">
+                                </div>
+                                <div class="form-group">
+                                    <label>Phone Number</label>
+                                    <input type="tel" id="p-phone" value="${phone}" placeholder="+20 100 000 0000">
+                                </div>
+                            </div>
+
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label>Date of Birth</label>
+                                    <input type="date" id="p-dob" value="${saved?.dob || ''}" max="${new Date().toISOString().split('T')[0]}">
+                                    <div class="field-hint">Used to verify eligibility for certain machinery rentals.</div>
+                                </div>
+                                <div class="form-group">
+                                    <label>City</label>
+                                    <select id="p-city">
+                                        <option value="" ${!saved?.city ? 'selected' : ''}>Select city…</option>
+                                        ${['Cairo','Giza','Alexandria','Sharm El-Sheikh','Aswan','Other'].map(c =>
+                                            `<option value="${c}" ${saved?.city === c ? 'selected' : ''}>${c}</option>`
+                                        ).join('')}
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div class="form-row full">
+                                <div class="form-group">
+                                    <label>Street Address</label>
+                                    <input type="text" id="p-address" value="${saved?.address || ''}" placeholder="Street name, building number, apartment">
+                                </div>
+                            </div>
+
+                            <div class="form-row full">
+                                <div class="form-group">
+                                    <label>Address Notes (optional)</label>
+                                    <textarea id="p-addressNotes" rows="3" placeholder="Landmarks, gate codes, or delivery instructions…">${saved?.addressNotes || ''}</textarea>
+                                </div>
+                            </div>
+
+                            <button type="submit" class="save-btn" id="saveBtn">💾 Save Changes</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    `;
+
+    document.getElementById('signoutBtn').addEventListener('click', async () => {
+        if (confirm('Sign out of Construction Hub?')) {
+            await account.deleteSession('current');
+            window.location.href = 'sign_in.html';
+        }
+    });
+
+    function showMsg(text, isError = false) {
+        const box = document.getElementById('status-msg');
+        box.textContent = text;
+        box.style.display = 'block';
+        box.style.background = isError ? '#fdecea' : '#e8f5e9';
+        box.style.color     = isError ? '#c0392b' : '#2e7d32';
+        box.style.border    = `1px solid ${isError ? '#e74c3c' : '#2ecc71'}`;
+    }
+
+    document.getElementById('profileForm').addEventListener('submit', async (e) => {
+        e.preventDefault();
+
+        const btn = document.getElementById('saveBtn');
+        btn.disabled = true;
+        btn.textContent = 'Saving…';
+
+        const name        = document.getElementById('p-name').value.trim();
+        const phoneVal     = document.getElementById('p-phone').value.trim();
+        const dob          = document.getElementById('p-dob').value;
+        const city         = document.getElementById('p-city').value;
+        const address      = document.getElementById('p-address').value.trim();
+        const addressNotes = document.getElementById('p-addressNotes').value.trim();
+
+        try {
+            // Keep Appwrite's own name field in sync if changed
+            if (name && name !== user.name) {
+                await account.updateName(name);
+            }
+
+            const ok = await saveUser(user.$id, {
+                name, phone: phoneVal, dob, city, address, addressNotes,
+                role, company, sellerType,
+            });
+
+            if (ok) {
+                showMsg('✅ Profile saved successfully.', false);
+                showToast('Profile updated!');
+            } else {
+                showMsg('⚠️ Could not save your profile. Please try again.', true);
+            }
+        } catch (err) {
+            showMsg('⚠️ Error: ' + (err.message || 'Could not save profile.'), true);
+        } finally {
+            btn.disabled = false;
+            btn.textContent = '💾 Save Changes';
+        }
+    });
+
+})();
+</script>
+
+</body>
+</html>

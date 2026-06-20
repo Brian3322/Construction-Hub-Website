@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Seed Materials Data</title>
+</head>
+<body>
+<h1>Seeding Materials_Website collection…</h1>
+<pre id="log"></pre>
+
+<script type="module">
+import { initializeApp, getApps, getApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+import { getFirestore, doc, setDoc } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+
+const firebaseConfig = {
+  apiKey: "AIzaSyAJ4E6DyZlImLmJomyy45XruCObfVemtq8",
+  authDomain: "construtionhubv2-8a393.firebaseapp.com",
+  projectId: "construtionhubv2-8a393",
+  storageBucket: "construtionhubv2-8a393.firebasestorage.app",
+  messagingSenderId: "857747425961",
+  appId: "1:857747425961:web:386bac01ff77dec28db7b8"
+};
+
+const app = getApps().length ? getApp() : initializeApp(firebaseConfig);
+const db = getFirestore(app);
+const log = (msg) => document.getElementById('log').textContent += msg + "\n";
+
+const materials = {
+  "structural-timber": {
+    name: "C24 Graded Structural Timber",
+    title: "Structural Timber (C24) | Construction Hub",
+    categoryTag: "TIMBER & LUMBER",
+    status: "available",
+    badges: ["✓ FSC Certified", "In Stock"],
+    icon: "🪵",
+    mainImage: "photos/wmremove-transformed (2).jpeg",
+    gallery: [
+      "photos/wmremove-transformed (2).jpeg",
+      "photos/wmremove-transformed (1).jpeg",
+      "photos/wmremove-transformed.jpeg"
+    ],
+    description: "Premium kiln-dried C24 grade softwood timber, ideal for high-load applications such as floor joists, roof rafters, and timber frame wall construction. Planed all round (PAR) with eased edges for easier handling and increased fire resistance.",
+    basePrice: 12.50,
+    priceUnit: "length",
+    sizeOptions: [
+      { value: "standard", label: "47mm x 100mm (4.8m Length)", price: 12.50, unit: "ea" },
+      { value: "large", label: "47mm x 200mm (4.8m Length)", price: 22.75, unit: "ea" },
+      { value: "bulk", label: "Full Pack (50 Lengths - 47x100)", price: 550.00, unit: "pack" }
+    ],
+    specs: [
+      { label: "Strength Grade", value: "C24 (Industrial Standard)" },
+      { label: "Finish", value: "Planed All Round (PAR)" },
+      { label: "Moisture Content", value: "Kiln Dried to < 20%" },
+      { label: "Sourcing", value: "FSC / PEFC Certified Sustainable" }
+    ],
+    supplier: { name: "Northwood Timber Mills" },
+    meta: {
+      treatment: "Kiln Dried / Regularised",
+      delivery: "Flatbed hiab delivery available"
+    },
+    reviews: [
+      { author: "Greenwood Homes", rating: 5, text: "Very straight lengths with minimal knotting. Perfect for our latest roof conversion." }
+    ],
+    shippingPolicy: "Delivered via specialized hiab crane trucks. Please ensure 3.5m width clearance for site access. Timber should be stored in a dry area upon delivery.",
+    cartImage: "all products/product details page/Binding wire/photos/Timber.jpeg"
+  },
+
+  "reinforcement-steel": {
+    name: "Reinforcement Steel (TMT Bars)",
+    title: "Reinforcement Steel | Construction Hub",
+    categoryTag: "STEEL & REINFORCEMENT",
+    status: "available",
+    badges: ["✓ Verified Supplier", "In Stock"],
+    icon: "🔩",
+    mainImage: "photos/steel.png",
+    gallery: [
+      "photos/steel.png",
+      "photos/istockphoto-1484751645-612x612.jpg",
+      "photos/Iron-rods-700x470.jpg"
+    ],
+    description: "High-tensile Thermo-Mechanically Treated (TMT) bars designed for superior bonding with concrete. Essential for reinforced concrete structures, these bars provide exceptional ductility, earthquake resistance, and anti-corrosion properties for long-lasting construction.",
+    basePrice: 1.10,
+    priceUnit: "kg",
+    sizeOptions: [
+      { value: "10mm", label: "10mm x 12m", price: 1.10, unit: "kg" },
+      { value: "12mm", label: "12mm x 12m", price: 1.15, unit: "kg" },
+      { value: "16mm", label: "16mm x 12m", price: 1.20, unit: "kg" }
+    ],
+    specs: [
+      { label: "Material Grade", value: "FE500 TMT Steel" },
+      { label: "Standard", value: "ASTM A615 / BS 4449" },
+      { label: "Yield Strength", value: "500 MPa" },
+      { label: "Elongation", value: "14.5% Min" }
+    ],
+    supplier: { name: "SteelCorp Industries" },
+    meta: {
+      grade: "FE500 / FE500D",
+      delivery: "Flatbed Truck Delivery within 3 days"
+    },
+    reviews: [
+      { author: "John Doe", rating: 5, text: "Great quality steel, very consistent diameter." }
+    ],
+    shippingPolicy: "Standard delivery via heavy-duty flatbed trucks. Crane unloading must be requested separately.",
+    cartImage: "all products/product details page/Binding wire/photos/steel.png"
+  },
+
+  "red-clay-bricks": {
+    name: "Red Clay Bricks",
+    title: "Red Clay Bricks | Construction Hub",
+    categoryTag: "BRICKS & BLOCKS",
+    status: "available",
+    badges: ["✓ Verified Supplier", "In Stock"],
+    icon: "🧱",
+    mainImage: "photos/bricks.png",
+    gallery: [
+      "photos/bricks.png",
+      "photos/wmremove-transformed.jpeg",
+      "photos/bricks2.png"
+    ],
+    description: "Premium high-density structural clay bricks, kiln-fired for maximum durability. Perfect for load-bearing walls, decorative facades, and outdoor landscaping. Weather-resistant with excellent thermal insulation properties for modern construction.",
+    basePrice: 0.50,
+    priceUnit: "size",
+    sizeOptions: [
+      { value: "standard", label: "Standard (215 x 102.5 x 65mm)", price: 0.50, unit: "ea" },
+      { value: "utility", label: "Utility (290 x 90 x 90mm)", price: 0.75, unit: "ea" },
+      { value: "pallet", label: "Full Pallet (500 Units)", price: 240.00, unit: "pallet" }
+    ],
+    specs: [
+      { label: "Material", value: "Natural Red Clay" },
+      { label: "Compressive Strength", value: "> 20 N/mm²" },
+      { label: "Water Absorption", value: "< 12%" },
+      { label: "Finish", value: "Smooth / Sand-faced" }
+    ],
+    supplier: { name: "National Brick Foundry" },
+    meta: {
+      weight: "Approx. 2.5kg per standard brick",
+      delivery: "Palletized delivery available (2-4 Days)"
+    },
+    reviews: [
+      { author: "Builder Pro Egypt", rating: 5, text: "Consistent color and very low breakage during transit. Recommended." }
+    ],
+    shippingPolicy: "Standard delivery is via crane-truck. Please ensure the drop-off site is clear for pallet placement.",
+    cartImage: "all products/product details page/Binding wire/photos/bricks.png"
+  },
+
+  "portland-cement": {
+    name: "Ordinary Portland Cement (Grade 42.5)",
+    title: "Portland Cement (Grade 42.5) | Construction Hub",
+    categoryTag: "CEMENT & BINDERS",
+    status: "available",
+    badges: ["✓ Certified Manufacturer", "In Stock"],
+    icon: "🏗️",
+    mainImage: "photos/cement.png",
+    gallery: [
+      "photos/cement.png",
+      "photos/wmremove-transformed (1).jpeg",
+      "photos/wmremove-transformed.jpeg"
+    ],
+    description: "High-performance Grade 42.5 Ordinary Portland Cement (OPC) designed for versatile construction projects. Providing exceptional binding strength and fast setting times, it is ideal for high-rise buildings, structural foundations, and heavy-duty concrete works. Engineered for durability against sulfate attacks.",
+    basePrice: 8.50,
+    priceUnit: "unit",
+    sizeOptions: [
+      { value: "standard", label: "Standard Paper Bag (50kg)", price: 8.50, unit: "ea" },
+      { value: "utility", label: "Utility Handy Bag (25kg)", price: 4.75, unit: "ea" },
+      { value: "bulk", label: "Bulk Tonne (20 x 50kg Bags)", price: 160.00, unit: "ton" }
+    ],
+    specs: [
+      { label: "Cement Type", value: "Ordinary Portland Cement (OPC)" },
+      { label: "Strength Class", value: "42.5 N/mm² (28 days)" },
+      { label: "Initial Setting Time", value: "60 - 90 Minutes" },
+      { label: "Compliance", value: "EN 197-1 / ASTM C150" }
+    ],
+    supplier: { name: "Global Cement Industries" },
+    meta: {
+      availability: "1500+ Bags Available",
+      delivery: "Next-day construction site delivery"
+    },
+    reviews: [
+      { author: "Cairo Structural Ltd.", rating: 5, text: "Excellent binding quality and very low impurity levels. Great for our foundation pours." }
+    ],
+    shippingPolicy: "Flatbed truck delivery. Offloading is provided for bulk orders over 5 tons. Please ensure site access for heavy vehicles.",
+    cartImage: "all products/product details page/Binding wire/photos/cement.png"
+  },
+
+  "hollow-concrete-blocks": {
+    name: "Heavy-Duty Hollow Concrete Blocks",
+    title: "Hollow Concrete Blocks | Construction Hub",
+    categoryTag: "BRICKS & BLOCKS",
+    status: "available",
+    badges: ["✓ Load Bearing", "In Stock"],
+    icon: "🧱",
+    mainImage: "photos/8_inch_concrete_block-removebg-preview.png",
+    gallery: [
+      "photos/8_inch_concrete_block-removebg-preview.png",
+      "photos/precision-6x8x16-standard.jpg",
+      "photos/precision-8x8x16-SingleBullnose.jpg"
+    ],
+    description: "High-strength precast hollow concrete blocks engineered for structural integrity and thermal efficiency. Ideal for building foundations, retaining walls, and industrial partitioning. Manufactured with high-quality aggregate to ensure uniform dimensions and superior mortar bonding.",
+    basePrice: 0.85,
+    priceUnit: "unit",
+    sizeOptions: [
+      { value: "standard", label: "Standard (20 x 20 x 40 cm)", price: 0.85, unit: "unit" },
+      { value: "thin", label: "Partition (10 x 20 x 40 cm)", price: 0.65, unit: "unit" },
+      { value: "pallet", label: "Full Pallet (108 Units)", price: 85.00, unit: "pallet" }
+    ],
+    specs: [
+      { label: "Compressive Strength", value: "7.5 N/mm² - 10 N/mm²" },
+      { label: "Configuration", value: "2-Core Hollow" },
+      { label: "Material Mix", value: "OPC Cement, Sand, Crushed Rock" },
+      { label: "Fire Rating", value: "Up to 4 Hours" }
+    ],
+    supplier: { name: "Atlas Precast Concrete" },
+    meta: {
+      density: "1900 kg/m³",
+      delivery: "Forklift unloading required"
+    },
+    reviews: [
+      { author: "Civil Build Corp", rating: 5, text: "Blocks are very well-cured and have sharp edges. Great for maintaining straight wall lines." }
+    ],
+    shippingPolicy: "Palletized delivery via flatbed truck. Site must be accessible for 12-ton vehicles. Standard unloading time: 45 minutes per load.",
+    cartImage: "all products/product details page/Binding wire/photos/8_inch_concrete_block-removebg-preview.png"
+  }
+};
+
+(async () => {
+  for (const [id, data] of Object.entries(materials)) {
+    try {
+      await setDoc(doc(db, "Materials_Website", id), data);
+      log(`✅ Uploaded: ${id}`);
+    } catch (err) {
+      log(`❌ Failed: ${id} — ${err.message}`);
+    }
+  }
+  log("\nSeeding complete.");
+})();
+</script>
+</body>
+</html>

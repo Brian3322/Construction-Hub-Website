@@ -50,7 +50,6 @@
                 <div class="thumb" onclick="changeImage('photos/Plascon_Website-Banner-Desktop_V2-scaled.png', this)">
                     <img src="photos/Plascon_Website-Banner-Desktop_V2-scaled.png" alt="Wall Application">
                 </div>
-                <div class="thumb-add">+ Add</div>
             </div>
         </section>
 
@@ -77,31 +76,31 @@
 
             <div class="pricing-section">
                 <span class="price-label">Price per selection:</span>
-                <h2 class="main-price">EGP<span id="dynamic-price">45.00</span> <small>/ bucket</small></h2>
+                <h2 class="main-price">EGP<span id="dynamic-price"> 1000</span> <small>/ bucket</small></h2>
             </div>
 
             <div class="selection-group">
                 <h3>Select Volume (Liters)</h3>
                 <div class="options-grid">
                     <label class="option-card">
-                        <input type="radio" name="size" value="small" data-price="45.00" checked>
+                        <input type="radio" name="size" value="small" data-price="1000" checked>
                         <div class="option-content">
                             <span class="size-name">Small Bucket (5 Liters)</span>
-                            <span class="size-price">EGP 45.00/ea</span>
+                            <span class="size-price">EGP 1000/EGP</span>
                         </div>
                     </label>
                     <label class="option-card">
-                        <input type="radio" name="size" value="medium" data-price="82.50">
+                        <input type="radio" name="size" value="medium" data-price="2000">
                         <div class="option-content">
                             <span class="size-name">Standard Drum (10 Liters)</span>
-                            <span class="size-price">EGP 82.50/ea</span>
+                            <span class="size-price">EGP 2000/EGP</span>
                         </div>
                     </label>
                     <label class="option-card">
-                        <input type="radio" name="size" value="large" data-price="155.00">
+                        <input type="radio" name="size" value="large" data-price="4000">
                         <div class="option-content">
                             <span class="size-name">Industrial Pail (20 Liters)</span>
-                            <span class="size-price">EGP 155.00/ea</span>
+                            <span class="size-price">EGP 4000/EGP</span>
                         </div>
                     </label>
                 </div>
@@ -287,10 +286,10 @@
                 unit      : 'bucket',
                 qty       : qty,
                 icon      : '🎨',
-                image     : 'all products/product details page/Binding wire/photos/exterior wall paint.png',
+                image     : 'all products/product details page/Exterior Wall Paint/photos/exterior wall paint.png',
             });
 
-            showCartToast(`✅ Added EGP{qty} × Exterior Wall Paint (EGP{sizeLabel}) to cart!`);
+            showCartToast(`✅ Added ${qty} × Exterior Wall Paint (${sizeLabel}) to cart!`);
         }
 
         /* ── Buy Now ── */

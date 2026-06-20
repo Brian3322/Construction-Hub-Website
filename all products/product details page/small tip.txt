@@ -1,0 +1,6 @@
+all the css files are equal to each other, so if you want to add more pages, 
+in each page, you only need to change the html info or say this to gemini:
+[i need the same design i sent to you but for "Binding wire"] 
+[i need the same design i sent to you but for "bricks"]
+- copy the html from what gemini will do and paste it to the html file in vscode
+- copy the the content of the css from any css file in this folder and paste it to the current css file

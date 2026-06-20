@@ -5,7 +5,25 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Construction Hub | Industrial Marketplace</title>
     <link rel="stylesheet" href="CSS/style.css">
-    <script src="https://cdn.jsdelivr.net/npm/appwrite@13.0.1"></script>
+    <style>
+        .btn-logout-icon {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 38px;
+            height: 38px;
+            border-radius: 50%;
+            font-size: 1.1rem;
+            text-decoration: none;
+            background: rgba(255,255,255,0.08);
+            transition: background 0.2s ease;
+        }
+        .btn-logout-icon:hover {
+            background: rgba(255,255,255,0.2);
+            cursor: pointer;
+        }
+    </style>
+    <script src="https://cdn.jsdelivr.net/npm/appwrite@16.0.2"></script>
 </head>
 <body>
 
@@ -26,7 +44,9 @@
     <span class="ch-cart-badge">0</span>
   </a>
 </li>
-                    <li><a href="sign_in.html" id="account-link" class="btn-account">Account</a></li>
+                    <li id="profile-link-item" style="display:none;"><a href="profile.html" class="btn-account">👤 My Profile</a></li>
+                    <li id="logout-link-item" style="display:none;"><a href="#" id="logout-icon-btn" class="btn-logout-icon" title="Sign out">👤</a></li>
+                    <li><a href="sign_in.html" id="account-link">Account</a></li>
                 </ul>
                 
             </nav>
@@ -239,12 +259,19 @@
         (async () => {
             try {
                 const user = await account.get();
-                const link = document.getElementById('account-link');
-                // Show user's name with a sign-out option
-                link.textContent = '👤 ' + user.name.split(' ')[0];
-                link.href = '#';
-                link.title = 'Click to sign out';
-                link.addEventListener('click', async (e) => {
+
+                // Hide the default "Account" text link once signed in
+                document.getElementById('account-link').parentElement.style.display = 'none';
+
+                // Reveal the Profile link now that we know the user is signed in
+                document.getElementById('profile-link-item').style.display = 'block';
+
+                // Reveal the icon-only logout button and wire it up
+                const logoutItem = document.getElementById('logout-link-item');
+                const logoutBtn = document.getElementById('logout-icon-btn');
+                logoutItem.style.display = 'block';
+                logoutBtn.title = 'Sign out (' + user.name.split(' ')[0] + ')';
+                logoutBtn.addEventListener('click', async (e) => {
                     e.preventDefault();
                     if (confirm('Sign out of Construction Hub?')) {
                         await account.deleteSession('current');
@@ -256,21 +283,5 @@
             }
         })();
     </script>
-  <script type="text/javascript">
-  (function(d, t) {
-      var v = d.createElement(t), s = d.getElementsByTagName(t)[0];
-      v.onload = function() {
-        window.voiceflow.chat.load({
-          verify: { projectID: '69f6668dd8bf4ff14739b6d6' },
-          url: 'https://general-runtime.voiceflow.com',
-          versionID: 'production',
-          voice: {
-            url: "https://runtime-api.voiceflow.com"
-          }
-        });
-      }
-      v.src = "https://cdn.voiceflow.com/widget-next/bundle.mjs"; v.type = "text/javascript"; s.parentNode.insertBefore(v, s);
-  })(document, 'script');
-</script>
 </body>
 </html>

@@ -53,7 +53,7 @@
                     <h2 class="price-value">EGP 525.00 <small>/ Day</small></h2>
                 </div>
                 <div class="hero-actions">
-                    <button class="btn-rent-primary">Rent Now</button>
+                    <button class="btn-rent-primary" disabled>Rent Now</button>
                 </div>
             </div>
         </div>
@@ -139,14 +139,56 @@
             clickedElement.classList.add('active');
         }
     </script>
-<script>
-const MACHINE = {
-    id        : 'cat-950gc-loader',
-    name      : 'CAT 950GC Medium Wheel Loader',
-    dailyPrice: 525.0,
-    icon      : '🚛',
-    image     : 'photos/13_1512630041.jpg',
-};
+<script type="module">
+import { loadMachine } from "../../../machinery-firestore.js";
+let MACHINE = {};
+window.MACHINE = MACHINE;
+document.addEventListener('DOMContentLoaded', async () => {
+  const data = await loadMachine('cat-950gc-loader');
+  if (!data) return;
+  document.title = data.title;
+  document.querySelector('.category-tag').textContent = data.categoryTag;
+  document.querySelector('.machinery-name').textContent = data.name;
+  document.querySelector('.badge.available').textContent = `● ${data.statusLabel}`;
+  document.querySelector('.year-label').textContent = data.yearLabel;
+  document.querySelector('.price-value').innerHTML = `EGP ${data.dailyPrice.toFixed(2)} <small>/ Day</small>`;
+  document.querySelector('.overview-text').textContent = data.overview;
+  const idealEl = document.querySelector('.ideal-projects');
+  if (idealEl && data.idealFor) {
+    idealEl.innerHTML = `<strong>Ideal for:</strong> ${data.idealFor}`;
+  }
+  document.getElementById('mainMachineryImg').src = data.mainImage;
+  const galleryEl = document.querySelector('.gallery-mini');
+  galleryEl.innerHTML = data.gallery.map((src, i) =>
+    `<img src="${src}" class="thumb${i === 0 ? ' active' : ''}" onclick="swapImg(this.src, this)">`
+  ).join('');
+  const specsGrid = document.querySelector('.specs-grid');
+  specsGrid.innerHTML = data.specs.map(s => `
+    <div class="spec-item">
+      <span class="spec-label">${s.label}</span>
+      <span class="spec-val">${s.value}</span>
+    </div>`).join('');
+  const rentalList = document.querySelector('.rental-list');
+  rentalList.innerHTML = data.rentalTerms.map(r =>
+    `<li><strong>${r.label}:</strong> ${r.value}</li>`
+  ).join('');
+  document.querySelector('.sup-meta strong').textContent = data.supplier.name;
+  document.querySelector('.sup-meta .rating').textContent = data.supplier.rating;
+  document.querySelector('.terms-note').textContent = data.termsNote;
+  MACHINE.id = 'cat-950gc-loader';
+  MACHINE.name = data.name;
+  MACHINE.dailyPrice = data.dailyPrice;
+  MACHINE.icon = data.icon;
+  MACHINE.image = data.mainImage;
+  MACHINE.cartImage = data.cartImage;
+
+  // Wire up Rent Now button after data is ready
+  const btn = document.querySelector('.btn-rent-primary');
+  if (btn) {
+    btn.disabled = false;
+    btn.onclick = addMachineToCart;
+  }
+});
 </script>
 
 <!-- ── Inlined Cart API ── -->
@@ -221,24 +263,24 @@ function chShowToast(msg) {
 }
 
 function addMachineToCart() {
+    const m = window.MACHINE;
+    if (!m || !m.id) {
+        chShowToast('⚠️ Machine data not loaded yet. Please wait a moment.');
+        return;
+    }
     Cart.add({
-        id        : MACHINE.id,
-        name      : MACHINE.name,
+        id        : m.id,
+        name      : m.name,
         type      : 'rental',
-        unitPrice : MACHINE.dailyPrice,
+        unitPrice : m.dailyPrice,
         unit      : 'day',
         qty       : 1,
-        icon      : MACHINE.icon,
-         image     : 'all products/product details page/All-Terrain Forklift/photos/C844107.jpg',
+        icon      : m.icon      || '🚛',
+        image     : m.cartImage || m.image || '',
         days      : 1,
     });
     chShowToast('✅ Added to cart! Go to checkout to complete your booking.');
 }
-
-document.addEventListener('DOMContentLoaded', () => {
-    const btn = document.querySelector('.btn-rent-primary');
-    if (btn) btn.onclick = addMachineToCart;
-});
 </script>
 
 </body>

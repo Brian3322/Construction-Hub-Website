@@ -53,6 +53,22 @@
         .nav-links a:hover { color: var(--yellow); }
         .btn-account { background: var(--yellow); padding: 8px 15px; border-radius: 4px; color: #fff !important; }
         .btn-account:hover { background: var(--yellow-dark) !important; }
+        .btn-logout-icon {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 38px;
+            height: 38px;
+            border-radius: 50%;
+            font-size: 1.1rem;
+            text-decoration: none;
+            background: rgba(255,255,255,0.08);
+            transition: background 0.2s ease;
+        }
+        .btn-logout-icon:hover {
+            background: rgba(255,255,255,0.2);
+            cursor: pointer;
+        }
 
         .cart-nav-link { position: relative; display: inline-flex; align-items: center; gap: 6px; }
         .ch-cart-badge {
@@ -409,7 +425,9 @@
                         <span class="ch-cart-badge">0</span>
                     </a>
                 </li>
-                <li><a href="sign_in.html" class="btn-account">Account</a></li>
+                <li id="profile-link-item" style="display:none;"><a href="profile.html" class="btn-account">👤 My Profile</a></li>
+                <li id="logout-link-item" style="display:none;"><a href="#" id="logout-icon-btn" class="btn-logout-icon" title="Sign out">👤</a></li>
+                <li><a href="sign_in.html" id="account-link" class="btn-account">Account</a></li>
             </ul>
         </nav>
     </div>
@@ -688,11 +706,95 @@ window.addEventListener('cartChanged', _updateBadge);
 document.addEventListener('DOMContentLoaded', _updateBadge);
 </script>
 
+<!-- ─────────────────────────────────────────────────────────────────────────
+     Order recording — writes each completed order to Firestore
+     ("orders_website" collection) and (if signed in) tags it with
+     the Appwrite user id so a buyer's order history can be queried later.
+     ───────────────────────────────────────────────────────────────────────── -->
+<script src="https://cdn.jsdelivr.net/npm/appwrite@16.0.2"></script>
+<script>
+    // Reflects the current sign-in state in the navbar: if a session
+    // already exists, swap the "Account" link for "My Profile" + a
+    // sign-out icon instead of sending the user to sign_in.html
+    // (which would just bounce them straight back out).
+    (function () {
+        const { Client, Account } = Appwrite;
+        const client = new Client()
+            .setEndpoint('https://nyc.cloud.appwrite.io/v1')
+            .setProject('69e66361000f9e7af684');
+        const account = new Account(client);
+
+        (async () => {
+            try {
+                const user = await account.get();
+
+                document.getElementById('account-link').parentElement.style.display = 'none';
+                document.getElementById('profile-link-item').style.display = 'block';
+
+                const logoutItem = document.getElementById('logout-link-item');
+                const logoutBtn  = document.getElementById('logout-icon-btn');
+                logoutItem.style.display = 'block';
+                logoutBtn.title = 'Sign out (' + user.name.split(' ')[0] + ')';
+                logoutBtn.addEventListener('click', async (e) => {
+                    e.preventDefault();
+                    if (confirm('Sign out of Construction Hub?')) {
+                        await account.deleteSession('current');
+                        window.location.href = 'sign_in.html';
+                    }
+                });
+            } catch {
+                // Not logged in — keep the default "Account" link to sign_in.html
+            }
+        })();
+    })();
+</script>
+<script type="module">
+    import { initializeApp, getApps, getApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+    import { getFirestore, collection, addDoc, serverTimestamp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+
+    const firebaseConfig = {
+        apiKey: "AIzaSyAJ4E6DyZlImLmJomyy45XruCObfVemtq8",
+        authDomain: "construtionhubv2-8a393.firebaseapp.com",
+        projectId: "construtionhubv2-8a393",
+        storageBucket: "construtionhubv2-8a393.firebasestorage.app",
+        messagingSenderId: "857747425961",
+        appId: "1:857747425961:web:386bac01ff77dec28db7b8"
+    };
+
+    const app = getApps().length ? getApp() : initializeApp(firebaseConfig);
+    const db  = getFirestore(app);
+
+    // Writes one order document to the "orders_website" collection.
+    // Returns the new document's auto-generated Firestore id.
+    window._saveOrderToFirestore = async function (orderData) {
+        const ref = await addDoc(collection(db, "orders_website"), {
+            ...orderData,
+            createdAt: serverTimestamp(),
+        });
+        return ref.id;
+    };
+
+    // Best-effort lookup of the signed-in Appwrite user, so the order
+    // can be linked to an account. Returns null for guest checkouts.
+    window._getCurrentUser = async function () {
+        try {
+            const { Client, Account } = Appwrite;
+            const client = new Client()
+                .setEndpoint('https://nyc.cloud.appwrite.io/v1')
+                .setProject('69e66361000f9e7af684');
+            const account = new Account(client);
+            return await account.get();
+        } catch {
+            return null; // not signed in — guest checkout
+        }
+    };
+</script>
+
 <!-- ──────────────────────────────────────────────────────────────
      Page logic
      ────────────────────────────────────────────────────────────── -->
 <script>
-const DELIVERY_FEE = 150;
+const DELIVERY_FEE = 50;
 const VAT_RATE     = 0.14;
 const PROMO_CODES  = { 'HUB10': 0.10, 'BUILD20': 0.20, 'FIRST15': 0.15 };
 
@@ -858,19 +960,86 @@ function formatExpiry(input) {
 }
 
 // ── Place Order ──────────────────────────────────────────────────
-function placeOrder() {
+async function placeOrder() {
     if (cart.length === 0) { showToast('⚠️ Your cart is empty.'); return; }
-    const name    = document.getElementById('firstName').value.trim();
-    const phone   = document.getElementById('phone').value.trim();
-    const address = document.getElementById('address').value.trim();
-    if (!name || !phone || !address) {
+
+    const firstName    = document.getElementById('firstName').value.trim();
+    const lastName     = document.getElementById('lastName').value.trim();
+    const phone        = document.getElementById('phone').value.trim();
+    const email        = document.getElementById('email').value.trim();
+    const address      = document.getElementById('address').value.trim();
+    const city         = document.getElementById('city').value;
+    const deliveryDate = document.getElementById('deliveryDate').value;
+    const notes        = document.getElementById('notes').value.trim();
+    const promoCode    = document.getElementById('promoCode').value.trim().toUpperCase();
+    const paymentMethod = (document.querySelector('input[name="payment"]:checked') || {}).value || 'cod';
+
+    if (!firstName || !phone || !address) {
         showToast('⚠️ Please fill in your name, phone, and address.');
         return;
     }
+
     const orderNum = 'CH-' + Math.floor(100000 + Math.random() * 900000);
+
+    // Snapshot pricing exactly as shown in the summary at the moment of purchase
+    const subtotal    = calcSubtotal();
+    const deliveryFee = cart.length > 0 ? DELIVERY_FEE : 0;
+    const discountAmt = subtotal * discount;
+    const taxable      = subtotal - discountAmt;
+    const vat          = taxable * VAT_RATE;
+    const total         = taxable + vat + deliveryFee;
+
+    const placeBtn = document.querySelector('.checkout-btn');
+    if (placeBtn) { placeBtn.disabled = true; placeBtn.textContent = 'Placing order…'; }
+
+    // Best-effort: attach the signed-in account so the order can be
+    // linked to a user; guests simply get a null userId.
+    let userId = null;
+    try {
+        const user = await window._getCurrentUser();
+        if (user) userId = user.$id;
+    } catch { /* stay a guest order */ }
+
+    const orderData = {
+        orderNumber: orderNum,
+        status: 'pending',
+        userId: userId,
+        customer: {
+            firstName, lastName, phone, email, address, city,
+            deliveryDate, notes,
+        },
+        paymentMethod,
+        items: cart.map(item => ({
+            id: item.id,
+            name: item.name,
+            type: item.type,
+            unitPrice: item.unitPrice,
+            unit: item.unit,
+            qty: item.qty,
+            startDate: item.startDate || '',
+            endDate: item.endDate || '',
+            days: item.days || 1,
+        })),
+        pricing: {
+            subtotal, deliveryFee, discountRate: discount,
+            discountAmount: discountAmt, vat, total,
+            promoCode: promoCode || null,
+        },
+    };
+
+    try {
+        await window._saveOrderToFirestore(orderData);
+    } catch (err) {
+        // Don't block the customer's order confirmation if this write
+        // fails — just log it so it can be investigated.
+        console.error('Could not save order to Firestore:', err);
+    }
+
     document.getElementById('orderNumber').textContent = `Order #${orderNum}`;
     document.getElementById('successOverlay').classList.add('show');
     Cart.clear();
+
+    if (placeBtn) { placeBtn.disabled = false; placeBtn.textContent = '🔒 Place Order'; }
 }
 
 // ── Toast ────────────────────────────────────────────────────────
