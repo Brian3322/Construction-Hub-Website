@@ -343,7 +343,9 @@
 
             burgerBtn.addEventListener('click', toggleMenu);
             overlay.addEventListener('click', closeMenu);
-            navLinks.querySelectorAll('a').forEach(link => link.addEventListener('click', closeMenu));
+            navLinks.querySelectorAll('a').forEach(link => {link.addEventListener('click', () => {setTimeout(closeMenu, 150);
+    });
+});
         })();
     </script>
 
