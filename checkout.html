@@ -426,7 +426,7 @@
                     </a>
                 </li>
                 <li id="profile-link-item" style="display:none;"><a href="profile.html" class="btn-account">👤 My Profile</a></li>
-                <li id="logout-link-item" style="display:none;"><a href="#" id="logout-icon-btn" class="btn-logout-icon" title="Sign out">👤</a></li>
+                <li id="logout-link-item" style="display:none;"><a href="#" id="logout-icon-btn" title="Sign out">Log Out</a></li>
                 <li><a href="sign_in.html" id="account-link" class="btn-account">Account</a></li>
             </ul>
         </nav>
@@ -717,6 +717,10 @@ document.addEventListener('DOMContentLoaded', _updateBadge);
     // already exists, swap the "Account" link for "My Profile" + a
     // sign-out icon instead of sending the user to sign_in.html
     // (which would just bounce them straight back out).
+    //
+    // Also exposes window._getSignedInUser so the delivery-info
+    // prefill script (below) can reuse the same session check
+    // instead of calling account.get() a second time.
     (function () {
         const { Client, Account } = Appwrite;
         const client = new Client()
@@ -724,28 +728,77 @@ document.addEventListener('DOMContentLoaded', _updateBadge);
             .setProject('69e66361000f9e7af684');
         const account = new Account(client);
 
-        (async () => {
+        window._getSignedInUser = async function () {
             try {
-                const user = await account.get();
-
-                document.getElementById('account-link').parentElement.style.display = 'none';
-                document.getElementById('profile-link-item').style.display = 'block';
-
-                const logoutItem = document.getElementById('logout-link-item');
-                const logoutBtn  = document.getElementById('logout-icon-btn');
-                logoutItem.style.display = 'block';
-                logoutBtn.title = 'Sign out (' + user.name.split(' ')[0] + ')';
-                logoutBtn.addEventListener('click', async (e) => {
-                    e.preventDefault();
-                    if (confirm('Sign out of Construction Hub?')) {
-                        await account.deleteSession('current');
-                        window.location.href = 'sign_in.html';
-                    }
-                });
+                return await account.get();
             } catch {
-                // Not logged in — keep the default "Account" link to sign_in.html
+                return null;
             }
+        };
+
+        (async () => {
+            const user = await window._getSignedInUser();
+            if (!user) return; // Not logged in — keep the default "Account" link to sign_in.html
+
+            document.getElementById('account-link').parentElement.style.display = 'none';
+            document.getElementById('profile-link-item').style.display = 'block';
+
+            const logoutItem = document.getElementById('logout-link-item');
+            const logoutBtn  = document.getElementById('logout-icon-btn');
+            logoutItem.style.display = 'block';
+            logoutBtn.title = 'Sign out (' + user.name.split(' ')[0] + ')';
+            logoutBtn.addEventListener('click', async (e) => {
+                e.preventDefault();
+                if (confirm('Sign out of Construction Hub?')) {
+                    await account.deleteSession('current');
+                    window.location.href = 'sign_in.html';
+                }
+            });
         })();
+    })();
+</script>
+
+<!-- ─────────────────────────────────────────────────────────────────────────
+     Delivery info prefill — pulls the signed-in user's saved profile
+     (Appwrite account + Firestore "user_website" doc) and fills in
+     Delivery Information fields that the customer hasn't already typed.
+     Skips silently for guests, or if a field already has a value.
+     ───────────────────────────────────────────────────────────────────────── -->
+<script type="module">
+    import { loadUser } from './machinery-firestore.js';
+
+    function fillIfEmpty(id, value) {
+        if (!value) return;
+        const el = document.getElementById(id);
+        if (el && !el.value) el.value = value;
+    }
+
+    (async () => {
+        const user = await window._getSignedInUser();
+        if (!user) return; // Guest checkout — nothing to prefill
+
+        let saved = null;
+        try {
+            saved = await loadUser(user.$id);
+        } catch (err) {
+            console.error('Could not load saved profile for prefill:', err);
+        }
+
+        // Split the saved/Appwrite full name into first + last for the two inputs
+        const fullName = (saved?.name || user.name || '').trim();
+        const [firstName, ...rest] = fullName.split(/\s+/).filter(Boolean);
+        const lastName = rest.join(' ');
+
+        fillIfEmpty('firstName', firstName);
+        fillIfEmpty('lastName', lastName);
+        fillIfEmpty('phone', saved?.phone);
+        fillIfEmpty('email', user.email);
+        fillIfEmpty('address', saved?.address);
+
+        const cityEl = document.getElementById('city');
+        if (cityEl && !cityEl.value && saved?.city) {
+            cityEl.value = saved.city;
+        }
     })();
 </script>
 <script type="module">

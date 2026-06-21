@@ -22,6 +22,71 @@
             background: rgba(255,255,255,0.2);
             cursor: pointer;
         }
+
+        /* ── Hamburger Menu Toggle ── */
+        .burger-btn {
+            display: none;
+            flex-direction: column;
+            justify-content: center;
+            gap: 5px;
+            width: 38px;
+            height: 38px;
+            background: none;
+            border: none;
+            cursor: pointer;
+            padding: 0;
+            z-index: 1100;
+        }
+        .burger-btn .bar {
+            width: 100%;
+            height: 4px;
+            background: #fff;
+            border-radius: 4px;
+            transition: transform 0.3s ease, opacity 0.3s ease, background 0.3s ease;
+        }
+        .burger-btn.open .bar:nth-child(1) {
+            transform: translateY(9px) rotate(45deg);
+        }
+        .burger-btn.open .bar:nth-child(2) {
+            opacity: 0;
+        }
+        .burger-btn.open .bar:nth-child(3) {
+            transform: translateY(-9px) rotate(-45deg);
+        }
+
+        @media (max-width: 768px) {
+            .burger-btn { display: flex; }
+
+            .nav-links {
+                display: flex;
+                flex-direction: column;
+                align-items: stretch;
+                position: fixed;
+                top: 0;
+                right: -100%;
+                width: 260px;
+                height: 100vh;
+                background: #1a1a2e;
+                padding: 90px 25px 30px;
+                gap: 18px;
+                box-shadow: -4px 0 20px rgba(0,0,0,0.4);
+                transition: right 0.35s ease;
+                z-index: 1050;
+            }
+            .nav-links.open { right: 0; }
+
+            .nav-links li { margin-left: 0; }
+            .nav-links a { display: block; font-size: 1rem; padding: 8px 0; }
+
+            .nav-overlay {
+                display: none;
+                position: fixed;
+                inset: 0;
+                background: rgba(0,0,0,0.5);
+                z-index: 1040;
+            }
+            .nav-overlay.open { display: block; }
+        }
     </style>
     <script src="https://cdn.jsdelivr.net/npm/appwrite@16.0.2"></script>
 </head>
@@ -31,7 +96,7 @@
         <div class="container">
             <a href="index.html" class="logo">CONSTRUCTION<span>HUB</span></a>
             <nav>
-                <ul class="nav-links">
+                <ul class="nav-links" id="navLinks">
                     <li><a href="#home">Home</a></li>
                     <li><a href="#products">Product</a></li>
                     <li><a href="#machinery">Heavy Machinery</a></li>
@@ -45,13 +110,19 @@
   </a>
 </li>
                     <li id="profile-link-item" style="display:none;"><a href="profile.html" class="btn-account">👤 My Profile</a></li>
-                    <li id="logout-link-item" style="display:none;"><a href="#" id="logout-icon-btn" class="btn-logout-icon" title="Sign out">👤</a></li>
+                    <li id="logout-link-item" style="display:none;"><a href="#" id="logout-icon-btn" title="Sign out">Log Out</a></li>
                     <li><a href="sign_in.html" id="account-link">Account</a></li>
                 </ul>
                 
             </nav>
+            <button class="burger-btn" id="burgerBtn" aria-label="Toggle navigation menu" aria-expanded="false">
+                <span class="bar"></span>
+                <span class="bar"></span>
+                <span class="bar"></span>
+            </button>
         </div>
     </header>
+    <div class="nav-overlay" id="navOverlay"></div>
 
     <section id="home" class="hero">
         <div class="hero-overlay">
@@ -129,7 +200,7 @@
             </div>
 
             <div class="view-more-container">
-                <a href="all products/all products.html" target="_blank" class="btn-view-more">View More Materials</a>
+                <a href="all products/all products.html" class="btn-view-more">View More Materials</a>
             </div>
         </div>
     </section>
@@ -173,7 +244,7 @@
                 
                 <div class="card">
                     <div class="card-img-placeholder">
-                        <img src="all products/heavy machinery details page/Scissor lift/photos/pexels-jimmy-nilsson-masth-193596566-13532460.jpg" alt="Scissor Lift" style="width: 100%; height: 100%; object-fit: cover;">
+                        <img src="all products/heavy machinery details page/Scissor lift/photos/Scissor.jpg" alt="Scissor Lift" style="width: 100%; height: 100%; object-fit: cover;">
                     </div>
                     <div class="card-body">
                         <h3>Scissor Lift</h3>
@@ -187,7 +258,7 @@
             </div>
 
             <div class="view-more-container">
-                <a href="all heavy machinery rent/all heavy machinery to rent.html" target="_blank" class="btn-view-more">View More Machinery</a>
+                <a href="all heavy machinery rent/all heavy machinery to rent.html" class="btn-view-more">View More Machinery</a>
             </div>
         </div>
     </section>
@@ -250,6 +321,33 @@
     </footer>
 
     <script>
+        // ── Hamburger menu toggle ──
+        (function () {
+            const burgerBtn = document.getElementById('burgerBtn');
+            const navLinks  = document.getElementById('navLinks');
+            const overlay   = document.getElementById('navOverlay');
+
+            function closeMenu() {
+                burgerBtn.classList.remove('open');
+                navLinks.classList.remove('open');
+                overlay.classList.remove('open');
+                burgerBtn.setAttribute('aria-expanded', 'false');
+            }
+
+            function toggleMenu() {
+                const isOpen = navLinks.classList.toggle('open');
+                burgerBtn.classList.toggle('open', isOpen);
+                overlay.classList.toggle('open', isOpen);
+                burgerBtn.setAttribute('aria-expanded', String(isOpen));
+            }
+
+            burgerBtn.addEventListener('click', toggleMenu);
+            overlay.addEventListener('click', closeMenu);
+            navLinks.querySelectorAll('a').forEach(link => link.addEventListener('click', closeMenu));
+        })();
+    </script>
+
+    <script>
         const { Client, Account } = Appwrite;
         const client = new Client()
             .setEndpoint('https://nyc.cloud.appwrite.io/v1')
@@ -289,7 +387,7 @@
       var v = d.createElement(t), s = d.getElementsByTagName(t)[0];
       v.onload = function() {
         window.voiceflow.chat.load({
-          verify: { projectID: '69f661d4d8bf4ff14739b69b' },
+          verify: { projectID: '69f6668dd8bf4ff14739b6d6' },
           url: 'https://general-runtime.voiceflow.com',
           versionID: 'production',
           voice: {

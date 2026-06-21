@@ -22,6 +22,72 @@
             background: rgba(255,255,255,0.2);
             cursor: pointer;
         }
+    
+        /* ── Hamburger Menu Toggle ── */
+        .burger-btn {
+            display: none;
+            flex-direction: column;
+            justify-content: center;
+            gap: 5px;
+            width: 38px;
+            height: 38px;
+            background: none;
+            border: none;
+            cursor: pointer;
+            padding: 0;
+            z-index: 1100;
+        }
+        .burger-btn .bar {
+            width: 100%;
+            height: 4px;
+            background: #fff;
+            border-radius: 4px;
+            transition: transform 0.3s ease, opacity 0.3s ease, background 0.3s ease;
+        }
+        .burger-btn.open .bar:nth-child(1) {
+            transform: translateY(9px) rotate(45deg);
+        }
+        .burger-btn.open .bar:nth-child(2) {
+            opacity: 0;
+        }
+        .burger-btn.open .bar:nth-child(3) {
+            transform: translateY(-9px) rotate(-45deg);
+        }
+
+        @media (max-width: 768px) {
+            .burger-btn { display: flex; }
+
+            .nav-links {
+                display: flex;
+                flex-direction: column;
+                align-items: stretch;
+                position: fixed;
+                top: 0;
+                right: -100%;
+                width: 260px;
+                height: 100vh;
+                background: #1a1a2e;
+                padding: 90px 25px 30px;
+                gap: 18px;
+                box-shadow: -4px 0 20px rgba(0,0,0,0.4);
+                transition: right 0.35s ease;
+                z-index: 1050;
+                overflow-y: auto;
+            }
+            .nav-links.open { right: 0; }
+
+            .nav-links li { margin-left: 0; }
+            .nav-links a { display: block; font-size: 1rem; padding: 8px 0; }
+
+            .nav-overlay {
+                display: none;
+                position: fixed;
+                inset: 0;
+                background: rgba(0,0,0,0.5);
+                z-index: 1040;
+            }
+            .nav-overlay.open { display: block; }
+        }
     </style>
     <script src="https://cdn.jsdelivr.net/npm/appwrite@16.0.2"></script>
 </head>
@@ -31,7 +97,7 @@
         <div class="container">
             <a href="../index.html" class="logo">CONSTRUCTION<span>HUB</span></a>
             <nav>
-                <ul class="nav-links">
+                <ul class="nav-links" id="navLinks">
                     <li><a href="../index.html#home">Home</a></li>
                     <li><a href="../index.html#products">Product</a></li>
                     <li><a href="../index.html#machinery">Heavy Machinery</a></li>
@@ -39,7 +105,7 @@
                     <li><a href="../contact us.html" class="active-link">Contact</a></li>
                     <li><a href="../index.html#faq">FAQ</a></li>
                     <li id="profile-link-item" style="display:none;"><a href="../profile.html" class="btn-account">👤 My Profile</a></li>
-                <li id="logout-link-item" style="display:none;"><a href="#" id="logout-icon-btn" class="btn-logout-icon" title="Sign out">👤</a></li>
+                <li id="logout-link-item" style="display:none;"><a href="#" id="logout-icon-btn" title="Sign out">Log Out</a></li>
                 <li><a href="../sign_in.html" id="account-link" class="btn-account">Account</a></li>
                     <li>
                         <a href="../../../checkout.html" class="cart-link">
@@ -49,10 +115,16 @@
                     </li>
                 </ul>
             </nav>
+            <button class="burger-btn" id="burgerBtn" aria-label="Toggle navigation menu" aria-expanded="false">
+                <span class="bar"></span>
+                <span class="bar"></span>
+                <span class="bar"></span>
+            </button>
         </div>
     </header>
 
 
+    <div class="nav-overlay" id="navOverlay"></div>
     <section class="catalog-hero">
         <div class="container">
             <div class="hero-content">
@@ -326,5 +398,33 @@
         })();
     })();
 </script>
+
+    <script>
+        // ── Hamburger menu toggle ──
+        (function () {
+            const burgerBtn = document.getElementById('burgerBtn');
+            const navLinks  = document.getElementById('navLinks');
+            const overlay   = document.getElementById('navOverlay');
+            if (!burgerBtn || !navLinks || !overlay) return;
+
+            function closeMenu() {
+                burgerBtn.classList.remove('open');
+                navLinks.classList.remove('open');
+                overlay.classList.remove('open');
+                burgerBtn.setAttribute('aria-expanded', 'false');
+            }
+
+            function toggleMenu() {
+                const isOpen = navLinks.classList.toggle('open');
+                burgerBtn.classList.toggle('open', isOpen);
+                overlay.classList.toggle('open', isOpen);
+                burgerBtn.setAttribute('aria-expanded', String(isOpen));
+            }
+
+            burgerBtn.addEventListener('click', toggleMenu);
+            overlay.addEventListener('click', closeMenu);
+            navLinks.querySelectorAll('a').forEach(link => link.addEventListener('click', closeMenu));
+        })();
+    </script>
 </body>
 </html>
